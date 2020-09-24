@@ -1,3 +1,9 @@
 _build
 .settings
 .vscode
+Absyn.o
+Lexer.o
+Parser.o
+Printer.o
+Test.o
+Testfifth
