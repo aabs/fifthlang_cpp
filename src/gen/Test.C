@@ -45,7 +45,7 @@ int main(int argc, char ** argv)
     }
   } else input = stdin;
   /* The default entry point is used. For other options see Parser.H */
-  Exp *parse_tree = pExp(input);
+  Fifth *parse_tree = pFifth(input);
   if (parse_tree)
   {
     printf("\nParse Successful!\n");

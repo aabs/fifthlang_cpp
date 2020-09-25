@@ -8,7 +8,74 @@
 
 
 
+void Skeleton::visitFifth(Fifth *t) {} //abstract class
+void Skeleton::visitModuleImport(ModuleImport *t) {} //abstract class
+void Skeleton::visitFunctionDeclaration(FunctionDeclaration *t) {} //abstract class
+void Skeleton::visitFormalParameter(FormalParameter *t) {} //abstract class
+void Skeleton::visitParamType(ParamType *t) {} //abstract class
+void Skeleton::visitParamName(ParamName *t) {} //abstract class
+void Skeleton::visitFunctionName(FunctionName *t) {} //abstract class
 void Skeleton::visitExp(Exp *t) {} //abstract class
+
+void Skeleton::visitFifthProgram(FifthProgram *fifth_program)
+{
+  /* Code For FifthProgram Goes Here */
+
+  fifth_program->listmoduleimport_->accept(this);
+  fifth_program->listfunctiondeclaration_->accept(this);
+
+}
+
+void Skeleton::visitModImp(ModImp *mod_imp)
+{
+  /* Code For ModImp Goes Here */
+
+  visitIdent(mod_imp->ident_);
+
+}
+
+void Skeleton::visitFuncDecl(FuncDecl *func_decl)
+{
+  /* Code For FuncDecl Goes Here */
+
+  func_decl->functionname_->accept(this);
+  func_decl->listformalparameter_->accept(this);
+  func_decl->listexp_->accept(this);
+
+}
+
+void Skeleton::visitFParam(FParam *f_param)
+{
+  /* Code For FParam Goes Here */
+
+  f_param->paramtype_->accept(this);
+  f_param->paramname_->accept(this);
+
+}
+
+void Skeleton::visitTParam(TParam *t_param)
+{
+  /* Code For TParam Goes Here */
+
+  visitIdent(t_param->ident_);
+
+}
+
+void Skeleton::visitNParam(NParam *n_param)
+{
+  /* Code For NParam Goes Here */
+
+  visitIdent(n_param->ident_);
+
+}
+
+void Skeleton::visitNFunc(NFunc *n_func)
+{
+  /* Code For NFunc Goes Here */
+
+  visitIdent(n_func->ident_);
+
+}
 
 void Skeleton::visitEAdd(EAdd *e_add)
 {
@@ -54,6 +121,54 @@ void Skeleton::visitEInt(EInt *e_int)
 
 }
 
+void Skeleton::visitEDouble(EDouble *e_double)
+{
+  /* Code For EDouble Goes Here */
+
+  visitDouble(e_double->double_);
+
+}
+
+void Skeleton::visitEIdent(EIdent *e_ident)
+{
+  /* Code For EIdent Goes Here */
+
+  visitIdent(e_ident->ident_);
+
+}
+
+
+void Skeleton::visitListModuleImport(ListModuleImport *list_module_import)
+{
+  for (ListModuleImport::iterator i = list_module_import->begin() ; i != list_module_import->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListFunctionDeclaration(ListFunctionDeclaration *list_function_declaration)
+{
+  for (ListFunctionDeclaration::iterator i = list_function_declaration->begin() ; i != list_function_declaration->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListFormalParameter(ListFormalParameter *list_formal_parameter)
+{
+  for (ListFormalParameter::iterator i = list_formal_parameter->begin() ; i != list_formal_parameter->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
+
+void Skeleton::visitListExp(ListExp *list_exp)
+{
+  for (ListExp::iterator i = list_exp->begin() ; i != list_exp->end() ; ++i)
+  {
+    (*i)->accept(this);
+  }
+}
 
 
 void Skeleton::visitInteger(Integer x)

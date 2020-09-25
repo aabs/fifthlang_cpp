@@ -29,12 +29,32 @@ class PrintAbsyn : public Visitor
   ~PrintAbsyn(void);
   char *print(Visitable *v);
 
+  void visitFifth(Fifth *p); /* abstract class */
+  void visitFifthProgram(FifthProgram *p);
+  void visitModuleImport(ModuleImport *p); /* abstract class */
+  void visitModImp(ModImp *p);
+  void visitListModuleImport(ListModuleImport *p);
+  void visitFunctionDeclaration(FunctionDeclaration *p); /* abstract class */
+  void visitFuncDecl(FuncDecl *p);
+  void visitListFunctionDeclaration(ListFunctionDeclaration *p);
+  void visitFormalParameter(FormalParameter *p); /* abstract class */
+  void visitFParam(FParam *p);
+  void visitListFormalParameter(ListFormalParameter *p);
+  void visitParamType(ParamType *p); /* abstract class */
+  void visitTParam(TParam *p);
+  void visitParamName(ParamName *p); /* abstract class */
+  void visitNParam(NParam *p);
+  void visitFunctionName(FunctionName *p); /* abstract class */
+  void visitNFunc(NFunc *p);
   void visitExp(Exp *p); /* abstract class */
   void visitEAdd(EAdd *p);
   void visitESub(ESub *p);
   void visitEMul(EMul *p);
   void visitEDiv(EDiv *p);
   void visitEInt(EInt *p);
+  void visitEDouble(EDouble *p);
+  void visitEIdent(EIdent *p);
+  void visitListExp(ListExp *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
@@ -117,12 +137,32 @@ class ShowAbsyn : public Visitor
   ~ShowAbsyn(void);
   char *show(Visitable *v);
 
+  void visitFifth(Fifth *p); /* abstract class */
+  void visitFifthProgram(FifthProgram *p);
+  void visitModuleImport(ModuleImport *p); /* abstract class */
+  void visitModImp(ModImp *p);
+  void visitListModuleImport(ListModuleImport *p);
+  void visitFunctionDeclaration(FunctionDeclaration *p); /* abstract class */
+  void visitFuncDecl(FuncDecl *p);
+  void visitListFunctionDeclaration(ListFunctionDeclaration *p);
+  void visitFormalParameter(FormalParameter *p); /* abstract class */
+  void visitFParam(FParam *p);
+  void visitListFormalParameter(ListFormalParameter *p);
+  void visitParamType(ParamType *p); /* abstract class */
+  void visitTParam(TParam *p);
+  void visitParamName(ParamName *p); /* abstract class */
+  void visitNParam(NParam *p);
+  void visitFunctionName(FunctionName *p); /* abstract class */
+  void visitNFunc(NFunc *p);
   void visitExp(Exp *p); /* abstract class */
   void visitEAdd(EAdd *p);
   void visitESub(ESub *p);
   void visitEMul(EMul *p);
   void visitEDiv(EDiv *p);
   void visitEInt(EInt *p);
+  void visitEDouble(EDouble *p);
+  void visitEIdent(EIdent *p);
+  void visitListExp(ListExp *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);

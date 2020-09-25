@@ -7,3 +7,11 @@ Parser.o
 Printer.o
 Test.o
 Testfifth
+Absyn.C.bak
+Absyn.H.bak
+fifth.y.bak
+Parser.H.bak
+Printer.C.bak
+Printer.H.bak
+Skeleton.C.bak
+Skeleton.H.bak

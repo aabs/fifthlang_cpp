@@ -4,6 +4,326 @@
 #include <vector>
 #include "Absyn.H"
 
+/********************   FifthProgram    ********************/
+FifthProgram::FifthProgram(ListModuleImport *p1, ListFunctionDeclaration *p2)
+{
+  listmoduleimport_ = p1;
+  listfunctiondeclaration_ = p2;
+
+}
+
+FifthProgram::FifthProgram(const FifthProgram & other)
+{
+  listmoduleimport_ = other.listmoduleimport_->clone();
+  listfunctiondeclaration_ = other.listfunctiondeclaration_->clone();
+
+}
+
+FifthProgram &FifthProgram::operator=(const FifthProgram & other)
+{
+  FifthProgram tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void FifthProgram::swap(FifthProgram & other)
+{
+  std::swap(listmoduleimport_, other.listmoduleimport_);
+  std::swap(listfunctiondeclaration_, other.listfunctiondeclaration_);
+
+}
+
+FifthProgram::~FifthProgram()
+{
+  delete(listmoduleimport_);
+  delete(listfunctiondeclaration_);
+
+}
+
+void FifthProgram::accept(Visitor *v)
+{
+  v->visitFifthProgram(this);
+}
+
+FifthProgram *FifthProgram::clone() const
+{
+  return new FifthProgram(*this);
+}
+
+
+
+/********************   ModImp    ********************/
+ModImp::ModImp(Ident p1)
+{
+  ident_ = p1;
+
+}
+
+ModImp::ModImp(const ModImp & other)
+{
+  ident_ = other.ident_;
+
+}
+
+ModImp &ModImp::operator=(const ModImp & other)
+{
+  ModImp tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ModImp::swap(ModImp & other)
+{
+  std::swap(ident_, other.ident_);
+
+}
+
+ModImp::~ModImp()
+{
+
+}
+
+void ModImp::accept(Visitor *v)
+{
+  v->visitModImp(this);
+}
+
+ModImp *ModImp::clone() const
+{
+  return new ModImp(*this);
+}
+
+
+
+/********************   FuncDecl    ********************/
+FuncDecl::FuncDecl(FunctionName *p1, ListFormalParameter *p2, ListExp *p3)
+{
+  functionname_ = p1;
+  listformalparameter_ = p2;
+  listexp_ = p3;
+
+}
+
+FuncDecl::FuncDecl(const FuncDecl & other)
+{
+  functionname_ = other.functionname_->clone();
+  listformalparameter_ = other.listformalparameter_->clone();
+  listexp_ = other.listexp_->clone();
+
+}
+
+FuncDecl &FuncDecl::operator=(const FuncDecl & other)
+{
+  FuncDecl tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void FuncDecl::swap(FuncDecl & other)
+{
+  std::swap(functionname_, other.functionname_);
+  std::swap(listformalparameter_, other.listformalparameter_);
+  std::swap(listexp_, other.listexp_);
+
+}
+
+FuncDecl::~FuncDecl()
+{
+  delete(functionname_);
+  delete(listformalparameter_);
+  delete(listexp_);
+
+}
+
+void FuncDecl::accept(Visitor *v)
+{
+  v->visitFuncDecl(this);
+}
+
+FuncDecl *FuncDecl::clone() const
+{
+  return new FuncDecl(*this);
+}
+
+
+
+/********************   FParam    ********************/
+FParam::FParam(ParamType *p1, ParamName *p2)
+{
+  paramtype_ = p1;
+  paramname_ = p2;
+
+}
+
+FParam::FParam(const FParam & other)
+{
+  paramtype_ = other.paramtype_->clone();
+  paramname_ = other.paramname_->clone();
+
+}
+
+FParam &FParam::operator=(const FParam & other)
+{
+  FParam tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void FParam::swap(FParam & other)
+{
+  std::swap(paramtype_, other.paramtype_);
+  std::swap(paramname_, other.paramname_);
+
+}
+
+FParam::~FParam()
+{
+  delete(paramtype_);
+  delete(paramname_);
+
+}
+
+void FParam::accept(Visitor *v)
+{
+  v->visitFParam(this);
+}
+
+FParam *FParam::clone() const
+{
+  return new FParam(*this);
+}
+
+
+
+/********************   TParam    ********************/
+TParam::TParam(Ident p1)
+{
+  ident_ = p1;
+
+}
+
+TParam::TParam(const TParam & other)
+{
+  ident_ = other.ident_;
+
+}
+
+TParam &TParam::operator=(const TParam & other)
+{
+  TParam tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void TParam::swap(TParam & other)
+{
+  std::swap(ident_, other.ident_);
+
+}
+
+TParam::~TParam()
+{
+
+}
+
+void TParam::accept(Visitor *v)
+{
+  v->visitTParam(this);
+}
+
+TParam *TParam::clone() const
+{
+  return new TParam(*this);
+}
+
+
+
+/********************   NParam    ********************/
+NParam::NParam(Ident p1)
+{
+  ident_ = p1;
+
+}
+
+NParam::NParam(const NParam & other)
+{
+  ident_ = other.ident_;
+
+}
+
+NParam &NParam::operator=(const NParam & other)
+{
+  NParam tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NParam::swap(NParam & other)
+{
+  std::swap(ident_, other.ident_);
+
+}
+
+NParam::~NParam()
+{
+
+}
+
+void NParam::accept(Visitor *v)
+{
+  v->visitNParam(this);
+}
+
+NParam *NParam::clone() const
+{
+  return new NParam(*this);
+}
+
+
+
+/********************   NFunc    ********************/
+NFunc::NFunc(Ident p1)
+{
+  ident_ = p1;
+
+}
+
+NFunc::NFunc(const NFunc & other)
+{
+  ident_ = other.ident_;
+
+}
+
+NFunc &NFunc::operator=(const NFunc & other)
+{
+  NFunc tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NFunc::swap(NFunc & other)
+{
+  std::swap(ident_, other.ident_);
+
+}
+
+NFunc::~NFunc()
+{
+
+}
+
+void NFunc::accept(Visitor *v)
+{
+  v->visitNFunc(this);
+}
+
+NFunc *NFunc::clone() const
+{
+  return new NFunc(*this);
+}
+
+
+
 /********************   EAdd    ********************/
 EAdd::EAdd(Exp *p1, Exp *p2)
 {
@@ -238,6 +558,148 @@ EInt *EInt::clone() const
 }
 
 
+
+/********************   EDouble    ********************/
+EDouble::EDouble(Double p1)
+{
+  double_ = p1;
+
+}
+
+EDouble::EDouble(const EDouble & other)
+{
+  double_ = other.double_;
+
+}
+
+EDouble &EDouble::operator=(const EDouble & other)
+{
+  EDouble tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void EDouble::swap(EDouble & other)
+{
+  std::swap(double_, other.double_);
+
+}
+
+EDouble::~EDouble()
+{
+
+}
+
+void EDouble::accept(Visitor *v)
+{
+  v->visitEDouble(this);
+}
+
+EDouble *EDouble::clone() const
+{
+  return new EDouble(*this);
+}
+
+
+
+/********************   EIdent    ********************/
+EIdent::EIdent(Ident p1)
+{
+  ident_ = p1;
+
+}
+
+EIdent::EIdent(const EIdent & other)
+{
+  ident_ = other.ident_;
+
+}
+
+EIdent &EIdent::operator=(const EIdent & other)
+{
+  EIdent tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void EIdent::swap(EIdent & other)
+{
+  std::swap(ident_, other.ident_);
+
+}
+
+EIdent::~EIdent()
+{
+
+}
+
+void EIdent::accept(Visitor *v)
+{
+  v->visitEIdent(this);
+}
+
+EIdent *EIdent::clone() const
+{
+  return new EIdent(*this);
+}
+
+
+
+
+/********************   ListModuleImport    ********************/
+
+void ListModuleImport::accept(Visitor *v)
+{
+  v->visitListModuleImport(this);
+}
+
+
+ListModuleImport *ListModuleImport::clone() const
+{
+  return new ListModuleImport(*this);
+}
+
+
+/********************   ListFunctionDeclaration    ********************/
+
+void ListFunctionDeclaration::accept(Visitor *v)
+{
+  v->visitListFunctionDeclaration(this);
+}
+
+
+ListFunctionDeclaration *ListFunctionDeclaration::clone() const
+{
+  return new ListFunctionDeclaration(*this);
+}
+
+
+/********************   ListFormalParameter    ********************/
+
+void ListFormalParameter::accept(Visitor *v)
+{
+  v->visitListFormalParameter(this);
+}
+
+
+ListFormalParameter *ListFormalParameter::clone() const
+{
+  return new ListFormalParameter(*this);
+}
+
+
+/********************   ListExp    ********************/
+
+void ListExp::accept(Visitor *v)
+{
+  v->visitListExp(this);
+}
+
+
+ListExp *ListExp::clone() const
+{
+  return new ListExp(*this);
+}
 
 
 

@@ -19,12 +19,32 @@ typedef std::string Ident;
 
 /********************   Forward Declarations    ********************/
 
+class Fifth;
+class ModuleImport;
+class FunctionDeclaration;
+class FormalParameter;
+class ParamType;
+class ParamName;
+class FunctionName;
 class Exp;
+class FifthProgram;
+class ModImp;
+class FuncDecl;
+class FParam;
+class TParam;
+class NParam;
+class NFunc;
 class EAdd;
 class ESub;
 class EMul;
 class EDiv;
 class EInt;
+class EDouble;
+class EIdent;
+class ListModuleImport;
+class ListFunctionDeclaration;
+class ListFormalParameter;
+class ListExp;
 
 
 /********************   Visitor Interfaces    ********************/
@@ -32,12 +52,32 @@ class Visitor
 {
 public:
   virtual ~Visitor() {}
+  virtual void visitFifth(Fifth *p) = 0;
+  virtual void visitModuleImport(ModuleImport *p) = 0;
+  virtual void visitFunctionDeclaration(FunctionDeclaration *p) = 0;
+  virtual void visitFormalParameter(FormalParameter *p) = 0;
+  virtual void visitParamType(ParamType *p) = 0;
+  virtual void visitParamName(ParamName *p) = 0;
+  virtual void visitFunctionName(FunctionName *p) = 0;
   virtual void visitExp(Exp *p) = 0;
+  virtual void visitFifthProgram(FifthProgram *p) = 0;
+  virtual void visitModImp(ModImp *p) = 0;
+  virtual void visitFuncDecl(FuncDecl *p) = 0;
+  virtual void visitFParam(FParam *p) = 0;
+  virtual void visitTParam(TParam *p) = 0;
+  virtual void visitNParam(NParam *p) = 0;
+  virtual void visitNFunc(NFunc *p) = 0;
   virtual void visitEAdd(EAdd *p) = 0;
   virtual void visitESub(ESub *p) = 0;
   virtual void visitEMul(EMul *p) = 0;
   virtual void visitEDiv(EDiv *p) = 0;
   virtual void visitEInt(EInt *p) = 0;
+  virtual void visitEDouble(EDouble *p) = 0;
+  virtual void visitEIdent(EIdent *p) = 0;
+  virtual void visitListModuleImport(ListModuleImport *p) = 0;
+  virtual void visitListFunctionDeclaration(ListFunctionDeclaration *p) = 0;
+  virtual void visitListFormalParameter(ListFormalParameter *p) = 0;
+  virtual void visitListExp(ListExp *p) = 0;
 
 
   virtual void visitInteger(Integer x) = 0;
@@ -59,6 +99,55 @@ class Visitable
 
 /********************   Abstract Syntax Classes    ********************/
 
+class Fifth : public Visitable
+{
+public:
+  virtual Fifth *clone() const = 0;
+  int line_number;
+};
+
+class ModuleImport : public Visitable
+{
+public:
+  virtual ModuleImport *clone() const = 0;
+  int line_number;
+};
+
+class FunctionDeclaration : public Visitable
+{
+public:
+  virtual FunctionDeclaration *clone() const = 0;
+  int line_number;
+};
+
+class FormalParameter : public Visitable
+{
+public:
+  virtual FormalParameter *clone() const = 0;
+  int line_number;
+};
+
+class ParamType : public Visitable
+{
+public:
+  virtual ParamType *clone() const = 0;
+  int line_number;
+};
+
+class ParamName : public Visitable
+{
+public:
+  virtual ParamName *clone() const = 0;
+  int line_number;
+};
+
+class FunctionName : public Visitable
+{
+public:
+  virtual FunctionName *clone() const = 0;
+  int line_number;
+};
+
 class Exp : public Visitable
 {
 public:
@@ -67,6 +156,108 @@ public:
 };
 
 
+
+class FifthProgram : public Fifth
+{
+public:
+  ListModuleImport *listmoduleimport_;
+  ListFunctionDeclaration *listfunctiondeclaration_;
+
+  FifthProgram(const FifthProgram &);
+  FifthProgram &operator=(const FifthProgram &);
+  FifthProgram(ListModuleImport *p1, ListFunctionDeclaration *p2);
+  ~FifthProgram();
+  virtual void accept(Visitor *v);
+  virtual FifthProgram *clone() const;
+  void swap(FifthProgram &);
+};
+
+class ModImp : public ModuleImport
+{
+public:
+  Ident ident_;
+
+  ModImp(const ModImp &);
+  ModImp &operator=(const ModImp &);
+  ModImp(Ident p1);
+  ~ModImp();
+  virtual void accept(Visitor *v);
+  virtual ModImp *clone() const;
+  void swap(ModImp &);
+};
+
+class FuncDecl : public FunctionDeclaration
+{
+public:
+  FunctionName *functionname_;
+  ListFormalParameter *listformalparameter_;
+  ListExp *listexp_;
+
+  FuncDecl(const FuncDecl &);
+  FuncDecl &operator=(const FuncDecl &);
+  FuncDecl(FunctionName *p1, ListFormalParameter *p2, ListExp *p3);
+  ~FuncDecl();
+  virtual void accept(Visitor *v);
+  virtual FuncDecl *clone() const;
+  void swap(FuncDecl &);
+};
+
+class FParam : public FormalParameter
+{
+public:
+  ParamType *paramtype_;
+  ParamName *paramname_;
+
+  FParam(const FParam &);
+  FParam &operator=(const FParam &);
+  FParam(ParamType *p1, ParamName *p2);
+  ~FParam();
+  virtual void accept(Visitor *v);
+  virtual FParam *clone() const;
+  void swap(FParam &);
+};
+
+class TParam : public ParamType
+{
+public:
+  Ident ident_;
+
+  TParam(const TParam &);
+  TParam &operator=(const TParam &);
+  TParam(Ident p1);
+  ~TParam();
+  virtual void accept(Visitor *v);
+  virtual TParam *clone() const;
+  void swap(TParam &);
+};
+
+class NParam : public ParamName
+{
+public:
+  Ident ident_;
+
+  NParam(const NParam &);
+  NParam &operator=(const NParam &);
+  NParam(Ident p1);
+  ~NParam();
+  virtual void accept(Visitor *v);
+  virtual NParam *clone() const;
+  void swap(NParam &);
+};
+
+class NFunc : public FunctionName
+{
+public:
+  Ident ident_;
+
+  NFunc(const NFunc &);
+  NFunc &operator=(const NFunc &);
+  NFunc(Ident p1);
+  ~NFunc();
+  virtual void accept(Visitor *v);
+  virtual NFunc *clone() const;
+  void swap(NFunc &);
+};
 
 class EAdd : public Exp
 {
@@ -142,7 +333,63 @@ public:
   void swap(EInt &);
 };
 
+class EDouble : public Exp
+{
+public:
+  Double double_;
 
+  EDouble(const EDouble &);
+  EDouble &operator=(const EDouble &);
+  EDouble(Double p1);
+  ~EDouble();
+  virtual void accept(Visitor *v);
+  virtual EDouble *clone() const;
+  void swap(EDouble &);
+};
+
+class EIdent : public Exp
+{
+public:
+  Ident ident_;
+
+  EIdent(const EIdent &);
+  EIdent &operator=(const EIdent &);
+  EIdent(Ident p1);
+  ~EIdent();
+  virtual void accept(Visitor *v);
+  virtual EIdent *clone() const;
+  void swap(EIdent &);
+};
+
+
+
+class ListModuleImport : public Visitable, public std::vector<ModuleImport*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListModuleImport *clone() const;
+};
+
+class ListFunctionDeclaration : public Visitable, public std::vector<FunctionDeclaration*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListFunctionDeclaration *clone() const;
+};
+
+class ListFormalParameter : public Visitable, public std::vector<FormalParameter*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListFormalParameter *clone() const;
+};
+
+class ListExp : public Visitable, public std::vector<Exp*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListExp *clone() const;
+};
 
 
 

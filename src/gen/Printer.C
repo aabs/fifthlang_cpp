@@ -113,6 +113,133 @@ char *PrintAbsyn::print(Visitable *v)
   return buf_;
 }
 
+void PrintAbsyn::visitFifth(Fifth *p) {} //abstract class
+
+void PrintAbsyn::visitFifthProgram(FifthProgram *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  if(p->listmoduleimport_) {_i_ = 0; p->listmoduleimport_->accept(this);}
+  if(p->listfunctiondeclaration_) {_i_ = 0; p->listfunctiondeclaration_->accept(this);}
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitModuleImport(ModuleImport *p) {} //abstract class
+
+void PrintAbsyn::visitModImp(ModImp *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  render("use");
+  visitIdent(p->ident_);
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListModuleImport(ListModuleImport *listmoduleimport)
+{
+  for (ListModuleImport::const_iterator i = listmoduleimport->begin() ; i != listmoduleimport->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listmoduleimport->end() - 1) render(';');
+  }
+}void PrintAbsyn::visitFunctionDeclaration(FunctionDeclaration *p) {} //abstract class
+
+void PrintAbsyn::visitFuncDecl(FuncDecl *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  _i_ = 0; p->functionname_->accept(this);
+  render('(');
+  if(p->listformalparameter_) {_i_ = 0; p->listformalparameter_->accept(this);}
+  render(')');
+  render("=>");
+  if(p->listexp_) {_i_ = 0; p->listexp_->accept(this);}
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListFunctionDeclaration(ListFunctionDeclaration *listfunctiondeclaration)
+{
+  for (ListFunctionDeclaration::const_iterator i = listfunctiondeclaration->begin() ; i != listfunctiondeclaration->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listfunctiondeclaration->end() - 1) render('.');
+  }
+}void PrintAbsyn::visitFormalParameter(FormalParameter *p) {} //abstract class
+
+void PrintAbsyn::visitFParam(FParam *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  _i_ = 0; p->paramtype_->accept(this);
+  _i_ = 0; p->paramname_->accept(this);
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListFormalParameter(ListFormalParameter *listformalparameter)
+{
+  for (ListFormalParameter::const_iterator i = listformalparameter->begin() ; i != listformalparameter->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listformalparameter->end() - 1) render(',');
+  }
+}void PrintAbsyn::visitParamType(ParamType *p) {} //abstract class
+
+void PrintAbsyn::visitTParam(TParam *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  visitIdent(p->ident_);
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitParamName(ParamName *p) {} //abstract class
+
+void PrintAbsyn::visitNParam(NParam *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  visitIdent(p->ident_);
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitFunctionName(FunctionName *p) {} //abstract class
+
+void PrintAbsyn::visitNFunc(NFunc *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  visitIdent(p->ident_);
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitExp(Exp *p) {} //abstract class
 
 void PrintAbsyn::visitEAdd(EAdd *p)
@@ -183,7 +310,38 @@ void PrintAbsyn::visitEInt(EInt *p)
   _i_ = oldi;
 }
 
-void PrintAbsyn::visitInteger(Integer i)
+void PrintAbsyn::visitEDouble(EDouble *p)
+{
+  int oldi = _i_;
+  if (oldi > 2) render(_L_PAREN);
+
+  visitDouble(p->double_);
+
+  if (oldi > 2) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEIdent(EIdent *p)
+{
+  int oldi = _i_;
+  if (oldi > 2) render(_L_PAREN);
+
+  visitIdent(p->ident_);
+
+  if (oldi > 2) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitListExp(ListExp *listexp)
+{
+  for (ListExp::const_iterator i = listexp->begin() ; i != listexp->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listexp->end() - 1) render(';');
+  }
+}void PrintAbsyn::visitInteger(Integer i)
 {
   char tmp[16];
   sprintf(tmp, "%d", i);
@@ -233,6 +391,125 @@ char *ShowAbsyn::show(Visitable *v)
   return buf_;
 }
 
+void ShowAbsyn::visitFifth(Fifth *p) {} //abstract class
+
+void ShowAbsyn::visitFifthProgram(FifthProgram *p)
+{
+  bufAppend('(');
+  bufAppend("FifthProgram");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listmoduleimport_)  p->listmoduleimport_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listfunctiondeclaration_)  p->listfunctiondeclaration_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitModuleImport(ModuleImport *p) {} //abstract class
+
+void ShowAbsyn::visitModImp(ModImp *p)
+{
+  bufAppend('(');
+  bufAppend("ModImp");
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitListModuleImport(ListModuleImport *listmoduleimport)
+{
+  for (ListModuleImport::const_iterator i = listmoduleimport->begin() ; i != listmoduleimport->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listmoduleimport->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitFunctionDeclaration(FunctionDeclaration *p) {} //abstract class
+
+void ShowAbsyn::visitFuncDecl(FuncDecl *p)
+{
+  bufAppend('(');
+  bufAppend("FuncDecl");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->functionname_)  p->functionname_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listformalparameter_)  p->listformalparameter_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexp_)  p->listexp_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitListFunctionDeclaration(ListFunctionDeclaration *listfunctiondeclaration)
+{
+  for (ListFunctionDeclaration::const_iterator i = listfunctiondeclaration->begin() ; i != listfunctiondeclaration->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listfunctiondeclaration->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitFormalParameter(FormalParameter *p) {} //abstract class
+
+void ShowAbsyn::visitFParam(FParam *p)
+{
+  bufAppend('(');
+  bufAppend("FParam");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->paramtype_)  p->paramtype_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->paramname_)  p->paramname_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
+void ShowAbsyn::visitListFormalParameter(ListFormalParameter *listformalparameter)
+{
+  for (ListFormalParameter::const_iterator i = listformalparameter->begin() ; i != listformalparameter->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listformalparameter->end() - 1) bufAppend(", ");
+  }
+}
+
+void ShowAbsyn::visitParamType(ParamType *p) {} //abstract class
+
+void ShowAbsyn::visitTParam(TParam *p)
+{
+  bufAppend('(');
+  bufAppend("TParam");
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitParamName(ParamName *p) {} //abstract class
+
+void ShowAbsyn::visitNParam(NParam *p)
+{
+  bufAppend('(');
+  bufAppend("NParam");
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitFunctionName(FunctionName *p) {} //abstract class
+
+void ShowAbsyn::visitNFunc(NFunc *p)
+{
+  bufAppend('(');
+  bufAppend("NFunc");
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(')');
+}
 void ShowAbsyn::visitExp(Exp *p) {} //abstract class
 
 void ShowAbsyn::visitEAdd(EAdd *p)
@@ -283,6 +560,31 @@ void ShowAbsyn::visitEInt(EInt *p)
   visitInteger(p->integer_);
   bufAppend(')');
 }
+void ShowAbsyn::visitEDouble(EDouble *p)
+{
+  bufAppend('(');
+  bufAppend("EDouble");
+  bufAppend(' ');
+  visitDouble(p->double_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitEIdent(EIdent *p)
+{
+  bufAppend('(');
+  bufAppend("EIdent");
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitListExp(ListExp *listexp)
+{
+  for (ListExp::const_iterator i = listexp->begin() ; i != listexp->end() ; ++i)
+  {
+    (*i)->accept(this);
+    if (i != listexp->end() - 1) bufAppend(", ");
+  }
+}
+
 void ShowAbsyn::visitInteger(Integer i)
 {
   char tmp[16];

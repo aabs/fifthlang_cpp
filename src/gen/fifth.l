@@ -26,16 +26,28 @@ IDENT [a-zA-Z0-9'_]
 %START YYINITIAL COMMENT CHAR CHARESC CHAREND STRING ESCAPED
 %%
 
-<YYINITIAL>"+"      	 return _SYMB_0;
-<YYINITIAL>"-"      	 return _SYMB_1;
-<YYINITIAL>"*"      	 return _SYMB_2;
-<YYINITIAL>"/"      	 return _SYMB_3;
-<YYINITIAL>"("      	 return _SYMB_4;
-<YYINITIAL>")"      	 return _SYMB_5;
+<YYINITIAL>";"      	 return _SYMB_0;
+<YYINITIAL>"("      	 return _SYMB_1;
+<YYINITIAL>")"      	 return _SYMB_2;
+<YYINITIAL>"=>"      	 return _SYMB_3;
+<YYINITIAL>"."      	 return _SYMB_4;
+<YYINITIAL>","      	 return _SYMB_5;
+<YYINITIAL>"+"      	 return _SYMB_6;
+<YYINITIAL>"-"      	 return _SYMB_7;
+<YYINITIAL>"*"      	 return _SYMB_8;
+<YYINITIAL>"/"      	 return _SYMB_9;
+<YYINITIAL>"use"      	 return _SYMB_10;
 
+<YYINITIAL>"//"[^\n]*\n ++yy_mylinenumber; // BNFC: comment "//";
+<YYINITIAL>"#"[^\n]*\n ++yy_mylinenumber; // BNFC: comment "#";
+<YYINITIAL>"/*" BEGIN COMMENT; // BNFC: comment "/*" "*/";
+<COMMENT>"*/" BEGIN YYINITIAL;
+<COMMENT>. /* skip */;
+<COMMENT>[\n] ++yy_mylinenumber;
 
-
+<YYINITIAL>{DIGIT}+"."{DIGIT}+("e"(\-)?{DIGIT}+)?      	 yylval.double_ = atof(yytext); return _DOUBLE_;
 <YYINITIAL>{DIGIT}+      	 yylval.int_ = atoi(yytext); return _INTEGER_;
+<YYINITIAL>{LETTER}{IDENT}*      	 yylval.string_ = strdup(yytext); return _IDENT_;
 \n  ++yy_mylinenumber ;
 <YYINITIAL>[ \t\r\n\f]      	 /* ignore white space. */;
 <YYINITIAL>.      	 return _ERROR_;

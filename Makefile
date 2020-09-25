@@ -35,7 +35,7 @@ $(DIROUT):
 $(DIRBNFC):
 	-mkdir -p $@
 
-$(DIROUT)/$(OUT): $(DIROUT)
+$(DIROUT)/$(OUT): $(DIROUT) $(DIRBNFC)/fifth.y
 	$(CC) $(CCARGS) -o $(@) $(DIRSRC)/fifth.cpp
 
 clean:
@@ -46,22 +46,11 @@ clean:
 
 parser: $(BNFC_GEN_OBJS)
 
-$(BNFC_GEN_OBJS): $(BNFC_GEN_CPP) $(BNFC_GEN_INCLUDE)
-$(BNFC_GEN_CPP): $(DIRBNFC)/fifth.y
-$(BNFC_GEN_INCLUDE): $(DIRBNFC)/fifth.y
-
-$(DIROUT)/fifth.tab.o: $(DIRSRC)/fifth.tab.cc $(DIRSRC)/fifth.tab.hh
-	$(CC) $(CCARGS) -o $(@) $< 
-
-$(DIROUT)/fifth.yy.o: $(DIRSRC)/fifth.yy.cc
-	$(CC) $(CCARGS) -o $(@) $< 
-
-$(DIRSRC)/fifth.tab.cc $(DIRSRC)/fifth.tab.hh: $(PARSER_FILE)
-	$(BISON) $(BISONARGS) $^ && \
-	mv fifth.tab.* $(DIRSRC)
-
-$(DIRSRC)/fifth.yy.cc: $(LEXER_FILE)
-	$(FLEX) $(FLEXARGS) -o $@ $^
+# $(BNFC_GEN_OBJS): $(DIRBNFC) $(BNFC_GEN_CPP) $(BNFC_GEN_INCLUDE)
+# 	cd $(DIRBNFC) && \
+# 	$(MAKE) 
+# $(BNFC_GEN_CPP): $(DIRBNFC) $(BNFC_FILE)
+# $(BNFC_GEN_INCLUDE): $(DIRBNFC) $(BNFC_FILE)
 
 $(DIRBNFC)/fifth.y: $(BNFC_FILE)
 	$(BNFC) $(BNFCARGS)  $<
