@@ -70,52 +70,99 @@ Fifth* pFifth(const char *str)
   double double_;
   char* string_;
   Fifth* fifth_;
-  ModuleImport* moduleimport_;
-  ListModuleImport* listmoduleimport_;
-  FunctionDeclaration* functiondeclaration_;
-  ListFunctionDeclaration* listfunctiondeclaration_;
+  Alias* alias_;
+  Block* block_;
   FormalParameter* formalparameter_;
-  ListFormalParameter* listformalparameter_;
-  ParamType* paramtype_;
-  ParamName* paramname_;
-  QFunctionName* qfunctionname_;
+  FunctionDeclaration* functiondeclaration_;
   FunctionName* functionname_;
+  ModuleImport* moduleimport_;
   PackageName* packagename_;
+  ParamName* paramname_;
+  ParamType* paramtype_;
+  QFunctionName* qfunctionname_;
+  Statement* statement_;
+  UriConstant* uriconstant_;
+  VarName* varname_;
+  QVarName* qvarname_;
   Exp* exp_;
+  TypeInitialiser* typeinitialiser_;
+  TypeName* typename_;
+  TypePropertyInit* typepropertyinit_;
+  ListFormalParameter* listformalparameter_;
   ListExp* listexp_;
+  ListTypePropertyInit* listtypepropertyinit_;
+  ListVarName* listvarname_;
+  ListAlias* listalias_;
+  ListFunctionDeclaration* listfunctiondeclaration_;
+  ListModuleImport* listmoduleimport_;
+  ListStatement* liststatement_;
 }
 
 %token _ERROR_
 %token _SYMB_0    //   ;
-%token _SYMB_1    //   (
-%token _SYMB_2    //   )
-%token _SYMB_3    //   =>
-%token _SYMB_4    //   ,
+%token _SYMB_1    //   {
+%token _SYMB_2    //   }
+%token _SYMB_3    //   (
+%token _SYMB_4    //   )
 %token _SYMB_5    //   .
-%token _SYMB_6    //   +
-%token _SYMB_7    //   -
-%token _SYMB_8    //   *
-%token _SYMB_9    //   /
-%token _SYMB_10    //   use
+%token _SYMB_6    //   =
+%token _SYMB_7    //   <
+%token _SYMB_8    //   >
+%token _SYMB_9    //   &&
+%token _SYMB_10    //   +
+%token _SYMB_11    //   -
+%token _SYMB_12    //   *
+%token _SYMB_13    //   /
+%token _SYMB_14    //   !
+%token _SYMB_15    //   ,
+%token _SYMB_16    //   alias
+%token _SYMB_17    //   as
+%token _SYMB_18    //   else
+%token _SYMB_19    //   if
+%token _SYMB_20    //   new
+%token _SYMB_21    //   return
+%token _SYMB_22    //   use
+%token _SYMB_23    //   with
+%token<string_> _SYMB_24    //   UIdent
+%token<string_> _SYMB_25    //   PIdent
 
 %type <fifth_> Fifth
-%type <moduleimport_> ModuleImport
-%type <listmoduleimport_> ListModuleImport
-%type <functiondeclaration_> FunctionDeclaration
-%type <listfunctiondeclaration_> ListFunctionDeclaration
+%type <alias_> Alias
+%type <block_> Block
 %type <formalparameter_> FormalParameter
-%type <listformalparameter_> ListFormalParameter
-%type <paramtype_> ParamType
-%type <paramname_> ParamName
-%type <qfunctionname_> QFunctionName
+%type <functiondeclaration_> FunctionDeclaration
 %type <functionname_> FunctionName
+%type <moduleimport_> ModuleImport
 %type <packagename_> PackageName
+%type <paramname_> ParamName
+%type <paramtype_> ParamType
+%type <qfunctionname_> QFunctionName
+%type <statement_> Statement
+%type <uriconstant_> UriConstant
+%type <varname_> VarName
+%type <qvarname_> QVarName
 %type <exp_> Exp
 %type <exp_> Exp1
 %type <exp_> Exp2
 %type <exp_> Exp3
 %type <exp_> Exp4
+%type <exp_> Exp5
+%type <exp_> Exp6
+%type <typeinitialiser_> TypeInitialiser
+%type <typename_> TypeName
+%type <typepropertyinit_> TypePropertyInit
+%type <exp_> Exp7
+%type <exp_> Exp8
+%type <exp_> Exp9
+%type <exp_> Exp10
+%type <listformalparameter_> ListFormalParameter
 %type <listexp_> ListExp
+%type <listtypepropertyinit_> ListTypePropertyInit
+%type <listvarname_> ListVarName
+%type <listalias_> ListAlias
+%type <listfunctiondeclaration_> ListFunctionDeclaration
+%type <listmoduleimport_> ListModuleImport
+%type <liststatement_> ListStatement
 
 %start Fifth
 %token<string_> _STRING_
@@ -124,57 +171,111 @@ Fifth* pFifth(const char *str)
 %token<string_> _IDENT_
 
 %%
-Fifth : ListModuleImport ListFunctionDeclaration {  std::reverse($1->begin(),$1->end()) ; std::reverse($2->begin(),$2->end()) ;$$ = new FifthProgram($1, $2); $$->line_number = yy_mylinenumber; YY_RESULT_Fifth_= $$; }
+Fifth : ListModuleImport ListAlias ListStatement ListFunctionDeclaration {  std::reverse($4->begin(),$4->end()) ;$$ = new FifthProgram($1, $2, $3, $4); $$->line_number = yy_mylinenumber; YY_RESULT_Fifth_= $$; }
 ;
-ModuleImport : _SYMB_10 PackageName {  $$ = new ModImp($2); $$->line_number = yy_mylinenumber;  }
+Alias : _SYMB_16 UriConstant _SYMB_17 PackageName _SYMB_0 {  $$ = new AliasUri($2, $4); $$->line_number = yy_mylinenumber;  }
 ;
-ListModuleImport : ModuleImport _SYMB_0 {  $$ = new ListModuleImport() ; $$->push_back($1);  }
-  | ModuleImport _SYMB_0 ListModuleImport {  $3->push_back($1) ; $$ = $3 ;  }
-;
-FunctionDeclaration : FunctionName _SYMB_1 ListFormalParameter _SYMB_2 _SYMB_3 ListExp {  std::reverse($3->begin(),$3->end()) ; std::reverse($6->begin(),$6->end()) ;$$ = new FuncDecl($1, $3, $6); $$->line_number = yy_mylinenumber;  }
-;
-ListFunctionDeclaration : FunctionDeclaration _SYMB_0 {  $$ = new ListFunctionDeclaration() ; $$->push_back($1);  }
-  | FunctionDeclaration _SYMB_0 ListFunctionDeclaration {  $3->push_back($1) ; $$ = $3 ;  }
+Block : _SYMB_1 ListStatement _SYMB_2 {  $$ = new Blk($2); $$->line_number = yy_mylinenumber;  }
 ;
 FormalParameter : ParamType ParamName {  $$ = new FParam($1, $2); $$->line_number = yy_mylinenumber;  }
 ;
-ListFormalParameter : /* empty */ {  $$ = new ListFormalParameter();  }
-  | FormalParameter {  $$ = new ListFormalParameter() ; $$->push_back($1);  }
-  | FormalParameter _SYMB_4 ListFormalParameter {  $3->push_back($1) ; $$ = $3 ;  }
-;
-ParamType : _IDENT_ {  $$ = new TParam($1); $$->line_number = yy_mylinenumber;  }
-;
-ParamName : _IDENT_ {  $$ = new NParam($1); $$->line_number = yy_mylinenumber;  }
-;
-QFunctionName : PackageName _SYMB_5 FunctionName {  $$ = new NQFunc($1, $3); $$->line_number = yy_mylinenumber;  }
+FunctionDeclaration : FunctionName _SYMB_3 ListFormalParameter _SYMB_4 Block {  std::reverse($3->begin(),$3->end()) ;$$ = new FuncDecl($1, $3, $5); $$->line_number = yy_mylinenumber;  }
 ;
 FunctionName : _IDENT_ {  $$ = new NFunc($1); $$->line_number = yy_mylinenumber;  }
 ;
+ModuleImport : _SYMB_22 PackageName _SYMB_0 {  $$ = new ModImp($2); $$->line_number = yy_mylinenumber;  }
+;
 PackageName : _IDENT_ {  $$ = new NPkg($1); $$->line_number = yy_mylinenumber;  }
 ;
-Exp : Exp _SYMB_6 Exp1 {  $$ = new EAdd($1, $3); $$->line_number = yy_mylinenumber;  }
-  | Exp _SYMB_7 Exp1 {  $$ = new ESub($1, $3); $$->line_number = yy_mylinenumber;  }
+ParamName : VarName {  $$ = new NParam($1); $$->line_number = yy_mylinenumber;  }
+;
+ParamType : TypeName {  $$ = new TParam($1); $$->line_number = yy_mylinenumber;  }
+;
+QFunctionName : PackageName _SYMB_5 FunctionName {  $$ = new NQFunc($1, $3); $$->line_number = yy_mylinenumber;  }
+;
+Statement : QVarName _SYMB_6 Exp {  $$ = new SAssign($1, $3); $$->line_number = yy_mylinenumber;  }
+  | _SYMB_21 Exp {  $$ = new SReturn($2); $$->line_number = yy_mylinenumber;  }
+  | _SYMB_19 _SYMB_3 Exp _SYMB_4 Block {  $$ = new SIf($3, $5); $$->line_number = yy_mylinenumber;  }
+  | _SYMB_19 _SYMB_3 Exp _SYMB_4 Block _SYMB_18 Block {  $$ = new SIfElse($3, $5, $7); $$->line_number = yy_mylinenumber;  }
+  | _SYMB_23 Statement {  $$ = new SWith($2); $$->line_number = yy_mylinenumber;  }
+  | Exp {  $$ = new SBareStmt($1); $$->line_number = yy_mylinenumber;  }
+;
+UriConstant : _SYMB_7 _STRING_ _SYMB_8 {  $$ = new UriConst($2); $$->line_number = yy_mylinenumber;  }
+;
+VarName : _IDENT_ {  $$ = new VarNameIdent($1); $$->line_number = yy_mylinenumber;  }
+  | _SYMB_25 {  $$ = new VarNamePIdent($1); $$->line_number = yy_mylinenumber;  }
+  | _SYMB_24 {  $$ = new VarNameUIdent($1); $$->line_number = yy_mylinenumber;  }
+;
+QVarName : ListVarName {  std::reverse($1->begin(),$1->end()) ;$$ = new QVarName1($1); $$->line_number = yy_mylinenumber;  }
+;
+Exp : Exp _SYMB_9 Exp {  $$ = new EAnd($1, $3); $$->line_number = yy_mylinenumber;  }
   | Exp1 {  $$ = $1;  }
 ;
-Exp1 : Exp1 _SYMB_8 Exp2 {  $$ = new EMul($1, $3); $$->line_number = yy_mylinenumber;  }
-  | Exp1 _SYMB_9 Exp2 {  $$ = new EDiv($1, $3); $$->line_number = yy_mylinenumber;  }
+Exp1 : Exp1 _SYMB_10 Exp2 {  $$ = new EAdd($1, $3); $$->line_number = yy_mylinenumber;  }
+  | Exp1 _SYMB_11 Exp2 {  $$ = new ESub($1, $3); $$->line_number = yy_mylinenumber;  }
   | Exp2 {  $$ = $1;  }
 ;
-Exp2 : _INTEGER_ {  $$ = new EInt($1); $$->line_number = yy_mylinenumber;  }
-  | _DOUBLE_ {  $$ = new EDouble($1); $$->line_number = yy_mylinenumber;  }
-  | _IDENT_ {  $$ = new EIdent($1); $$->line_number = yy_mylinenumber;  }
-  | _STRING_ {  $$ = new EString($1); $$->line_number = yy_mylinenumber;  }
+Exp2 : Exp2 _SYMB_12 Exp3 {  $$ = new EMul($1, $3); $$->line_number = yy_mylinenumber;  }
+  | Exp2 _SYMB_13 Exp3 {  $$ = new EDiv($1, $3); $$->line_number = yy_mylinenumber;  }
   | Exp3 {  $$ = $1;  }
 ;
-Exp3 : FunctionName _SYMB_1 ListExp _SYMB_2 {  std::reverse($3->begin(),$3->end()) ;$$ = new EFuncCall($1, $3); $$->line_number = yy_mylinenumber;  }
-  | QFunctionName _SYMB_1 ListExp _SYMB_2 {  std::reverse($3->begin(),$3->end()) ;$$ = new EQFuncCall($1, $3); $$->line_number = yy_mylinenumber;  }
+Exp3 : _INTEGER_ {  $$ = new EInt($1); $$->line_number = yy_mylinenumber;  }
+  | _DOUBLE_ {  $$ = new EDouble($1); $$->line_number = yy_mylinenumber;  }
+  | _STRING_ {  $$ = new EString($1); $$->line_number = yy_mylinenumber;  }
+  | QVarName {  $$ = new EVarname($1); $$->line_number = yy_mylinenumber;  }
   | Exp4 {  $$ = $1;  }
 ;
-Exp4 : _SYMB_1 ListExp _SYMB_2 {  std::reverse($2->begin(),$2->end()) ;$$ = new EFuncParen($2); $$->line_number = yy_mylinenumber;  }
-  | _SYMB_1 Exp _SYMB_2 {  $$ = $2;  }
+Exp4 : FunctionName _SYMB_3 ListExp _SYMB_4 {  std::reverse($3->begin(),$3->end()) ;$$ = new EFuncCall($1, $3); $$->line_number = yy_mylinenumber;  }
+  | QVarName _SYMB_3 ListExp _SYMB_4 {  std::reverse($3->begin(),$3->end()) ;$$ = new EQFuncCall($1, $3); $$->line_number = yy_mylinenumber;  }
+  | Exp5 {  $$ = $1;  }
+;
+Exp5 : _SYMB_3 Exp _SYMB_4 {  $$ = new EFuncParen($2); $$->line_number = yy_mylinenumber;  }
+  | Exp6 {  $$ = $1;  }
+;
+Exp6 : _SYMB_14 Exp {  $$ = new ENegation($2); $$->line_number = yy_mylinenumber;  }
+  | _SYMB_20 TypeInitialiser {  $$ = new ETypeCreate($2); $$->line_number = yy_mylinenumber;  }
+  | Exp7 {  $$ = $1;  }
+;
+TypeInitialiser : TypeName _SYMB_1 ListTypePropertyInit _SYMB_2 {  std::reverse($3->begin(),$3->end()) ;$$ = new TypeInt($1, $3); $$->line_number = yy_mylinenumber;  }
+;
+TypeName : QVarName {  $$ = new NTypeName($1); $$->line_number = yy_mylinenumber;  }
+;
+TypePropertyInit : VarName _SYMB_6 Exp {  $$ = new TypePropertyInit1($1, $3); $$->line_number = yy_mylinenumber;  }
+;
+Exp7 : Exp8 {  $$ = $1;  }
+;
+Exp8 : Exp9 {  $$ = $1;  }
+;
+Exp9 : Exp10 {  $$ = $1;  }
+;
+Exp10 : _SYMB_3 Exp _SYMB_4 {  $$ = $2;  }
+;
+ListFormalParameter : /* empty */ {  $$ = new ListFormalParameter();  }
+  | FormalParameter {  $$ = new ListFormalParameter() ; $$->push_back($1);  }
+  | FormalParameter _SYMB_15 ListFormalParameter {  $3->push_back($1) ; $$ = $3 ;  }
 ;
 ListExp : /* empty */ {  $$ = new ListExp();  }
   | Exp {  $$ = new ListExp() ; $$->push_back($1);  }
-  | Exp _SYMB_4 ListExp {  $3->push_back($1) ; $$ = $3 ;  }
+  | Exp _SYMB_15 ListExp {  $3->push_back($1) ; $$ = $3 ;  }
+;
+ListTypePropertyInit : /* empty */ {  $$ = new ListTypePropertyInit();  }
+  | TypePropertyInit {  $$ = new ListTypePropertyInit() ; $$->push_back($1);  }
+  | TypePropertyInit _SYMB_15 ListTypePropertyInit {  $3->push_back($1) ; $$ = $3 ;  }
+;
+ListVarName : /* empty */ {  $$ = new ListVarName();  }
+  | VarName {  $$ = new ListVarName() ; $$->push_back($1);  }
+  | VarName _SYMB_5 ListVarName {  $3->push_back($1) ; $$ = $3 ;  }
+;
+ListAlias : /* empty */ {  $$ = new ListAlias();  }
+  | ListAlias Alias {  $1->push_back($2) ; $$ = $1 ;  }
+;
+ListFunctionDeclaration : FunctionDeclaration {  $$ = new ListFunctionDeclaration() ; $$->push_back($1);  }
+  | FunctionDeclaration ListFunctionDeclaration {  $2->push_back($1) ; $$ = $2 ;  }
+;
+ListModuleImport : /* empty */ {  $$ = new ListModuleImport();  }
+  | ListModuleImport ModuleImport {  $1->push_back($2) ; $$ = $1 ;  }
+;
+ListStatement : /* empty */ {  $$ = new ListStatement();  }
+  | ListStatement Statement _SYMB_0 {  $1->push_back($2) ; $$ = $1 ;  }
 ;
 

@@ -16,16 +16,26 @@ BNFC_GEN_OBJS = $(DIRBNFC)/Absyn.o $(DIRBNFC)/Lexer.o $(DIRBNFC)/Parser.o $(DIRB
 BNFC_GEN_CPP = $(DIRBNFC)/Absyn.C $(DIRBNFC)/Lexer.C $(DIRBNFC)/Parser.C $(DIRBNFC)/Printer.C $(DIRBNFC)/Skeleton.C $(DIRBNFC)/Test.C
 BNFC_GEN_INCLUDE = $(DIRBNFC)/Absyn.H $(DIRBNFC)/Parser.H $(DIRBNFC)/Printer.H $(DIRBNFC)/Skeleton.H
 
-.PHONY: all test clean
+TEST_FILES = $(wildcard test/examples/*.5th)
+
+.PHONY: all test clean test retest
 
 all: $(DIROUT)/$(OUT)
-test: $(DIRBNFC)/Test$(OUT) test/examples/test1.5th
+test: $(DIRBNFC)/Test$(OUT) $(TEST_FILES)
 	@echo 
 	@echo "------------------------"
 	$(DIRBNFC)/Test$(OUT) test/examples/test1.5th
 	@echo 
 	@echo "------------------------"
 	$(DIRBNFC)/Test$(OUT) test/examples/test2.5th
+	@echo 
+	@echo "------------------------"
+	$(DIRBNFC)/Test$(OUT) test/examples/test3.coa.5th
+
+retest: $(TEST_FILES)
+
+test/examples/%.5th: $(DIRBNFC)/Test$(OUT)
+	$<  $@
 
 $(DIRBNFC)/Test$(OUT): $(DIRBNFC)/fifth.y
 

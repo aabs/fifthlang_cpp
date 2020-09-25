@@ -184,10 +184,25 @@ extern int yydebug;
     _SYMB_8 = 267,                 /* _SYMB_8  */
     _SYMB_9 = 268,                 /* _SYMB_9  */
     _SYMB_10 = 269,                /* _SYMB_10  */
-    _STRING_ = 270,                /* _STRING_  */
-    _INTEGER_ = 271,               /* _INTEGER_  */
-    _DOUBLE_ = 272,                /* _DOUBLE_  */
-    _IDENT_ = 273                  /* _IDENT_  */
+    _SYMB_11 = 270,                /* _SYMB_11  */
+    _SYMB_12 = 271,                /* _SYMB_12  */
+    _SYMB_13 = 272,                /* _SYMB_13  */
+    _SYMB_14 = 273,                /* _SYMB_14  */
+    _SYMB_15 = 274,                /* _SYMB_15  */
+    _SYMB_16 = 275,                /* _SYMB_16  */
+    _SYMB_17 = 276,                /* _SYMB_17  */
+    _SYMB_18 = 277,                /* _SYMB_18  */
+    _SYMB_19 = 278,                /* _SYMB_19  */
+    _SYMB_20 = 279,                /* _SYMB_20  */
+    _SYMB_21 = 280,                /* _SYMB_21  */
+    _SYMB_22 = 281,                /* _SYMB_22  */
+    _SYMB_23 = 282,                /* _SYMB_23  */
+    _SYMB_24 = 283,                /* _SYMB_24  */
+    _SYMB_25 = 284,                /* _SYMB_25  */
+    _STRING_ = 285,                /* _STRING_  */
+    _INTEGER_ = 286,               /* _INTEGER_  */
+    _DOUBLE_ = 287,                /* _DOUBLE_  */
+    _IDENT_ = 288                  /* _IDENT_  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -203,21 +218,34 @@ union YYSTYPE
   double double_;
   char* string_;
   Fifth* fifth_;
-  ModuleImport* moduleimport_;
-  ListModuleImport* listmoduleimport_;
-  FunctionDeclaration* functiondeclaration_;
-  ListFunctionDeclaration* listfunctiondeclaration_;
+  Alias* alias_;
+  Block* block_;
   FormalParameter* formalparameter_;
-  ListFormalParameter* listformalparameter_;
-  ParamType* paramtype_;
-  ParamName* paramname_;
-  QFunctionName* qfunctionname_;
+  FunctionDeclaration* functiondeclaration_;
   FunctionName* functionname_;
+  ModuleImport* moduleimport_;
   PackageName* packagename_;
+  ParamName* paramname_;
+  ParamType* paramtype_;
+  QFunctionName* qfunctionname_;
+  Statement* statement_;
+  UriConstant* uriconstant_;
+  VarName* varname_;
+  QVarName* qvarname_;
   Exp* exp_;
+  TypeInitialiser* typeinitialiser_;
+  TypeName* typename_;
+  TypePropertyInit* typepropertyinit_;
+  ListFormalParameter* listformalparameter_;
   ListExp* listexp_;
+  ListTypePropertyInit* listtypepropertyinit_;
+  ListVarName* listvarname_;
+  ListAlias* listalias_;
+  ListFunctionDeclaration* listfunctiondeclaration_;
+  ListModuleImport* listmoduleimport_;
+  ListStatement* liststatement_;
 
-#line 221 "Parser.C"
+#line 249 "Parser.C"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -250,29 +278,62 @@ enum yysymbol_kind_t
   YYSYMBOL__SYMB_8 = 12,                   /* _SYMB_8  */
   YYSYMBOL__SYMB_9 = 13,                   /* _SYMB_9  */
   YYSYMBOL__SYMB_10 = 14,                  /* _SYMB_10  */
-  YYSYMBOL__STRING_ = 15,                  /* _STRING_  */
-  YYSYMBOL__INTEGER_ = 16,                 /* _INTEGER_  */
-  YYSYMBOL__DOUBLE_ = 17,                  /* _DOUBLE_  */
-  YYSYMBOL__IDENT_ = 18,                   /* _IDENT_  */
-  YYSYMBOL_YYACCEPT = 19,                  /* $accept  */
-  YYSYMBOL_Fifth = 20,                     /* Fifth  */
-  YYSYMBOL_ModuleImport = 21,              /* ModuleImport  */
-  YYSYMBOL_ListModuleImport = 22,          /* ListModuleImport  */
-  YYSYMBOL_FunctionDeclaration = 23,       /* FunctionDeclaration  */
-  YYSYMBOL_ListFunctionDeclaration = 24,   /* ListFunctionDeclaration  */
-  YYSYMBOL_FormalParameter = 25,           /* FormalParameter  */
-  YYSYMBOL_ListFormalParameter = 26,       /* ListFormalParameter  */
-  YYSYMBOL_ParamType = 27,                 /* ParamType  */
-  YYSYMBOL_ParamName = 28,                 /* ParamName  */
-  YYSYMBOL_QFunctionName = 29,             /* QFunctionName  */
-  YYSYMBOL_FunctionName = 30,              /* FunctionName  */
-  YYSYMBOL_PackageName = 31,               /* PackageName  */
-  YYSYMBOL_Exp = 32,                       /* Exp  */
-  YYSYMBOL_Exp1 = 33,                      /* Exp1  */
-  YYSYMBOL_Exp2 = 34,                      /* Exp2  */
-  YYSYMBOL_Exp3 = 35,                      /* Exp3  */
-  YYSYMBOL_Exp4 = 36,                      /* Exp4  */
-  YYSYMBOL_ListExp = 37                    /* ListExp  */
+  YYSYMBOL__SYMB_11 = 15,                  /* _SYMB_11  */
+  YYSYMBOL__SYMB_12 = 16,                  /* _SYMB_12  */
+  YYSYMBOL__SYMB_13 = 17,                  /* _SYMB_13  */
+  YYSYMBOL__SYMB_14 = 18,                  /* _SYMB_14  */
+  YYSYMBOL__SYMB_15 = 19,                  /* _SYMB_15  */
+  YYSYMBOL__SYMB_16 = 20,                  /* _SYMB_16  */
+  YYSYMBOL__SYMB_17 = 21,                  /* _SYMB_17  */
+  YYSYMBOL__SYMB_18 = 22,                  /* _SYMB_18  */
+  YYSYMBOL__SYMB_19 = 23,                  /* _SYMB_19  */
+  YYSYMBOL__SYMB_20 = 24,                  /* _SYMB_20  */
+  YYSYMBOL__SYMB_21 = 25,                  /* _SYMB_21  */
+  YYSYMBOL__SYMB_22 = 26,                  /* _SYMB_22  */
+  YYSYMBOL__SYMB_23 = 27,                  /* _SYMB_23  */
+  YYSYMBOL__SYMB_24 = 28,                  /* _SYMB_24  */
+  YYSYMBOL__SYMB_25 = 29,                  /* _SYMB_25  */
+  YYSYMBOL__STRING_ = 30,                  /* _STRING_  */
+  YYSYMBOL__INTEGER_ = 31,                 /* _INTEGER_  */
+  YYSYMBOL__DOUBLE_ = 32,                  /* _DOUBLE_  */
+  YYSYMBOL__IDENT_ = 33,                   /* _IDENT_  */
+  YYSYMBOL_YYACCEPT = 34,                  /* $accept  */
+  YYSYMBOL_Fifth = 35,                     /* Fifth  */
+  YYSYMBOL_Alias = 36,                     /* Alias  */
+  YYSYMBOL_Block = 37,                     /* Block  */
+  YYSYMBOL_FormalParameter = 38,           /* FormalParameter  */
+  YYSYMBOL_FunctionDeclaration = 39,       /* FunctionDeclaration  */
+  YYSYMBOL_FunctionName = 40,              /* FunctionName  */
+  YYSYMBOL_ModuleImport = 41,              /* ModuleImport  */
+  YYSYMBOL_PackageName = 42,               /* PackageName  */
+  YYSYMBOL_ParamName = 43,                 /* ParamName  */
+  YYSYMBOL_ParamType = 44,                 /* ParamType  */
+  YYSYMBOL_Statement = 45,                 /* Statement  */
+  YYSYMBOL_UriConstant = 46,               /* UriConstant  */
+  YYSYMBOL_VarName = 47,                   /* VarName  */
+  YYSYMBOL_QVarName = 48,                  /* QVarName  */
+  YYSYMBOL_Exp = 49,                       /* Exp  */
+  YYSYMBOL_Exp1 = 50,                      /* Exp1  */
+  YYSYMBOL_Exp2 = 51,                      /* Exp2  */
+  YYSYMBOL_Exp3 = 52,                      /* Exp3  */
+  YYSYMBOL_Exp4 = 53,                      /* Exp4  */
+  YYSYMBOL_Exp5 = 54,                      /* Exp5  */
+  YYSYMBOL_Exp6 = 55,                      /* Exp6  */
+  YYSYMBOL_TypeInitialiser = 56,           /* TypeInitialiser  */
+  YYSYMBOL_TypeName = 57,                  /* TypeName  */
+  YYSYMBOL_TypePropertyInit = 58,          /* TypePropertyInit  */
+  YYSYMBOL_Exp7 = 59,                      /* Exp7  */
+  YYSYMBOL_Exp8 = 60,                      /* Exp8  */
+  YYSYMBOL_Exp9 = 61,                      /* Exp9  */
+  YYSYMBOL_Exp10 = 62,                     /* Exp10  */
+  YYSYMBOL_ListFormalParameter = 63,       /* ListFormalParameter  */
+  YYSYMBOL_ListExp = 64,                   /* ListExp  */
+  YYSYMBOL_ListTypePropertyInit = 65,      /* ListTypePropertyInit  */
+  YYSYMBOL_ListVarName = 66,               /* ListVarName  */
+  YYSYMBOL_ListAlias = 67,                 /* ListAlias  */
+  YYSYMBOL_ListFunctionDeclaration = 68,   /* ListFunctionDeclaration  */
+  YYSYMBOL_ListModuleImport = 69,          /* ListModuleImport  */
+  YYSYMBOL_ListStatement = 70              /* ListStatement  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -580,21 +641,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  7
+#define YYFINAL  3
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   49
+#define YYLAST   155
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  19
+#define YYNTOKENS  34
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  19
+#define YYNNTS  37
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  36
+#define YYNRULES  70
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  63
+#define YYNSTATES  119
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   273
+#define YYMAXUTOK   288
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -635,17 +696,22 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32,    33
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,   127,   127,   129,   131,   132,   134,   136,   137,   139,
-     141,   142,   143,   145,   147,   149,   151,   153,   155,   156,
-     157,   159,   160,   161,   163,   164,   165,   166,   167,   169,
-     170,   171,   173,   174,   176,   177,   178
+       0,   174,   174,   176,   178,   180,   182,   184,   186,   188,
+     190,   192,   196,   197,   198,   199,   200,   201,   203,   205,
+     206,   207,   209,   211,   212,   214,   215,   216,   218,   219,
+     220,   222,   223,   224,   225,   226,   228,   229,   230,   232,
+     233,   235,   236,   237,   239,   241,   243,   245,   247,   249,
+     251,   253,   254,   255,   257,   258,   259,   261,   262,   263,
+     265,   266,   267,   269,   270,   272,   273,   275,   276,   278,
+     279
 };
 #endif
 
@@ -663,12 +729,18 @@ static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "_ERROR_", "_SYMB_0",
   "_SYMB_1", "_SYMB_2", "_SYMB_3", "_SYMB_4", "_SYMB_5", "_SYMB_6",
-  "_SYMB_7", "_SYMB_8", "_SYMB_9", "_SYMB_10", "_STRING_", "_INTEGER_",
-  "_DOUBLE_", "_IDENT_", "$accept", "Fifth", "ModuleImport",
-  "ListModuleImport", "FunctionDeclaration", "ListFunctionDeclaration",
-  "FormalParameter", "ListFormalParameter", "ParamType", "ParamName",
-  "QFunctionName", "FunctionName", "PackageName", "Exp", "Exp1", "Exp2",
-  "Exp3", "Exp4", "ListExp", YY_NULLPTR
+  "_SYMB_7", "_SYMB_8", "_SYMB_9", "_SYMB_10", "_SYMB_11", "_SYMB_12",
+  "_SYMB_13", "_SYMB_14", "_SYMB_15", "_SYMB_16", "_SYMB_17", "_SYMB_18",
+  "_SYMB_19", "_SYMB_20", "_SYMB_21", "_SYMB_22", "_SYMB_23", "_SYMB_24",
+  "_SYMB_25", "_STRING_", "_INTEGER_", "_DOUBLE_", "_IDENT_", "$accept",
+  "Fifth", "Alias", "Block", "FormalParameter", "FunctionDeclaration",
+  "FunctionName", "ModuleImport", "PackageName", "ParamName", "ParamType",
+  "Statement", "UriConstant", "VarName", "QVarName", "Exp", "Exp1", "Exp2",
+  "Exp3", "Exp4", "Exp5", "Exp6", "TypeInitialiser", "TypeName",
+  "TypePropertyInit", "Exp7", "Exp8", "Exp9", "Exp10",
+  "ListFormalParameter", "ListExp", "ListTypePropertyInit", "ListVarName",
+  "ListAlias", "ListFunctionDeclaration", "ListModuleImport",
+  "ListStatement", YY_NULLPTR
 };
 
 static const char *
@@ -684,16 +756,18 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
+     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
+     285,   286,   287,   288
 };
 #endif
 
-#define YYPACT_NINF (-27)
+#define YYPACT_NINF (-66)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-18)
+#define YYTABLE_NINF (-55)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -702,13 +776,18 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -11,   -13,    16,    19,    10,   -27,   -27,   -27,   -11,   -27,
-      27,   -27,    28,   -27,    10,    14,   -27,   -27,    26,    29,
-      18,    14,    30,   -27,   -27,   -27,    -3,    -3,   -27,   -27,
-     -27,     2,    33,    34,    31,    11,    12,   -27,   -27,   -27,
-     -27,    -2,    36,    -3,    -3,    10,    -3,    -3,    -3,    -3,
-      -3,   -27,   -27,    37,    38,   -27,   -27,    12,    12,   -27,
-     -27,   -27,   -27
+     -66,    26,   -24,   -66,    16,   -66,    31,   -66,    56,    61,
+     -66,    34,   -66,    46,    57,   122,   122,    70,    17,   122,
+      34,   -66,   -66,   -66,   -66,   -66,    72,    47,    74,    78,
+      75,    12,    76,    33,    54,   -66,   -66,   -66,   -66,   -66,
+     -66,   -66,   -66,   -66,   -66,    71,    16,    81,    84,    29,
+      76,   122,   -66,   -66,   -66,    80,    76,   -66,   -66,    85,
+     -66,    79,   -66,    17,   106,   122,   122,   122,   122,   122,
+     122,   -66,    89,   106,   -66,    60,    17,    17,    82,    17,
+       6,     2,   -66,    86,    87,   -66,    90,    76,    76,    54,
+      54,   -66,   -66,   -66,    94,    96,    97,    98,    17,   -66,
+     -66,   106,    94,   -66,   -66,   -66,    93,   122,    17,   -66,
+     -66,   -66,   -66,     0,    94,    76,   -66,   -66,   -66
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -716,27 +795,36 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,     0,    17,     3,     1,     4,    16,
-       0,     2,     0,     5,     7,    10,     8,    13,    11,     0,
-       0,    10,     0,    14,     9,    12,    34,    34,    27,    24,
-      25,    26,     0,     0,     0,    35,    20,    23,    28,    31,
-       6,     0,     0,    34,    34,     0,    34,     0,     0,     0,
-       0,    33,    32,     0,     0,    15,    36,    18,    19,    21,
-      22,    30,    29
+      67,     0,    63,     1,     0,    68,    69,     9,     0,     0,
+      64,    60,     8,     0,     0,    60,    60,     0,    60,    60,
+      60,    21,    20,    33,    31,    32,    19,    65,     0,     0,
+      61,    34,    17,    24,    27,    30,    35,    38,    40,    43,
+      47,    48,    49,    22,     2,     0,     0,     0,    34,     0,
+      41,    60,    19,    45,    42,     0,    13,    16,     7,     0,
+      66,    60,    70,    60,    60,    60,    60,    60,    60,    60,
+      60,    18,     0,    60,    39,     0,    57,    51,    52,     0,
+      34,    55,    11,     0,     0,    62,     0,    12,    23,    25,
+      26,    28,    29,     3,     0,     0,    58,     0,    51,     5,
+      10,    60,     0,    36,    37,    69,    14,    60,    57,    44,
+      53,    56,     6,    60,     0,    46,    59,     4,    15
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -27,   -27,   -27,    39,   -27,    32,   -27,    24,   -27,   -27,
-     -27,    -4,    47,    22,   -21,   -20,   -27,   -27,   -26
+     -66,   -66,   -66,   -58,   -66,   -66,     9,   -66,    73,   -66,
+     -66,   100,   -66,   -65,    -8,   -11,   -66,   -51,     5,   -66,
+     -66,   -66,   -66,    99,   -66,   -66,   -66,   -66,   -66,    20,
+     -63,    13,    37,   -66,    95,   -66,    18
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     3,     4,    10,    11,    18,    19,    20,    24,
-      32,    33,    34,    35,    36,    37,    38,    39,    40
+      -1,     1,    10,   106,    78,    27,    47,     5,     8,    99,
+      79,    29,    14,    30,    48,    81,    33,    34,    35,    36,
+      37,    38,    54,    82,    96,    39,    40,    41,    42,    83,
+      84,    97,    43,     6,    44,     2,    11
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -744,51 +832,86 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      12,    42,    27,     1,    51,     5,    46,   -16,    47,    48,
-      12,   -17,    28,    29,    30,    31,     7,    53,    54,    46,
-      56,    47,    48,     8,    49,    50,    57,    58,     9,    59,
-      60,    14,    17,    15,    21,    22,    23,    26,    43,    44,
-      45,    55,    52,    61,    62,    25,    16,    13,     6,    41
+      32,    86,     4,    31,    49,    50,   117,    15,    56,    32,
+      53,    95,    31,    64,   100,    66,    89,    90,    16,    64,
+      28,   101,    65,    17,    18,    19,     3,    20,    21,    22,
+      23,    24,    25,    26,   -45,   -45,    59,    74,   111,   -45,
+      75,    15,    66,    95,   112,    21,    22,    67,    68,     7,
+      52,     9,    16,    80,    87,    88,   118,    17,    18,    19,
+      12,    20,    21,    22,    23,    24,    25,    26,    94,    53,
+      69,    70,    13,    66,    91,    92,    45,    51,    46,    -7,
+      58,    61,    62,    71,    63,    76,    15,   -51,    73,    66,
+      53,    64,    77,    93,   102,   103,   115,    16,   104,   105,
+      85,    98,    32,    18,   109,    31,   107,    21,    22,    23,
+      24,    25,    26,    15,   -54,   114,   108,    55,   110,    72,
+      57,   116,    60,   113,    16,     0,     0,     0,     0,    15,
+      18,     0,     0,     0,    21,    22,    23,    24,    25,    26,
+      16,     0,     0,     0,     0,     0,    18,     0,     0,     0,
+      21,    22,    23,    24,    25,    26
 };
 
 static const yytype_int8 yycheck[] =
 {
-       4,    27,     5,    14,     6,    18,     8,     5,    10,    11,
-      14,     9,    15,    16,    17,    18,     0,    43,    44,     8,
-      46,    10,    11,     4,    12,    13,    47,    48,    18,    49,
-      50,     4,    18,     5,     8,     6,    18,     7,     5,     5,
-       9,    45,     6,     6,     6,    21,    14,     8,     1,    27
+      11,    64,    26,    11,    15,    16,     6,     7,    19,    20,
+      18,    76,    20,     7,    79,    13,    67,    68,    18,     7,
+      11,    19,    10,    23,    24,    25,     0,    27,    28,    29,
+      30,    31,    32,    33,    28,    29,    27,     8,   101,    33,
+      51,     7,    13,   108,   102,    28,    29,    14,    15,    33,
+      33,    20,    18,    61,    65,    66,   114,    23,    24,    25,
+       4,    27,    28,    29,    30,    31,    32,    33,     8,    77,
+      16,    17,    11,    13,    69,    70,    30,     7,    21,     7,
+      33,     7,     4,    12,     9,     5,     7,     8,     7,    13,
+      98,     7,     7,     4,     8,     8,   107,    18,     8,     5,
+      63,    19,   113,    24,     6,   113,    10,    28,    29,    30,
+      31,    32,    33,     7,     8,    22,    19,    18,    98,    46,
+      20,   108,    27,   105,    18,    -1,    -1,    -1,    -1,     7,
+      24,    -1,    -1,    -1,    28,    29,    30,    31,    32,    33,
+      18,    -1,    -1,    -1,    -1,    -1,    24,    -1,    -1,    -1,
+      28,    29,    30,    31,    32,    33
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    14,    20,    21,    22,    18,    31,     0,     4,    18,
-      23,    24,    30,    22,     4,     5,    24,    18,    25,    26,
-      27,     8,     6,    18,    28,    26,     7,     5,    15,    16,
-      17,    18,    29,    30,    31,    32,    33,    34,    35,    36,
-      37,    32,    37,     5,     5,     9,     8,    10,    11,    12,
-      13,     6,     6,    37,    37,    30,    37,    33,    33,    34,
-      34,     6,     6
+       0,    35,    69,     0,    26,    41,    67,    33,    42,    20,
+      36,    70,     4,    11,    46,     7,    18,    23,    24,    25,
+      27,    28,    29,    30,    31,    32,    33,    39,    40,    45,
+      47,    48,    49,    50,    51,    52,    53,    54,    55,    59,
+      60,    61,    62,    66,    68,    30,    21,    40,    48,    49,
+      49,     7,    33,    48,    56,    57,    49,    45,    33,    40,
+      68,     7,     4,     9,     7,    10,    13,    14,    15,    16,
+      17,    12,    42,     7,     8,    49,     5,     7,    38,    44,
+      48,    49,    57,    63,    64,    66,    64,    49,    49,    51,
+      51,    52,    52,     4,     8,    47,    58,    65,    19,    43,
+      47,    19,     8,     8,     8,     5,    37,    10,    19,     6,
+      63,    64,    37,    70,    22,    49,    65,     6,    37
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    19,    20,    21,    22,    22,    23,    24,    24,    25,
-      26,    26,    26,    27,    28,    29,    30,    31,    32,    32,
-      32,    33,    33,    33,    34,    34,    34,    34,    34,    35,
-      35,    35,    36,    36,    37,    37,    37
+       0,    34,    35,    36,    37,    38,    39,    40,    41,    42,
+      43,    44,    45,    45,    45,    45,    45,    45,    46,    47,
+      47,    47,    48,    49,    49,    50,    50,    50,    51,    51,
+      51,    52,    52,    52,    52,    52,    53,    53,    53,    54,
+      54,    55,    55,    55,    56,    57,    58,    59,    60,    61,
+      62,    63,    63,    63,    64,    64,    64,    65,    65,    65,
+      66,    66,    66,    67,    67,    68,    68,    69,    69,    70,
+      70
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     2,     2,     2,     3,     6,     2,     3,     2,
-       0,     1,     3,     1,     1,     3,     1,     1,     3,     3,
-       1,     3,     3,     1,     1,     1,     1,     1,     1,     4,
-       4,     1,     3,     3,     0,     1,     3
+       0,     2,     4,     5,     3,     2,     5,     1,     3,     1,
+       1,     1,     3,     2,     5,     7,     2,     1,     3,     1,
+       1,     1,     1,     3,     1,     3,     3,     1,     3,     3,
+       1,     1,     1,     1,     1,     1,     4,     4,     1,     3,
+       1,     2,     2,     1,     4,     1,     3,     1,     1,     1,
+       3,     0,     1,     3,     0,     1,     3,     0,     1,     3,
+       0,     1,     3,     0,     2,     1,     2,     0,     2,     0,
+       3
 };
 
 
@@ -1255,218 +1378,422 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* Fifth: ListModuleImport ListFunctionDeclaration  */
-#line 127 "fifth.y"
-                                                 {  std::reverse((yyvsp[-1].listmoduleimport_)->begin(),(yyvsp[-1].listmoduleimport_)->end()) ; std::reverse((yyvsp[0].listfunctiondeclaration_)->begin(),(yyvsp[0].listfunctiondeclaration_)->end()) ;(yyval.fifth_) = new FifthProgram((yyvsp[-1].listmoduleimport_), (yyvsp[0].listfunctiondeclaration_)); (yyval.fifth_)->line_number = yy_mylinenumber; YY_RESULT_Fifth_= (yyval.fifth_); }
-#line 1262 "Parser.C"
-    break;
-
-  case 3: /* ModuleImport: _SYMB_10 PackageName  */
-#line 129 "fifth.y"
-                                    {  (yyval.moduleimport_) = new ModImp((yyvsp[0].packagename_)); (yyval.moduleimport_)->line_number = yy_mylinenumber;  }
-#line 1268 "Parser.C"
-    break;
-
-  case 4: /* ListModuleImport: ModuleImport _SYMB_0  */
-#line 131 "fifth.y"
-                                        {  (yyval.listmoduleimport_) = new ListModuleImport() ; (yyval.listmoduleimport_)->push_back((yyvsp[-1].moduleimport_));  }
-#line 1274 "Parser.C"
-    break;
-
-  case 5: /* ListModuleImport: ModuleImport _SYMB_0 ListModuleImport  */
-#line 132 "fifth.y"
-                                          {  (yyvsp[0].listmoduleimport_)->push_back((yyvsp[-2].moduleimport_)) ; (yyval.listmoduleimport_) = (yyvsp[0].listmoduleimport_) ;  }
-#line 1280 "Parser.C"
-    break;
-
-  case 6: /* FunctionDeclaration: FunctionName _SYMB_1 ListFormalParameter _SYMB_2 _SYMB_3 ListExp  */
-#line 134 "fifth.y"
-                                                                                       {  std::reverse((yyvsp[-3].listformalparameter_)->begin(),(yyvsp[-3].listformalparameter_)->end()) ; std::reverse((yyvsp[0].listexp_)->begin(),(yyvsp[0].listexp_)->end()) ;(yyval.functiondeclaration_) = new FuncDecl((yyvsp[-5].functionname_), (yyvsp[-3].listformalparameter_), (yyvsp[0].listexp_)); (yyval.functiondeclaration_)->line_number = yy_mylinenumber;  }
-#line 1286 "Parser.C"
-    break;
-
-  case 7: /* ListFunctionDeclaration: FunctionDeclaration _SYMB_0  */
-#line 136 "fifth.y"
-                                                      {  (yyval.listfunctiondeclaration_) = new ListFunctionDeclaration() ; (yyval.listfunctiondeclaration_)->push_back((yyvsp[-1].functiondeclaration_));  }
-#line 1292 "Parser.C"
-    break;
-
-  case 8: /* ListFunctionDeclaration: FunctionDeclaration _SYMB_0 ListFunctionDeclaration  */
-#line 137 "fifth.y"
-                                                        {  (yyvsp[0].listfunctiondeclaration_)->push_back((yyvsp[-2].functiondeclaration_)) ; (yyval.listfunctiondeclaration_) = (yyvsp[0].listfunctiondeclaration_) ;  }
-#line 1298 "Parser.C"
-    break;
-
-  case 9: /* FormalParameter: ParamType ParamName  */
-#line 139 "fifth.y"
-                                      {  (yyval.formalparameter_) = new FParam((yyvsp[-1].paramtype_), (yyvsp[0].paramname_)); (yyval.formalparameter_)->line_number = yy_mylinenumber;  }
-#line 1304 "Parser.C"
-    break;
-
-  case 10: /* ListFormalParameter: %empty  */
-#line 141 "fifth.y"
-                                  {  (yyval.listformalparameter_) = new ListFormalParameter();  }
-#line 1310 "Parser.C"
-    break;
-
-  case 11: /* ListFormalParameter: FormalParameter  */
-#line 142 "fifth.y"
-                    {  (yyval.listformalparameter_) = new ListFormalParameter() ; (yyval.listformalparameter_)->push_back((yyvsp[0].formalparameter_));  }
-#line 1316 "Parser.C"
-    break;
-
-  case 12: /* ListFormalParameter: FormalParameter _SYMB_4 ListFormalParameter  */
-#line 143 "fifth.y"
-                                                {  (yyvsp[0].listformalparameter_)->push_back((yyvsp[-2].formalparameter_)) ; (yyval.listformalparameter_) = (yyvsp[0].listformalparameter_) ;  }
-#line 1322 "Parser.C"
-    break;
-
-  case 13: /* ParamType: _IDENT_  */
-#line 145 "fifth.y"
-                    {  (yyval.paramtype_) = new TParam((yyvsp[0].string_)); (yyval.paramtype_)->line_number = yy_mylinenumber;  }
-#line 1328 "Parser.C"
-    break;
-
-  case 14: /* ParamName: _IDENT_  */
-#line 147 "fifth.y"
-                    {  (yyval.paramname_) = new NParam((yyvsp[0].string_)); (yyval.paramname_)->line_number = yy_mylinenumber;  }
-#line 1334 "Parser.C"
-    break;
-
-  case 15: /* QFunctionName: PackageName _SYMB_5 FunctionName  */
-#line 149 "fifth.y"
-                                                 {  (yyval.qfunctionname_) = new NQFunc((yyvsp[-2].packagename_), (yyvsp[0].functionname_)); (yyval.qfunctionname_)->line_number = yy_mylinenumber;  }
-#line 1340 "Parser.C"
-    break;
-
-  case 16: /* FunctionName: _IDENT_  */
-#line 151 "fifth.y"
-                       {  (yyval.functionname_) = new NFunc((yyvsp[0].string_)); (yyval.functionname_)->line_number = yy_mylinenumber;  }
-#line 1346 "Parser.C"
-    break;
-
-  case 17: /* PackageName: _IDENT_  */
-#line 153 "fifth.y"
-                      {  (yyval.packagename_) = new NPkg((yyvsp[0].string_)); (yyval.packagename_)->line_number = yy_mylinenumber;  }
-#line 1352 "Parser.C"
-    break;
-
-  case 18: /* Exp: Exp _SYMB_6 Exp1  */
-#line 155 "fifth.y"
-                       {  (yyval.exp_) = new EAdd((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1358 "Parser.C"
-    break;
-
-  case 19: /* Exp: Exp _SYMB_7 Exp1  */
-#line 156 "fifth.y"
-                     {  (yyval.exp_) = new ESub((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1364 "Parser.C"
-    break;
-
-  case 20: /* Exp: Exp1  */
-#line 157 "fifth.y"
-         {  (yyval.exp_) = (yyvsp[0].exp_);  }
-#line 1370 "Parser.C"
-    break;
-
-  case 21: /* Exp1: Exp1 _SYMB_8 Exp2  */
-#line 159 "fifth.y"
-                         {  (yyval.exp_) = new EMul((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1376 "Parser.C"
-    break;
-
-  case 22: /* Exp1: Exp1 _SYMB_9 Exp2  */
-#line 160 "fifth.y"
-                      {  (yyval.exp_) = new EDiv((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1382 "Parser.C"
-    break;
-
-  case 23: /* Exp1: Exp2  */
-#line 161 "fifth.y"
-         {  (yyval.exp_) = (yyvsp[0].exp_);  }
-#line 1388 "Parser.C"
-    break;
-
-  case 24: /* Exp2: _INTEGER_  */
-#line 163 "fifth.y"
-                 {  (yyval.exp_) = new EInt((yyvsp[0].int_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1394 "Parser.C"
-    break;
-
-  case 25: /* Exp2: _DOUBLE_  */
-#line 164 "fifth.y"
-             {  (yyval.exp_) = new EDouble((yyvsp[0].double_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1400 "Parser.C"
-    break;
-
-  case 26: /* Exp2: _IDENT_  */
-#line 165 "fifth.y"
-            {  (yyval.exp_) = new EIdent((yyvsp[0].string_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1406 "Parser.C"
-    break;
-
-  case 27: /* Exp2: _STRING_  */
-#line 166 "fifth.y"
-             {  (yyval.exp_) = new EString((yyvsp[0].string_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1412 "Parser.C"
-    break;
-
-  case 28: /* Exp2: Exp3  */
-#line 167 "fifth.y"
-         {  (yyval.exp_) = (yyvsp[0].exp_);  }
-#line 1418 "Parser.C"
-    break;
-
-  case 29: /* Exp3: FunctionName _SYMB_1 ListExp _SYMB_2  */
-#line 169 "fifth.y"
-                                            {  std::reverse((yyvsp[-1].listexp_)->begin(),(yyvsp[-1].listexp_)->end()) ;(yyval.exp_) = new EFuncCall((yyvsp[-3].functionname_), (yyvsp[-1].listexp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1424 "Parser.C"
-    break;
-
-  case 30: /* Exp3: QFunctionName _SYMB_1 ListExp _SYMB_2  */
-#line 170 "fifth.y"
-                                          {  std::reverse((yyvsp[-1].listexp_)->begin(),(yyvsp[-1].listexp_)->end()) ;(yyval.exp_) = new EQFuncCall((yyvsp[-3].qfunctionname_), (yyvsp[-1].listexp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1430 "Parser.C"
-    break;
-
-  case 31: /* Exp3: Exp4  */
-#line 171 "fifth.y"
-         {  (yyval.exp_) = (yyvsp[0].exp_);  }
-#line 1436 "Parser.C"
-    break;
-
-  case 32: /* Exp4: _SYMB_1 ListExp _SYMB_2  */
-#line 173 "fifth.y"
-                               {  std::reverse((yyvsp[-1].listexp_)->begin(),(yyvsp[-1].listexp_)->end()) ;(yyval.exp_) = new EFuncParen((yyvsp[-1].listexp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
-#line 1442 "Parser.C"
-    break;
-
-  case 33: /* Exp4: _SYMB_1 Exp _SYMB_2  */
+  case 2: /* Fifth: ListModuleImport ListAlias ListStatement ListFunctionDeclaration  */
 #line 174 "fifth.y"
-                        {  (yyval.exp_) = (yyvsp[-1].exp_);  }
-#line 1448 "Parser.C"
+                                                                         {  std::reverse((yyvsp[0].listfunctiondeclaration_)->begin(),(yyvsp[0].listfunctiondeclaration_)->end()) ;(yyval.fifth_) = new FifthProgram((yyvsp[-3].listmoduleimport_), (yyvsp[-2].listalias_), (yyvsp[-1].liststatement_), (yyvsp[0].listfunctiondeclaration_)); (yyval.fifth_)->line_number = yy_mylinenumber; YY_RESULT_Fifth_= (yyval.fifth_); }
+#line 1385 "Parser.C"
     break;
 
-  case 34: /* ListExp: %empty  */
+  case 3: /* Alias: _SYMB_16 UriConstant _SYMB_17 PackageName _SYMB_0  */
 #line 176 "fifth.y"
-                      {  (yyval.listexp_) = new ListExp();  }
-#line 1454 "Parser.C"
+                                                          {  (yyval.alias_) = new AliasUri((yyvsp[-3].uriconstant_), (yyvsp[-1].packagename_)); (yyval.alias_)->line_number = yy_mylinenumber;  }
+#line 1391 "Parser.C"
     break;
 
-  case 35: /* ListExp: Exp  */
-#line 177 "fifth.y"
-        {  (yyval.listexp_) = new ListExp() ; (yyval.listexp_)->push_back((yyvsp[0].exp_));  }
-#line 1460 "Parser.C"
-    break;
-
-  case 36: /* ListExp: Exp _SYMB_4 ListExp  */
+  case 4: /* Block: _SYMB_1 ListStatement _SYMB_2  */
 #line 178 "fifth.y"
-                        {  (yyvsp[0].listexp_)->push_back((yyvsp[-2].exp_)) ; (yyval.listexp_) = (yyvsp[0].listexp_) ;  }
-#line 1466 "Parser.C"
+                                      {  (yyval.block_) = new Blk((yyvsp[-1].liststatement_)); (yyval.block_)->line_number = yy_mylinenumber;  }
+#line 1397 "Parser.C"
+    break;
+
+  case 5: /* FormalParameter: ParamType ParamName  */
+#line 180 "fifth.y"
+                                      {  (yyval.formalparameter_) = new FParam((yyvsp[-1].paramtype_), (yyvsp[0].paramname_)); (yyval.formalparameter_)->line_number = yy_mylinenumber;  }
+#line 1403 "Parser.C"
+    break;
+
+  case 6: /* FunctionDeclaration: FunctionName _SYMB_3 ListFormalParameter _SYMB_4 Block  */
+#line 182 "fifth.y"
+                                                                             {  std::reverse((yyvsp[-2].listformalparameter_)->begin(),(yyvsp[-2].listformalparameter_)->end()) ;(yyval.functiondeclaration_) = new FuncDecl((yyvsp[-4].functionname_), (yyvsp[-2].listformalparameter_), (yyvsp[0].block_)); (yyval.functiondeclaration_)->line_number = yy_mylinenumber;  }
+#line 1409 "Parser.C"
+    break;
+
+  case 7: /* FunctionName: _IDENT_  */
+#line 184 "fifth.y"
+                       {  (yyval.functionname_) = new NFunc((yyvsp[0].string_)); (yyval.functionname_)->line_number = yy_mylinenumber;  }
+#line 1415 "Parser.C"
+    break;
+
+  case 8: /* ModuleImport: _SYMB_22 PackageName _SYMB_0  */
+#line 186 "fifth.y"
+                                            {  (yyval.moduleimport_) = new ModImp((yyvsp[-1].packagename_)); (yyval.moduleimport_)->line_number = yy_mylinenumber;  }
+#line 1421 "Parser.C"
+    break;
+
+  case 9: /* PackageName: _IDENT_  */
+#line 188 "fifth.y"
+                      {  (yyval.packagename_) = new NPkg((yyvsp[0].string_)); (yyval.packagename_)->line_number = yy_mylinenumber;  }
+#line 1427 "Parser.C"
+    break;
+
+  case 10: /* ParamName: VarName  */
+#line 190 "fifth.y"
+                    {  (yyval.paramname_) = new NParam((yyvsp[0].varname_)); (yyval.paramname_)->line_number = yy_mylinenumber;  }
+#line 1433 "Parser.C"
+    break;
+
+  case 11: /* ParamType: TypeName  */
+#line 192 "fifth.y"
+                     {  (yyval.paramtype_) = new TParam((yyvsp[0].typename_)); (yyval.paramtype_)->line_number = yy_mylinenumber;  }
+#line 1439 "Parser.C"
+    break;
+
+  case 12: /* Statement: QVarName _SYMB_6 Exp  */
+#line 196 "fifth.y"
+                                 {  (yyval.statement_) = new SAssign((yyvsp[-2].qvarname_), (yyvsp[0].exp_)); (yyval.statement_)->line_number = yy_mylinenumber;  }
+#line 1445 "Parser.C"
+    break;
+
+  case 13: /* Statement: _SYMB_21 Exp  */
+#line 197 "fifth.y"
+                 {  (yyval.statement_) = new SReturn((yyvsp[0].exp_)); (yyval.statement_)->line_number = yy_mylinenumber;  }
+#line 1451 "Parser.C"
+    break;
+
+  case 14: /* Statement: _SYMB_19 _SYMB_3 Exp _SYMB_4 Block  */
+#line 198 "fifth.y"
+                                       {  (yyval.statement_) = new SIf((yyvsp[-2].exp_), (yyvsp[0].block_)); (yyval.statement_)->line_number = yy_mylinenumber;  }
+#line 1457 "Parser.C"
+    break;
+
+  case 15: /* Statement: _SYMB_19 _SYMB_3 Exp _SYMB_4 Block _SYMB_18 Block  */
+#line 199 "fifth.y"
+                                                      {  (yyval.statement_) = new SIfElse((yyvsp[-4].exp_), (yyvsp[-2].block_), (yyvsp[0].block_)); (yyval.statement_)->line_number = yy_mylinenumber;  }
+#line 1463 "Parser.C"
+    break;
+
+  case 16: /* Statement: _SYMB_23 Statement  */
+#line 200 "fifth.y"
+                       {  (yyval.statement_) = new SWith((yyvsp[0].statement_)); (yyval.statement_)->line_number = yy_mylinenumber;  }
+#line 1469 "Parser.C"
+    break;
+
+  case 17: /* Statement: Exp  */
+#line 201 "fifth.y"
+        {  (yyval.statement_) = new SBareStmt((yyvsp[0].exp_)); (yyval.statement_)->line_number = yy_mylinenumber;  }
+#line 1475 "Parser.C"
+    break;
+
+  case 18: /* UriConstant: _SYMB_7 _STRING_ _SYMB_8  */
+#line 203 "fifth.y"
+                                       {  (yyval.uriconstant_) = new UriConst((yyvsp[-1].string_)); (yyval.uriconstant_)->line_number = yy_mylinenumber;  }
+#line 1481 "Parser.C"
+    break;
+
+  case 19: /* VarName: _IDENT_  */
+#line 205 "fifth.y"
+                  {  (yyval.varname_) = new VarNameIdent((yyvsp[0].string_)); (yyval.varname_)->line_number = yy_mylinenumber;  }
+#line 1487 "Parser.C"
+    break;
+
+  case 20: /* VarName: _SYMB_25  */
+#line 206 "fifth.y"
+             {  (yyval.varname_) = new VarNamePIdent((yyvsp[0].string_)); (yyval.varname_)->line_number = yy_mylinenumber;  }
+#line 1493 "Parser.C"
+    break;
+
+  case 21: /* VarName: _SYMB_24  */
+#line 207 "fifth.y"
+             {  (yyval.varname_) = new VarNameUIdent((yyvsp[0].string_)); (yyval.varname_)->line_number = yy_mylinenumber;  }
+#line 1499 "Parser.C"
+    break;
+
+  case 22: /* QVarName: ListVarName  */
+#line 209 "fifth.y"
+                       {  std::reverse((yyvsp[0].listvarname_)->begin(),(yyvsp[0].listvarname_)->end()) ;(yyval.qvarname_) = new QVarName1((yyvsp[0].listvarname_)); (yyval.qvarname_)->line_number = yy_mylinenumber;  }
+#line 1505 "Parser.C"
+    break;
+
+  case 23: /* Exp: Exp _SYMB_9 Exp  */
+#line 211 "fifth.y"
+                      {  (yyval.exp_) = new EAnd((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1511 "Parser.C"
+    break;
+
+  case 24: /* Exp: Exp1  */
+#line 212 "fifth.y"
+         {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1517 "Parser.C"
+    break;
+
+  case 25: /* Exp1: Exp1 _SYMB_10 Exp2  */
+#line 214 "fifth.y"
+                          {  (yyval.exp_) = new EAdd((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1523 "Parser.C"
+    break;
+
+  case 26: /* Exp1: Exp1 _SYMB_11 Exp2  */
+#line 215 "fifth.y"
+                       {  (yyval.exp_) = new ESub((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1529 "Parser.C"
+    break;
+
+  case 27: /* Exp1: Exp2  */
+#line 216 "fifth.y"
+         {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1535 "Parser.C"
+    break;
+
+  case 28: /* Exp2: Exp2 _SYMB_12 Exp3  */
+#line 218 "fifth.y"
+                          {  (yyval.exp_) = new EMul((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1541 "Parser.C"
+    break;
+
+  case 29: /* Exp2: Exp2 _SYMB_13 Exp3  */
+#line 219 "fifth.y"
+                       {  (yyval.exp_) = new EDiv((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1547 "Parser.C"
+    break;
+
+  case 30: /* Exp2: Exp3  */
+#line 220 "fifth.y"
+         {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1553 "Parser.C"
+    break;
+
+  case 31: /* Exp3: _INTEGER_  */
+#line 222 "fifth.y"
+                 {  (yyval.exp_) = new EInt((yyvsp[0].int_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1559 "Parser.C"
+    break;
+
+  case 32: /* Exp3: _DOUBLE_  */
+#line 223 "fifth.y"
+             {  (yyval.exp_) = new EDouble((yyvsp[0].double_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1565 "Parser.C"
+    break;
+
+  case 33: /* Exp3: _STRING_  */
+#line 224 "fifth.y"
+             {  (yyval.exp_) = new EString((yyvsp[0].string_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1571 "Parser.C"
+    break;
+
+  case 34: /* Exp3: QVarName  */
+#line 225 "fifth.y"
+             {  (yyval.exp_) = new EVarname((yyvsp[0].qvarname_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1577 "Parser.C"
+    break;
+
+  case 35: /* Exp3: Exp4  */
+#line 226 "fifth.y"
+         {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1583 "Parser.C"
+    break;
+
+  case 36: /* Exp4: FunctionName _SYMB_3 ListExp _SYMB_4  */
+#line 228 "fifth.y"
+                                            {  std::reverse((yyvsp[-1].listexp_)->begin(),(yyvsp[-1].listexp_)->end()) ;(yyval.exp_) = new EFuncCall((yyvsp[-3].functionname_), (yyvsp[-1].listexp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1589 "Parser.C"
+    break;
+
+  case 37: /* Exp4: QVarName _SYMB_3 ListExp _SYMB_4  */
+#line 229 "fifth.y"
+                                     {  std::reverse((yyvsp[-1].listexp_)->begin(),(yyvsp[-1].listexp_)->end()) ;(yyval.exp_) = new EQFuncCall((yyvsp[-3].qvarname_), (yyvsp[-1].listexp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1595 "Parser.C"
+    break;
+
+  case 38: /* Exp4: Exp5  */
+#line 230 "fifth.y"
+         {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1601 "Parser.C"
+    break;
+
+  case 39: /* Exp5: _SYMB_3 Exp _SYMB_4  */
+#line 232 "fifth.y"
+                           {  (yyval.exp_) = new EFuncParen((yyvsp[-1].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1607 "Parser.C"
+    break;
+
+  case 40: /* Exp5: Exp6  */
+#line 233 "fifth.y"
+         {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1613 "Parser.C"
+    break;
+
+  case 41: /* Exp6: _SYMB_14 Exp  */
+#line 235 "fifth.y"
+                    {  (yyval.exp_) = new ENegation((yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1619 "Parser.C"
+    break;
+
+  case 42: /* Exp6: _SYMB_20 TypeInitialiser  */
+#line 236 "fifth.y"
+                             {  (yyval.exp_) = new ETypeCreate((yyvsp[0].typeinitialiser_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1625 "Parser.C"
+    break;
+
+  case 43: /* Exp6: Exp7  */
+#line 237 "fifth.y"
+         {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1631 "Parser.C"
+    break;
+
+  case 44: /* TypeInitialiser: TypeName _SYMB_1 ListTypePropertyInit _SYMB_2  */
+#line 239 "fifth.y"
+                                                                {  std::reverse((yyvsp[-1].listtypepropertyinit_)->begin(),(yyvsp[-1].listtypepropertyinit_)->end()) ;(yyval.typeinitialiser_) = new TypeInt((yyvsp[-3].typename_), (yyvsp[-1].listtypepropertyinit_)); (yyval.typeinitialiser_)->line_number = yy_mylinenumber;  }
+#line 1637 "Parser.C"
+    break;
+
+  case 45: /* TypeName: QVarName  */
+#line 241 "fifth.y"
+                    {  (yyval.typename_) = new NTypeName((yyvsp[0].qvarname_)); (yyval.typename_)->line_number = yy_mylinenumber;  }
+#line 1643 "Parser.C"
+    break;
+
+  case 46: /* TypePropertyInit: VarName _SYMB_6 Exp  */
+#line 243 "fifth.y"
+                                       {  (yyval.typepropertyinit_) = new TypePropertyInit1((yyvsp[-2].varname_), (yyvsp[0].exp_)); (yyval.typepropertyinit_)->line_number = yy_mylinenumber;  }
+#line 1649 "Parser.C"
+    break;
+
+  case 47: /* Exp7: Exp8  */
+#line 245 "fifth.y"
+            {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1655 "Parser.C"
+    break;
+
+  case 48: /* Exp8: Exp9  */
+#line 247 "fifth.y"
+            {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1661 "Parser.C"
+    break;
+
+  case 49: /* Exp9: Exp10  */
+#line 249 "fifth.y"
+             {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1667 "Parser.C"
+    break;
+
+  case 50: /* Exp10: _SYMB_3 Exp _SYMB_4  */
+#line 251 "fifth.y"
+                            {  (yyval.exp_) = (yyvsp[-1].exp_);  }
+#line 1673 "Parser.C"
+    break;
+
+  case 51: /* ListFormalParameter: %empty  */
+#line 253 "fifth.y"
+                                  {  (yyval.listformalparameter_) = new ListFormalParameter();  }
+#line 1679 "Parser.C"
+    break;
+
+  case 52: /* ListFormalParameter: FormalParameter  */
+#line 254 "fifth.y"
+                    {  (yyval.listformalparameter_) = new ListFormalParameter() ; (yyval.listformalparameter_)->push_back((yyvsp[0].formalparameter_));  }
+#line 1685 "Parser.C"
+    break;
+
+  case 53: /* ListFormalParameter: FormalParameter _SYMB_15 ListFormalParameter  */
+#line 255 "fifth.y"
+                                                 {  (yyvsp[0].listformalparameter_)->push_back((yyvsp[-2].formalparameter_)) ; (yyval.listformalparameter_) = (yyvsp[0].listformalparameter_) ;  }
+#line 1691 "Parser.C"
+    break;
+
+  case 54: /* ListExp: %empty  */
+#line 257 "fifth.y"
+                      {  (yyval.listexp_) = new ListExp();  }
+#line 1697 "Parser.C"
+    break;
+
+  case 55: /* ListExp: Exp  */
+#line 258 "fifth.y"
+        {  (yyval.listexp_) = new ListExp() ; (yyval.listexp_)->push_back((yyvsp[0].exp_));  }
+#line 1703 "Parser.C"
+    break;
+
+  case 56: /* ListExp: Exp _SYMB_15 ListExp  */
+#line 259 "fifth.y"
+                         {  (yyvsp[0].listexp_)->push_back((yyvsp[-2].exp_)) ; (yyval.listexp_) = (yyvsp[0].listexp_) ;  }
+#line 1709 "Parser.C"
+    break;
+
+  case 57: /* ListTypePropertyInit: %empty  */
+#line 261 "fifth.y"
+                                   {  (yyval.listtypepropertyinit_) = new ListTypePropertyInit();  }
+#line 1715 "Parser.C"
+    break;
+
+  case 58: /* ListTypePropertyInit: TypePropertyInit  */
+#line 262 "fifth.y"
+                     {  (yyval.listtypepropertyinit_) = new ListTypePropertyInit() ; (yyval.listtypepropertyinit_)->push_back((yyvsp[0].typepropertyinit_));  }
+#line 1721 "Parser.C"
+    break;
+
+  case 59: /* ListTypePropertyInit: TypePropertyInit _SYMB_15 ListTypePropertyInit  */
+#line 263 "fifth.y"
+                                                   {  (yyvsp[0].listtypepropertyinit_)->push_back((yyvsp[-2].typepropertyinit_)) ; (yyval.listtypepropertyinit_) = (yyvsp[0].listtypepropertyinit_) ;  }
+#line 1727 "Parser.C"
+    break;
+
+  case 60: /* ListVarName: %empty  */
+#line 265 "fifth.y"
+                          {  (yyval.listvarname_) = new ListVarName();  }
+#line 1733 "Parser.C"
+    break;
+
+  case 61: /* ListVarName: VarName  */
+#line 266 "fifth.y"
+            {  (yyval.listvarname_) = new ListVarName() ; (yyval.listvarname_)->push_back((yyvsp[0].varname_));  }
+#line 1739 "Parser.C"
+    break;
+
+  case 62: /* ListVarName: VarName _SYMB_5 ListVarName  */
+#line 267 "fifth.y"
+                                {  (yyvsp[0].listvarname_)->push_back((yyvsp[-2].varname_)) ; (yyval.listvarname_) = (yyvsp[0].listvarname_) ;  }
+#line 1745 "Parser.C"
+    break;
+
+  case 63: /* ListAlias: %empty  */
+#line 269 "fifth.y"
+                        {  (yyval.listalias_) = new ListAlias();  }
+#line 1751 "Parser.C"
+    break;
+
+  case 64: /* ListAlias: ListAlias Alias  */
+#line 270 "fifth.y"
+                    {  (yyvsp[-1].listalias_)->push_back((yyvsp[0].alias_)) ; (yyval.listalias_) = (yyvsp[-1].listalias_) ;  }
+#line 1757 "Parser.C"
+    break;
+
+  case 65: /* ListFunctionDeclaration: FunctionDeclaration  */
+#line 272 "fifth.y"
+                                              {  (yyval.listfunctiondeclaration_) = new ListFunctionDeclaration() ; (yyval.listfunctiondeclaration_)->push_back((yyvsp[0].functiondeclaration_));  }
+#line 1763 "Parser.C"
+    break;
+
+  case 66: /* ListFunctionDeclaration: FunctionDeclaration ListFunctionDeclaration  */
+#line 273 "fifth.y"
+                                                {  (yyvsp[0].listfunctiondeclaration_)->push_back((yyvsp[-1].functiondeclaration_)) ; (yyval.listfunctiondeclaration_) = (yyvsp[0].listfunctiondeclaration_) ;  }
+#line 1769 "Parser.C"
+    break;
+
+  case 67: /* ListModuleImport: %empty  */
+#line 275 "fifth.y"
+                               {  (yyval.listmoduleimport_) = new ListModuleImport();  }
+#line 1775 "Parser.C"
+    break;
+
+  case 68: /* ListModuleImport: ListModuleImport ModuleImport  */
+#line 276 "fifth.y"
+                                  {  (yyvsp[-1].listmoduleimport_)->push_back((yyvsp[0].moduleimport_)) ; (yyval.listmoduleimport_) = (yyvsp[-1].listmoduleimport_) ;  }
+#line 1781 "Parser.C"
+    break;
+
+  case 69: /* ListStatement: %empty  */
+#line 278 "fifth.y"
+                            {  (yyval.liststatement_) = new ListStatement();  }
+#line 1787 "Parser.C"
+    break;
+
+  case 70: /* ListStatement: ListStatement Statement _SYMB_0  */
+#line 279 "fifth.y"
+                                    {  (yyvsp[-2].liststatement_)->push_back((yyvsp[-1].statement_)) ; (yyval.liststatement_) = (yyvsp[-2].liststatement_) ;  }
+#line 1793 "Parser.C"
     break;
 
 
-#line 1470 "Parser.C"
+#line 1797 "Parser.C"
 
       default: break;
     }

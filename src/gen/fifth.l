@@ -27,16 +27,29 @@ IDENT [a-zA-Z0-9'_]
 %%
 
 <YYINITIAL>";"      	 return _SYMB_0;
-<YYINITIAL>"("      	 return _SYMB_1;
-<YYINITIAL>")"      	 return _SYMB_2;
-<YYINITIAL>"=>"      	 return _SYMB_3;
-<YYINITIAL>","      	 return _SYMB_4;
+<YYINITIAL>"{"      	 return _SYMB_1;
+<YYINITIAL>"}"      	 return _SYMB_2;
+<YYINITIAL>"("      	 return _SYMB_3;
+<YYINITIAL>")"      	 return _SYMB_4;
 <YYINITIAL>"."      	 return _SYMB_5;
-<YYINITIAL>"+"      	 return _SYMB_6;
-<YYINITIAL>"-"      	 return _SYMB_7;
-<YYINITIAL>"*"      	 return _SYMB_8;
-<YYINITIAL>"/"      	 return _SYMB_9;
-<YYINITIAL>"use"      	 return _SYMB_10;
+<YYINITIAL>"="      	 return _SYMB_6;
+<YYINITIAL>"<"      	 return _SYMB_7;
+<YYINITIAL>">"      	 return _SYMB_8;
+<YYINITIAL>"&&"      	 return _SYMB_9;
+<YYINITIAL>"+"      	 return _SYMB_10;
+<YYINITIAL>"-"      	 return _SYMB_11;
+<YYINITIAL>"*"      	 return _SYMB_12;
+<YYINITIAL>"/"      	 return _SYMB_13;
+<YYINITIAL>"!"      	 return _SYMB_14;
+<YYINITIAL>","      	 return _SYMB_15;
+<YYINITIAL>"alias"      	 return _SYMB_16;
+<YYINITIAL>"as"      	 return _SYMB_17;
+<YYINITIAL>"else"      	 return _SYMB_18;
+<YYINITIAL>"if"      	 return _SYMB_19;
+<YYINITIAL>"new"      	 return _SYMB_20;
+<YYINITIAL>"return"      	 return _SYMB_21;
+<YYINITIAL>"use"      	 return _SYMB_22;
+<YYINITIAL>"with"      	 return _SYMB_23;
 
 <YYINITIAL>"//"[^\n]*\n ++yy_mylinenumber; // BNFC: comment "//";
 <YYINITIAL>"#"[^\n]*\n ++yy_mylinenumber; // BNFC: comment "#";
@@ -45,6 +58,8 @@ IDENT [a-zA-Z0-9'_]
 <COMMENT>. /* skip */;
 <COMMENT>[\n] ++yy_mylinenumber;
 
+<YYINITIAL>{CAPITAL}({LETTER}|{DIGIT}|\_)*     	 yylval.string_ = strdup(yytext); return _SYMB_24;
+<YYINITIAL>{LETTER}({LETTER}|{DIGIT}|\_)*\?     	 yylval.string_ = strdup(yytext); return _SYMB_25;
 <YYINITIAL>"\""      	 BEGIN STRING;
 <STRING>\\      	 BEGIN ESCAPED;
 <STRING>\"      	 yylval.string_ = strdup(YY_PARSED_STRING); YY_BUFFER_RESET(); BEGIN YYINITIAL; return _STRING_;

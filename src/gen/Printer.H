@@ -31,44 +31,78 @@ class PrintAbsyn : public Visitor
 
   void visitFifth(Fifth *p); /* abstract class */
   void visitFifthProgram(FifthProgram *p);
-  void visitModuleImport(ModuleImport *p); /* abstract class */
-  void visitModImp(ModImp *p);
-  void visitListModuleImport(ListModuleImport *p);
-  void visitFunctionDeclaration(FunctionDeclaration *p); /* abstract class */
-  void visitFuncDecl(FuncDecl *p);
-  void visitListFunctionDeclaration(ListFunctionDeclaration *p);
+  void visitAlias(Alias *p); /* abstract class */
+  void visitAliasUri(AliasUri *p);
+  void visitBlock(Block *p); /* abstract class */
+  void visitBlk(Blk *p);
   void visitFormalParameter(FormalParameter *p); /* abstract class */
   void visitFParam(FParam *p);
-  void visitListFormalParameter(ListFormalParameter *p);
-  void visitParamType(ParamType *p); /* abstract class */
-  void visitTParam(TParam *p);
-  void visitParamName(ParamName *p); /* abstract class */
-  void visitNParam(NParam *p);
-  void visitQFunctionName(QFunctionName *p); /* abstract class */
-  void visitNQFunc(NQFunc *p);
+  void visitFunctionDeclaration(FunctionDeclaration *p); /* abstract class */
+  void visitFuncDecl(FuncDecl *p);
   void visitFunctionName(FunctionName *p); /* abstract class */
   void visitNFunc(NFunc *p);
+  void visitModuleImport(ModuleImport *p); /* abstract class */
+  void visitModImp(ModImp *p);
   void visitPackageName(PackageName *p); /* abstract class */
   void visitNPkg(NPkg *p);
+  void visitParamName(ParamName *p); /* abstract class */
+  void visitNParam(NParam *p);
+  void visitParamType(ParamType *p); /* abstract class */
+  void visitTParam(TParam *p);
+  void visitQFunctionName(QFunctionName *p); /* abstract class */
+  void visitNQFunc(NQFunc *p);
+  void visitStatement(Statement *p); /* abstract class */
+  void visitSAssign(SAssign *p);
+  void visitSReturn(SReturn *p);
+  void visitSIf(SIf *p);
+  void visitSIfElse(SIfElse *p);
+  void visitSWith(SWith *p);
+  void visitSBareStmt(SBareStmt *p);
+  void visitUriConstant(UriConstant *p); /* abstract class */
+  void visitUriConst(UriConst *p);
+  void visitVarName(VarName *p); /* abstract class */
+  void visitVarNameIdent(VarNameIdent *p);
+  void visitVarNamePIdent(VarNamePIdent *p);
+  void visitVarNameUIdent(VarNameUIdent *p);
+  void visitQVarName(QVarName *p); /* abstract class */
+  void visitQVarName1(QVarName1 *p);
   void visitExp(Exp *p); /* abstract class */
+  void visitEAnd(EAnd *p);
   void visitEAdd(EAdd *p);
   void visitESub(ESub *p);
   void visitEMul(EMul *p);
   void visitEDiv(EDiv *p);
   void visitEInt(EInt *p);
   void visitEDouble(EDouble *p);
-  void visitEIdent(EIdent *p);
   void visitEString(EString *p);
+  void visitEVarname(EVarname *p);
   void visitEFuncCall(EFuncCall *p);
   void visitEQFuncCall(EQFuncCall *p);
   void visitEFuncParen(EFuncParen *p);
+  void visitENegation(ENegation *p);
+  void visitETypeCreate(ETypeCreate *p);
+  void visitTypeInitialiser(TypeInitialiser *p); /* abstract class */
+  void visitTypeInt(TypeInt *p);
+  void visitTypeName(TypeName *p); /* abstract class */
+  void visitNTypeName(NTypeName *p);
+  void visitTypePropertyInit(TypePropertyInit *p); /* abstract class */
+  void visitTypePropertyInit1(TypePropertyInit1 *p);
+  void visitListFormalParameter(ListFormalParameter *p);
   void visitListExp(ListExp *p);
+  void visitListTypePropertyInit(ListTypePropertyInit *p);
+  void visitListVarName(ListVarName *p);
+  void visitListAlias(ListAlias *p);
+  void visitListFunctionDeclaration(ListFunctionDeclaration *p);
+  void visitListModuleImport(ListModuleImport *p);
+  void visitListStatement(ListStatement *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
   void visitChar(Char c);
   void visitString(String s);
   void visitIdent(String s);
+  void visitUIdent(String s);
+  void visitPIdent(String s);
  protected:
   char *buf_;
   int cur_, buf_size;
@@ -147,44 +181,78 @@ class ShowAbsyn : public Visitor
 
   void visitFifth(Fifth *p); /* abstract class */
   void visitFifthProgram(FifthProgram *p);
-  void visitModuleImport(ModuleImport *p); /* abstract class */
-  void visitModImp(ModImp *p);
-  void visitListModuleImport(ListModuleImport *p);
-  void visitFunctionDeclaration(FunctionDeclaration *p); /* abstract class */
-  void visitFuncDecl(FuncDecl *p);
-  void visitListFunctionDeclaration(ListFunctionDeclaration *p);
+  void visitAlias(Alias *p); /* abstract class */
+  void visitAliasUri(AliasUri *p);
+  void visitBlock(Block *p); /* abstract class */
+  void visitBlk(Blk *p);
   void visitFormalParameter(FormalParameter *p); /* abstract class */
   void visitFParam(FParam *p);
-  void visitListFormalParameter(ListFormalParameter *p);
-  void visitParamType(ParamType *p); /* abstract class */
-  void visitTParam(TParam *p);
-  void visitParamName(ParamName *p); /* abstract class */
-  void visitNParam(NParam *p);
-  void visitQFunctionName(QFunctionName *p); /* abstract class */
-  void visitNQFunc(NQFunc *p);
+  void visitFunctionDeclaration(FunctionDeclaration *p); /* abstract class */
+  void visitFuncDecl(FuncDecl *p);
   void visitFunctionName(FunctionName *p); /* abstract class */
   void visitNFunc(NFunc *p);
+  void visitModuleImport(ModuleImport *p); /* abstract class */
+  void visitModImp(ModImp *p);
   void visitPackageName(PackageName *p); /* abstract class */
   void visitNPkg(NPkg *p);
+  void visitParamName(ParamName *p); /* abstract class */
+  void visitNParam(NParam *p);
+  void visitParamType(ParamType *p); /* abstract class */
+  void visitTParam(TParam *p);
+  void visitQFunctionName(QFunctionName *p); /* abstract class */
+  void visitNQFunc(NQFunc *p);
+  void visitStatement(Statement *p); /* abstract class */
+  void visitSAssign(SAssign *p);
+  void visitSReturn(SReturn *p);
+  void visitSIf(SIf *p);
+  void visitSIfElse(SIfElse *p);
+  void visitSWith(SWith *p);
+  void visitSBareStmt(SBareStmt *p);
+  void visitUriConstant(UriConstant *p); /* abstract class */
+  void visitUriConst(UriConst *p);
+  void visitVarName(VarName *p); /* abstract class */
+  void visitVarNameIdent(VarNameIdent *p);
+  void visitVarNamePIdent(VarNamePIdent *p);
+  void visitVarNameUIdent(VarNameUIdent *p);
+  void visitQVarName(QVarName *p); /* abstract class */
+  void visitQVarName1(QVarName1 *p);
   void visitExp(Exp *p); /* abstract class */
+  void visitEAnd(EAnd *p);
   void visitEAdd(EAdd *p);
   void visitESub(ESub *p);
   void visitEMul(EMul *p);
   void visitEDiv(EDiv *p);
   void visitEInt(EInt *p);
   void visitEDouble(EDouble *p);
-  void visitEIdent(EIdent *p);
   void visitEString(EString *p);
+  void visitEVarname(EVarname *p);
   void visitEFuncCall(EFuncCall *p);
   void visitEQFuncCall(EQFuncCall *p);
   void visitEFuncParen(EFuncParen *p);
+  void visitENegation(ENegation *p);
+  void visitETypeCreate(ETypeCreate *p);
+  void visitTypeInitialiser(TypeInitialiser *p); /* abstract class */
+  void visitTypeInt(TypeInt *p);
+  void visitTypeName(TypeName *p); /* abstract class */
+  void visitNTypeName(NTypeName *p);
+  void visitTypePropertyInit(TypePropertyInit *p); /* abstract class */
+  void visitTypePropertyInit1(TypePropertyInit1 *p);
+  void visitListFormalParameter(ListFormalParameter *p);
   void visitListExp(ListExp *p);
+  void visitListTypePropertyInit(ListTypePropertyInit *p);
+  void visitListVarName(ListVarName *p);
+  void visitListAlias(ListAlias *p);
+  void visitListFunctionDeclaration(ListFunctionDeclaration *p);
+  void visitListModuleImport(ListModuleImport *p);
+  void visitListStatement(ListStatement *p);
 
   void visitInteger(Integer i);
   void visitDouble(Double d);
   void visitChar(Char c);
   void visitString(String s);
   void visitIdent(String s);
+  void visitUIdent(String s);
+  void visitPIdent(String s);
  protected:
   char *buf_;
   int cur_, buf_size;

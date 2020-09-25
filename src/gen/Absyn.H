@@ -15,44 +15,78 @@ typedef std::string String;
 typedef std::string Ident;
 
 
+typedef std::string UIdent;
+typedef std::string PIdent;
 
 
 /********************   Forward Declarations    ********************/
 
 class Fifth;
-class ModuleImport;
-class FunctionDeclaration;
+class Alias;
+class Block;
 class FormalParameter;
-class ParamType;
-class ParamName;
-class QFunctionName;
+class FunctionDeclaration;
 class FunctionName;
+class ModuleImport;
 class PackageName;
+class ParamName;
+class ParamType;
+class QFunctionName;
+class Statement;
+class UriConstant;
+class VarName;
+class QVarName;
 class Exp;
+class TypeInitialiser;
+class TypeName;
+class TypePropertyInit;
 class FifthProgram;
-class ModImp;
-class FuncDecl;
+class AliasUri;
+class Blk;
 class FParam;
-class TParam;
-class NParam;
-class NQFunc;
+class FuncDecl;
 class NFunc;
+class ModImp;
 class NPkg;
+class NParam;
+class TParam;
+class NQFunc;
+class SAssign;
+class SReturn;
+class SIf;
+class SIfElse;
+class SWith;
+class SBareStmt;
+class UriConst;
+class VarNameIdent;
+class VarNamePIdent;
+class VarNameUIdent;
+class QVarName1;
+class EAnd;
 class EAdd;
 class ESub;
 class EMul;
 class EDiv;
 class EInt;
 class EDouble;
-class EIdent;
 class EString;
+class EVarname;
 class EFuncCall;
 class EQFuncCall;
 class EFuncParen;
-class ListModuleImport;
-class ListFunctionDeclaration;
+class ENegation;
+class ETypeCreate;
+class TypeInt;
+class NTypeName;
+class TypePropertyInit1;
 class ListFormalParameter;
 class ListExp;
+class ListTypePropertyInit;
+class ListVarName;
+class ListAlias;
+class ListFunctionDeclaration;
+class ListModuleImport;
+class ListStatement;
 
 
 /********************   Visitor Interfaces    ********************/
@@ -61,39 +95,71 @@ class Visitor
 public:
   virtual ~Visitor() {}
   virtual void visitFifth(Fifth *p) = 0;
-  virtual void visitModuleImport(ModuleImport *p) = 0;
-  virtual void visitFunctionDeclaration(FunctionDeclaration *p) = 0;
+  virtual void visitAlias(Alias *p) = 0;
+  virtual void visitBlock(Block *p) = 0;
   virtual void visitFormalParameter(FormalParameter *p) = 0;
-  virtual void visitParamType(ParamType *p) = 0;
-  virtual void visitParamName(ParamName *p) = 0;
-  virtual void visitQFunctionName(QFunctionName *p) = 0;
+  virtual void visitFunctionDeclaration(FunctionDeclaration *p) = 0;
   virtual void visitFunctionName(FunctionName *p) = 0;
+  virtual void visitModuleImport(ModuleImport *p) = 0;
   virtual void visitPackageName(PackageName *p) = 0;
+  virtual void visitParamName(ParamName *p) = 0;
+  virtual void visitParamType(ParamType *p) = 0;
+  virtual void visitQFunctionName(QFunctionName *p) = 0;
+  virtual void visitStatement(Statement *p) = 0;
+  virtual void visitUriConstant(UriConstant *p) = 0;
+  virtual void visitVarName(VarName *p) = 0;
+  virtual void visitQVarName(QVarName *p) = 0;
   virtual void visitExp(Exp *p) = 0;
+  virtual void visitTypeInitialiser(TypeInitialiser *p) = 0;
+  virtual void visitTypeName(TypeName *p) = 0;
+  virtual void visitTypePropertyInit(TypePropertyInit *p) = 0;
   virtual void visitFifthProgram(FifthProgram *p) = 0;
-  virtual void visitModImp(ModImp *p) = 0;
-  virtual void visitFuncDecl(FuncDecl *p) = 0;
+  virtual void visitAliasUri(AliasUri *p) = 0;
+  virtual void visitBlk(Blk *p) = 0;
   virtual void visitFParam(FParam *p) = 0;
-  virtual void visitTParam(TParam *p) = 0;
-  virtual void visitNParam(NParam *p) = 0;
-  virtual void visitNQFunc(NQFunc *p) = 0;
+  virtual void visitFuncDecl(FuncDecl *p) = 0;
   virtual void visitNFunc(NFunc *p) = 0;
+  virtual void visitModImp(ModImp *p) = 0;
   virtual void visitNPkg(NPkg *p) = 0;
+  virtual void visitNParam(NParam *p) = 0;
+  virtual void visitTParam(TParam *p) = 0;
+  virtual void visitNQFunc(NQFunc *p) = 0;
+  virtual void visitSAssign(SAssign *p) = 0;
+  virtual void visitSReturn(SReturn *p) = 0;
+  virtual void visitSIf(SIf *p) = 0;
+  virtual void visitSIfElse(SIfElse *p) = 0;
+  virtual void visitSWith(SWith *p) = 0;
+  virtual void visitSBareStmt(SBareStmt *p) = 0;
+  virtual void visitUriConst(UriConst *p) = 0;
+  virtual void visitVarNameIdent(VarNameIdent *p) = 0;
+  virtual void visitVarNamePIdent(VarNamePIdent *p) = 0;
+  virtual void visitVarNameUIdent(VarNameUIdent *p) = 0;
+  virtual void visitQVarName1(QVarName1 *p) = 0;
+  virtual void visitEAnd(EAnd *p) = 0;
   virtual void visitEAdd(EAdd *p) = 0;
   virtual void visitESub(ESub *p) = 0;
   virtual void visitEMul(EMul *p) = 0;
   virtual void visitEDiv(EDiv *p) = 0;
   virtual void visitEInt(EInt *p) = 0;
   virtual void visitEDouble(EDouble *p) = 0;
-  virtual void visitEIdent(EIdent *p) = 0;
   virtual void visitEString(EString *p) = 0;
+  virtual void visitEVarname(EVarname *p) = 0;
   virtual void visitEFuncCall(EFuncCall *p) = 0;
   virtual void visitEQFuncCall(EQFuncCall *p) = 0;
   virtual void visitEFuncParen(EFuncParen *p) = 0;
-  virtual void visitListModuleImport(ListModuleImport *p) = 0;
-  virtual void visitListFunctionDeclaration(ListFunctionDeclaration *p) = 0;
+  virtual void visitENegation(ENegation *p) = 0;
+  virtual void visitETypeCreate(ETypeCreate *p) = 0;
+  virtual void visitTypeInt(TypeInt *p) = 0;
+  virtual void visitNTypeName(NTypeName *p) = 0;
+  virtual void visitTypePropertyInit1(TypePropertyInit1 *p) = 0;
   virtual void visitListFormalParameter(ListFormalParameter *p) = 0;
   virtual void visitListExp(ListExp *p) = 0;
+  virtual void visitListTypePropertyInit(ListTypePropertyInit *p) = 0;
+  virtual void visitListVarName(ListVarName *p) = 0;
+  virtual void visitListAlias(ListAlias *p) = 0;
+  virtual void visitListFunctionDeclaration(ListFunctionDeclaration *p) = 0;
+  virtual void visitListModuleImport(ListModuleImport *p) = 0;
+  virtual void visitListStatement(ListStatement *p) = 0;
 
 
   virtual void visitInteger(Integer x) = 0;
@@ -101,6 +167,8 @@ public:
   virtual void visitDouble(Double x) = 0;
   virtual void visitString(String x) = 0;
   virtual void visitIdent(Ident x) = 0;
+  virtual void visitUIdent(UIdent x) = 0;
+  virtual void visitPIdent(PIdent x) = 0;
 
 };
 
@@ -122,17 +190,17 @@ public:
   int line_number;
 };
 
-class ModuleImport : public Visitable
+class Alias : public Visitable
 {
 public:
-  virtual ModuleImport *clone() const = 0;
+  virtual Alias *clone() const = 0;
   int line_number;
 };
 
-class FunctionDeclaration : public Visitable
+class Block : public Visitable
 {
 public:
-  virtual FunctionDeclaration *clone() const = 0;
+  virtual Block *clone() const = 0;
   int line_number;
 };
 
@@ -143,24 +211,10 @@ public:
   int line_number;
 };
 
-class ParamType : public Visitable
+class FunctionDeclaration : public Visitable
 {
 public:
-  virtual ParamType *clone() const = 0;
-  int line_number;
-};
-
-class ParamName : public Visitable
-{
-public:
-  virtual ParamName *clone() const = 0;
-  int line_number;
-};
-
-class QFunctionName : public Visitable
-{
-public:
-  virtual QFunctionName *clone() const = 0;
+  virtual FunctionDeclaration *clone() const = 0;
   int line_number;
 };
 
@@ -171,10 +225,66 @@ public:
   int line_number;
 };
 
+class ModuleImport : public Visitable
+{
+public:
+  virtual ModuleImport *clone() const = 0;
+  int line_number;
+};
+
 class PackageName : public Visitable
 {
 public:
   virtual PackageName *clone() const = 0;
+  int line_number;
+};
+
+class ParamName : public Visitable
+{
+public:
+  virtual ParamName *clone() const = 0;
+  int line_number;
+};
+
+class ParamType : public Visitable
+{
+public:
+  virtual ParamType *clone() const = 0;
+  int line_number;
+};
+
+class QFunctionName : public Visitable
+{
+public:
+  virtual QFunctionName *clone() const = 0;
+  int line_number;
+};
+
+class Statement : public Visitable
+{
+public:
+  virtual Statement *clone() const = 0;
+  int line_number;
+};
+
+class UriConstant : public Visitable
+{
+public:
+  virtual UriConstant *clone() const = 0;
+  int line_number;
+};
+
+class VarName : public Visitable
+{
+public:
+  virtual VarName *clone() const = 0;
+  int line_number;
+};
+
+class QVarName : public Visitable
+{
+public:
+  virtual QVarName *clone() const = 0;
   int line_number;
 };
 
@@ -185,51 +295,73 @@ public:
   int line_number;
 };
 
+class TypeInitialiser : public Visitable
+{
+public:
+  virtual TypeInitialiser *clone() const = 0;
+  int line_number;
+};
+
+class TypeName : public Visitable
+{
+public:
+  virtual TypeName *clone() const = 0;
+  int line_number;
+};
+
+class TypePropertyInit : public Visitable
+{
+public:
+  virtual TypePropertyInit *clone() const = 0;
+  int line_number;
+};
+
 
 
 class FifthProgram : public Fifth
 {
 public:
   ListModuleImport *listmoduleimport_;
+  ListAlias *listalias_;
+  ListStatement *liststatement_;
   ListFunctionDeclaration *listfunctiondeclaration_;
 
   FifthProgram(const FifthProgram &);
   FifthProgram &operator=(const FifthProgram &);
-  FifthProgram(ListModuleImport *p1, ListFunctionDeclaration *p2);
+  FifthProgram(ListModuleImport *p1, ListAlias *p2, ListStatement *p3, ListFunctionDeclaration *p4);
   ~FifthProgram();
   virtual void accept(Visitor *v);
   virtual FifthProgram *clone() const;
   void swap(FifthProgram &);
 };
 
-class ModImp : public ModuleImport
+class AliasUri : public Alias
 {
 public:
+  UriConstant *uriconstant_;
   PackageName *packagename_;
 
-  ModImp(const ModImp &);
-  ModImp &operator=(const ModImp &);
-  ModImp(PackageName *p1);
-  ~ModImp();
+  AliasUri(const AliasUri &);
+  AliasUri &operator=(const AliasUri &);
+  AliasUri(UriConstant *p1, PackageName *p2);
+  ~AliasUri();
   virtual void accept(Visitor *v);
-  virtual ModImp *clone() const;
-  void swap(ModImp &);
+  virtual AliasUri *clone() const;
+  void swap(AliasUri &);
 };
 
-class FuncDecl : public FunctionDeclaration
+class Blk : public Block
 {
 public:
-  FunctionName *functionname_;
-  ListFormalParameter *listformalparameter_;
-  ListExp *listexp_;
+  ListStatement *liststatement_;
 
-  FuncDecl(const FuncDecl &);
-  FuncDecl &operator=(const FuncDecl &);
-  FuncDecl(FunctionName *p1, ListFormalParameter *p2, ListExp *p3);
-  ~FuncDecl();
+  Blk(const Blk &);
+  Blk &operator=(const Blk &);
+  Blk(ListStatement *p1);
+  ~Blk();
   virtual void accept(Visitor *v);
-  virtual FuncDecl *clone() const;
-  void swap(FuncDecl &);
+  virtual Blk *clone() const;
+  void swap(Blk &);
 };
 
 class FParam : public FormalParameter
@@ -247,32 +379,90 @@ public:
   void swap(FParam &);
 };
 
-class TParam : public ParamType
+class FuncDecl : public FunctionDeclaration
+{
+public:
+  FunctionName *functionname_;
+  ListFormalParameter *listformalparameter_;
+  Block *block_;
+
+  FuncDecl(const FuncDecl &);
+  FuncDecl &operator=(const FuncDecl &);
+  FuncDecl(FunctionName *p1, ListFormalParameter *p2, Block *p3);
+  ~FuncDecl();
+  virtual void accept(Visitor *v);
+  virtual FuncDecl *clone() const;
+  void swap(FuncDecl &);
+};
+
+class NFunc : public FunctionName
 {
 public:
   Ident ident_;
 
-  TParam(const TParam &);
-  TParam &operator=(const TParam &);
-  TParam(Ident p1);
-  ~TParam();
+  NFunc(const NFunc &);
+  NFunc &operator=(const NFunc &);
+  NFunc(Ident p1);
+  ~NFunc();
   virtual void accept(Visitor *v);
-  virtual TParam *clone() const;
-  void swap(TParam &);
+  virtual NFunc *clone() const;
+  void swap(NFunc &);
+};
+
+class ModImp : public ModuleImport
+{
+public:
+  PackageName *packagename_;
+
+  ModImp(const ModImp &);
+  ModImp &operator=(const ModImp &);
+  ModImp(PackageName *p1);
+  ~ModImp();
+  virtual void accept(Visitor *v);
+  virtual ModImp *clone() const;
+  void swap(ModImp &);
+};
+
+class NPkg : public PackageName
+{
+public:
+  Ident ident_;
+
+  NPkg(const NPkg &);
+  NPkg &operator=(const NPkg &);
+  NPkg(Ident p1);
+  ~NPkg();
+  virtual void accept(Visitor *v);
+  virtual NPkg *clone() const;
+  void swap(NPkg &);
 };
 
 class NParam : public ParamName
 {
 public:
-  Ident ident_;
+  VarName *varname_;
 
   NParam(const NParam &);
   NParam &operator=(const NParam &);
-  NParam(Ident p1);
+  NParam(VarName *p1);
   ~NParam();
   virtual void accept(Visitor *v);
   virtual NParam *clone() const;
   void swap(NParam &);
+};
+
+class TParam : public ParamType
+{
+public:
+  TypeName *typename_;
+
+  TParam(const TParam &);
+  TParam &operator=(const TParam &);
+  TParam(TypeName *p1);
+  ~TParam();
+  virtual void accept(Visitor *v);
+  virtual TParam *clone() const;
+  void swap(TParam &);
 };
 
 class NQFunc : public QFunctionName
@@ -290,32 +480,177 @@ public:
   void swap(NQFunc &);
 };
 
-class NFunc : public FunctionName
+class SAssign : public Statement
 {
 public:
-  Ident ident_;
+  QVarName *qvarname_;
+  Exp *exp_;
 
-  NFunc(const NFunc &);
-  NFunc &operator=(const NFunc &);
-  NFunc(Ident p1);
-  ~NFunc();
+  SAssign(const SAssign &);
+  SAssign &operator=(const SAssign &);
+  SAssign(QVarName *p1, Exp *p2);
+  ~SAssign();
   virtual void accept(Visitor *v);
-  virtual NFunc *clone() const;
-  void swap(NFunc &);
+  virtual SAssign *clone() const;
+  void swap(SAssign &);
 };
 
-class NPkg : public PackageName
+class SReturn : public Statement
+{
+public:
+  Exp *exp_;
+
+  SReturn(const SReturn &);
+  SReturn &operator=(const SReturn &);
+  SReturn(Exp *p1);
+  ~SReturn();
+  virtual void accept(Visitor *v);
+  virtual SReturn *clone() const;
+  void swap(SReturn &);
+};
+
+class SIf : public Statement
+{
+public:
+  Exp *exp_;
+  Block *block_;
+
+  SIf(const SIf &);
+  SIf &operator=(const SIf &);
+  SIf(Exp *p1, Block *p2);
+  ~SIf();
+  virtual void accept(Visitor *v);
+  virtual SIf *clone() const;
+  void swap(SIf &);
+};
+
+class SIfElse : public Statement
+{
+public:
+  Exp *exp_;
+  Block *block_1;
+  Block *block_2;
+
+  SIfElse(const SIfElse &);
+  SIfElse &operator=(const SIfElse &);
+  SIfElse(Exp *p1, Block *p2, Block *p3);
+  ~SIfElse();
+  virtual void accept(Visitor *v);
+  virtual SIfElse *clone() const;
+  void swap(SIfElse &);
+};
+
+class SWith : public Statement
+{
+public:
+  Statement *statement_;
+
+  SWith(const SWith &);
+  SWith &operator=(const SWith &);
+  SWith(Statement *p1);
+  ~SWith();
+  virtual void accept(Visitor *v);
+  virtual SWith *clone() const;
+  void swap(SWith &);
+};
+
+class SBareStmt : public Statement
+{
+public:
+  Exp *exp_;
+
+  SBareStmt(const SBareStmt &);
+  SBareStmt &operator=(const SBareStmt &);
+  SBareStmt(Exp *p1);
+  ~SBareStmt();
+  virtual void accept(Visitor *v);
+  virtual SBareStmt *clone() const;
+  void swap(SBareStmt &);
+};
+
+class UriConst : public UriConstant
+{
+public:
+  String string_;
+
+  UriConst(const UriConst &);
+  UriConst &operator=(const UriConst &);
+  UriConst(String p1);
+  ~UriConst();
+  virtual void accept(Visitor *v);
+  virtual UriConst *clone() const;
+  void swap(UriConst &);
+};
+
+class VarNameIdent : public VarName
 {
 public:
   Ident ident_;
 
-  NPkg(const NPkg &);
-  NPkg &operator=(const NPkg &);
-  NPkg(Ident p1);
-  ~NPkg();
+  VarNameIdent(const VarNameIdent &);
+  VarNameIdent &operator=(const VarNameIdent &);
+  VarNameIdent(Ident p1);
+  ~VarNameIdent();
   virtual void accept(Visitor *v);
-  virtual NPkg *clone() const;
-  void swap(NPkg &);
+  virtual VarNameIdent *clone() const;
+  void swap(VarNameIdent &);
+};
+
+class VarNamePIdent : public VarName
+{
+public:
+  PIdent pident_;
+
+  VarNamePIdent(const VarNamePIdent &);
+  VarNamePIdent &operator=(const VarNamePIdent &);
+  VarNamePIdent(PIdent p1);
+  ~VarNamePIdent();
+  virtual void accept(Visitor *v);
+  virtual VarNamePIdent *clone() const;
+  void swap(VarNamePIdent &);
+};
+
+class VarNameUIdent : public VarName
+{
+public:
+  UIdent uident_;
+
+  VarNameUIdent(const VarNameUIdent &);
+  VarNameUIdent &operator=(const VarNameUIdent &);
+  VarNameUIdent(UIdent p1);
+  ~VarNameUIdent();
+  virtual void accept(Visitor *v);
+  virtual VarNameUIdent *clone() const;
+  void swap(VarNameUIdent &);
+};
+
+class QVarName1 : public QVarName
+{
+public:
+  ListVarName *listvarname_;
+
+  QVarName1(const QVarName1 &);
+  QVarName1 &operator=(const QVarName1 &);
+  QVarName1(ListVarName *p1);
+  ~QVarName1();
+  virtual void accept(Visitor *v);
+  virtual QVarName1 *clone() const;
+  void swap(QVarName1 &);
+};
+
+class EAnd : public Exp
+{
+public:
+  Exp *exp_1;
+  Exp *exp_2;
+
+  EAnd(const EAnd &);
+  EAnd &operator=(const EAnd &);
+  EAnd(Exp *p1, Exp *p2);
+  ~EAnd();
+  virtual void accept(Visitor *v);
+  virtual EAnd *clone() const;
+  void swap(EAnd &);
 };
 
 class EAdd : public Exp
@@ -406,20 +741,6 @@ public:
   void swap(EDouble &);
 };
 
-class EIdent : public Exp
-{
-public:
-  Ident ident_;
-
-  EIdent(const EIdent &);
-  EIdent &operator=(const EIdent &);
-  EIdent(Ident p1);
-  ~EIdent();
-  virtual void accept(Visitor *v);
-  virtual EIdent *clone() const;
-  void swap(EIdent &);
-};
-
 class EString : public Exp
 {
 public:
@@ -432,6 +753,20 @@ public:
   virtual void accept(Visitor *v);
   virtual EString *clone() const;
   void swap(EString &);
+};
+
+class EVarname : public Exp
+{
+public:
+  QVarName *qvarname_;
+
+  EVarname(const EVarname &);
+  EVarname &operator=(const EVarname &);
+  EVarname(QVarName *p1);
+  ~EVarname();
+  virtual void accept(Visitor *v);
+  virtual EVarname *clone() const;
+  void swap(EVarname &);
 };
 
 class EFuncCall : public Exp
@@ -452,12 +787,12 @@ public:
 class EQFuncCall : public Exp
 {
 public:
-  QFunctionName *qfunctionname_;
+  QVarName *qvarname_;
   ListExp *listexp_;
 
   EQFuncCall(const EQFuncCall &);
   EQFuncCall &operator=(const EQFuncCall &);
-  EQFuncCall(QFunctionName *p1, ListExp *p2);
+  EQFuncCall(QVarName *p1, ListExp *p2);
   ~EQFuncCall();
   virtual void accept(Visitor *v);
   virtual EQFuncCall *clone() const;
@@ -467,32 +802,90 @@ public:
 class EFuncParen : public Exp
 {
 public:
-  ListExp *listexp_;
+  Exp *exp_;
 
   EFuncParen(const EFuncParen &);
   EFuncParen &operator=(const EFuncParen &);
-  EFuncParen(ListExp *p1);
+  EFuncParen(Exp *p1);
   ~EFuncParen();
   virtual void accept(Visitor *v);
   virtual EFuncParen *clone() const;
   void swap(EFuncParen &);
 };
 
-
-
-class ListModuleImport : public Visitable, public std::vector<ModuleImport*>
+class ENegation : public Exp
 {
 public:
+  Exp *exp_;
+
+  ENegation(const ENegation &);
+  ENegation &operator=(const ENegation &);
+  ENegation(Exp *p1);
+  ~ENegation();
   virtual void accept(Visitor *v);
-  virtual ListModuleImport *clone() const;
+  virtual ENegation *clone() const;
+  void swap(ENegation &);
 };
 
-class ListFunctionDeclaration : public Visitable, public std::vector<FunctionDeclaration*>
+class ETypeCreate : public Exp
 {
 public:
+  TypeInitialiser *typeinitialiser_;
+
+  ETypeCreate(const ETypeCreate &);
+  ETypeCreate &operator=(const ETypeCreate &);
+  ETypeCreate(TypeInitialiser *p1);
+  ~ETypeCreate();
   virtual void accept(Visitor *v);
-  virtual ListFunctionDeclaration *clone() const;
+  virtual ETypeCreate *clone() const;
+  void swap(ETypeCreate &);
 };
+
+class TypeInt : public TypeInitialiser
+{
+public:
+  TypeName *typename_;
+  ListTypePropertyInit *listtypepropertyinit_;
+
+  TypeInt(const TypeInt &);
+  TypeInt &operator=(const TypeInt &);
+  TypeInt(TypeName *p1, ListTypePropertyInit *p2);
+  ~TypeInt();
+  virtual void accept(Visitor *v);
+  virtual TypeInt *clone() const;
+  void swap(TypeInt &);
+};
+
+class NTypeName : public TypeName
+{
+public:
+  QVarName *qvarname_;
+
+  NTypeName(const NTypeName &);
+  NTypeName &operator=(const NTypeName &);
+  NTypeName(QVarName *p1);
+  ~NTypeName();
+  virtual void accept(Visitor *v);
+  virtual NTypeName *clone() const;
+  void swap(NTypeName &);
+};
+
+class TypePropertyInit1 : public TypePropertyInit
+{
+public:
+  VarName *varname_;
+  Exp *exp_;
+
+  TypePropertyInit1(const TypePropertyInit1 &);
+  TypePropertyInit1 &operator=(const TypePropertyInit1 &);
+  TypePropertyInit1(VarName *p1, Exp *p2);
+  ~TypePropertyInit1();
+  virtual void accept(Visitor *v);
+  virtual TypePropertyInit1 *clone() const;
+  void swap(TypePropertyInit1 &);
+};
+
+
 
 class ListFormalParameter : public Visitable, public std::vector<FormalParameter*>
 {
@@ -506,6 +899,48 @@ class ListExp : public Visitable, public std::vector<Exp*>
 public:
   virtual void accept(Visitor *v);
   virtual ListExp *clone() const;
+};
+
+class ListTypePropertyInit : public Visitable, public std::vector<TypePropertyInit*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListTypePropertyInit *clone() const;
+};
+
+class ListVarName : public Visitable, public std::vector<VarName*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListVarName *clone() const;
+};
+
+class ListAlias : public Visitable, public std::vector<Alias*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListAlias *clone() const;
+};
+
+class ListFunctionDeclaration : public Visitable, public std::vector<FunctionDeclaration*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListFunctionDeclaration *clone() const;
+};
+
+class ListModuleImport : public Visitable, public std::vector<ModuleImport*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListModuleImport *clone() const;
+};
+
+class ListStatement : public Visitable, public std::vector<Statement*>
+{
+public:
+  virtual void accept(Visitor *v);
+  virtual ListStatement *clone() const;
 };
 
 
