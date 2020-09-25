@@ -15,6 +15,7 @@ void Skeleton::visitFormalParameter(FormalParameter *t) {} //abstract class
 void Skeleton::visitParamType(ParamType *t) {} //abstract class
 void Skeleton::visitParamName(ParamName *t) {} //abstract class
 void Skeleton::visitFunctionName(FunctionName *t) {} //abstract class
+void Skeleton::visitPackageName(PackageName *t) {} //abstract class
 void Skeleton::visitExp(Exp *t) {} //abstract class
 
 void Skeleton::visitFifthProgram(FifthProgram *fifth_program)
@@ -30,7 +31,7 @@ void Skeleton::visitModImp(ModImp *mod_imp)
 {
   /* Code For ModImp Goes Here */
 
-  visitIdent(mod_imp->ident_);
+  mod_imp->packagename_->accept(this);
 
 }
 
@@ -74,6 +75,14 @@ void Skeleton::visitNFunc(NFunc *n_func)
   /* Code For NFunc Goes Here */
 
   visitIdent(n_func->ident_);
+
+}
+
+void Skeleton::visitNPkg(NPkg *n_pkg)
+{
+  /* Code For NPkg Goes Here */
+
+  visitIdent(n_pkg->ident_);
 
 }
 

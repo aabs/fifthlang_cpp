@@ -15,6 +15,7 @@ class ListFormalParameter;
 class ParamType;
 class ParamName;
 class FunctionName;
+class PackageName;
 class Exp;
 class ListExp;
 
@@ -34,38 +35,13 @@ typedef union
   ParamType* paramtype_;
   ParamName* paramname_;
   FunctionName* functionname_;
+  PackageName* packagename_;
   Exp* exp_;
   ListExp* listexp_;
 } YYSTYPE;
 
 Fifth* pFifth(FILE *inp);
 Fifth* pFifth(const char *str);
-ModuleImport* pModuleImport(FILE *inp);
-ModuleImport* pModuleImport(const char *str);
-ListModuleImport* pListModuleImport(FILE *inp);
-ListModuleImport* pListModuleImport(const char *str);
-FunctionDeclaration* pFunctionDeclaration(FILE *inp);
-FunctionDeclaration* pFunctionDeclaration(const char *str);
-ListFunctionDeclaration* pListFunctionDeclaration(FILE *inp);
-ListFunctionDeclaration* pListFunctionDeclaration(const char *str);
-FormalParameter* pFormalParameter(FILE *inp);
-FormalParameter* pFormalParameter(const char *str);
-ListFormalParameter* pListFormalParameter(FILE *inp);
-ListFormalParameter* pListFormalParameter(const char *str);
-ParamType* pParamType(FILE *inp);
-ParamType* pParamType(const char *str);
-ParamName* pParamName(FILE *inp);
-ParamName* pParamName(const char *str);
-FunctionName* pFunctionName(FILE *inp);
-FunctionName* pFunctionName(const char *str);
-Exp* pExp(FILE *inp);
-Exp* pExp(const char *str);
-Exp* pExp1(FILE *inp);
-Exp* pExp1(const char *str);
-Exp* pExp2(FILE *inp);
-Exp* pExp2(const char *str);
-ListExp* pListExp(FILE *inp);
-ListExp* pListExp(const char *str);
 
 
 

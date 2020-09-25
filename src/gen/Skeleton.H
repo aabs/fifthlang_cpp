@@ -15,6 +15,7 @@ public:
   void visitParamType(ParamType *p);
   void visitParamName(ParamName *p);
   void visitFunctionName(FunctionName *p);
+  void visitPackageName(PackageName *p);
   void visitExp(Exp *p);
   void visitFifthProgram(FifthProgram *p);
   void visitModImp(ModImp *p);
@@ -23,6 +24,7 @@ public:
   void visitTParam(TParam *p);
   void visitNParam(NParam *p);
   void visitNFunc(NFunc *p);
+  void visitNPkg(NPkg *p);
   void visitEAdd(EAdd *p);
   void visitESub(ESub *p);
   void visitEMul(EMul *p);

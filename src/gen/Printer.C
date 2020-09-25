@@ -136,7 +136,7 @@ void PrintAbsyn::visitModImp(ModImp *p)
   if (oldi > 0) render(_L_PAREN);
 
   render("use");
-  visitIdent(p->ident_);
+  _i_ = 0; p->packagename_->accept(this);
 
   if (oldi > 0) render(_R_PAREN);
 
@@ -229,6 +229,20 @@ void PrintAbsyn::visitNParam(NParam *p)
 void PrintAbsyn::visitFunctionName(FunctionName *p) {} //abstract class
 
 void PrintAbsyn::visitNFunc(NFunc *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  visitIdent(p->ident_);
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitPackageName(PackageName *p) {} //abstract class
+
+void PrintAbsyn::visitNPkg(NPkg *p)
 {
   int oldi = _i_;
   if (oldi > 0) render(_L_PAREN);
@@ -414,7 +428,9 @@ void ShowAbsyn::visitModImp(ModImp *p)
   bufAppend('(');
   bufAppend("ModImp");
   bufAppend(' ');
-  visitIdent(p->ident_);
+  bufAppend('[');
+  if (p->packagename_)  p->packagename_->accept(this);
+  bufAppend(']');
   bufAppend(')');
 }
 void ShowAbsyn::visitListModuleImport(ListModuleImport *listmoduleimport)
@@ -506,6 +522,16 @@ void ShowAbsyn::visitNFunc(NFunc *p)
 {
   bufAppend('(');
   bufAppend("NFunc");
+  bufAppend(' ');
+  visitIdent(p->ident_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitPackageName(PackageName *p) {} //abstract class
+
+void ShowAbsyn::visitNPkg(NPkg *p)
+{
+  bufAppend('(');
+  bufAppend("NPkg");
   bufAppend(' ');
   visitIdent(p->ident_);
   bufAppend(')');

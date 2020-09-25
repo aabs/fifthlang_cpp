@@ -95,17 +95,6 @@ void yyerror(const char *str)
 
 
 static Fifth* YY_RESULT_Fifth_ = 0;
-static ModuleImport* YY_RESULT_ModuleImport_ = 0;
-static ListModuleImport* YY_RESULT_ListModuleImport_ = 0;
-static FunctionDeclaration* YY_RESULT_FunctionDeclaration_ = 0;
-static ListFunctionDeclaration* YY_RESULT_ListFunctionDeclaration_ = 0;
-static FormalParameter* YY_RESULT_FormalParameter_ = 0;
-static ListFormalParameter* YY_RESULT_ListFormalParameter_ = 0;
-static ParamType* YY_RESULT_ParamType_ = 0;
-static ParamName* YY_RESULT_ParamName_ = 0;
-static FunctionName* YY_RESULT_FunctionName_ = 0;
-static Exp* YY_RESULT_Exp_ = 0;
-static ListExp* YY_RESULT_ListExp_ = 0;
 
 Fifth* pFifth(FILE *inp)
 {
@@ -139,426 +128,10 @@ Fifth* pFifth(const char *str)
   }
 }
 
-ModuleImport* pModuleImport(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ModuleImport_;
-  }
-}
-ModuleImport* pModuleImport(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ModuleImport_;
-  }
-}
-
-ListModuleImport* pListModuleImport(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListModuleImport_;
-  }
-}
-ListModuleImport* pListModuleImport(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListModuleImport_;
-  }
-}
-
-FunctionDeclaration* pFunctionDeclaration(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FunctionDeclaration_;
-  }
-}
-FunctionDeclaration* pFunctionDeclaration(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FunctionDeclaration_;
-  }
-}
-
-ListFunctionDeclaration* pListFunctionDeclaration(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListFunctionDeclaration_;
-  }
-}
-ListFunctionDeclaration* pListFunctionDeclaration(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListFunctionDeclaration_;
-  }
-}
-
-FormalParameter* pFormalParameter(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FormalParameter_;
-  }
-}
-FormalParameter* pFormalParameter(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FormalParameter_;
-  }
-}
-
-ListFormalParameter* pListFormalParameter(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListFormalParameter_;
-  }
-}
-ListFormalParameter* pListFormalParameter(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListFormalParameter_;
-  }
-}
-
-ParamType* pParamType(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ParamType_;
-  }
-}
-ParamType* pParamType(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ParamType_;
-  }
-}
-
-ParamName* pParamName(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ParamName_;
-  }
-}
-ParamName* pParamName(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ParamName_;
-  }
-}
-
-FunctionName* pFunctionName(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FunctionName_;
-  }
-}
-FunctionName* pFunctionName(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FunctionName_;
-  }
-}
-
-Exp* pExp(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-Exp* pExp(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-
-Exp* pExp1(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-Exp* pExp1(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-
-Exp* pExp2(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-Exp* pExp2(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-
-ListExp* pListExp(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListExp_;
-  }
-}
-ListExp* pListExp(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListExp_;
-  }
-}
 
 
 
-
-#line 562 "Parser.C"
+#line 135 "Parser.C"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -622,7 +195,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 494 "fifth.y"
+#line 67 "fifth.y"
 
   int int_;
   char char_;
@@ -638,10 +211,11 @@ union YYSTYPE
   ParamType* paramtype_;
   ParamName* paramname_;
   FunctionName* functionname_;
+  PackageName* packagename_;
   Exp* exp_;
   ListExp* listexp_;
 
-#line 645 "Parser.C"
+#line 219 "Parser.C"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -688,10 +262,11 @@ enum yysymbol_kind_t
   YYSYMBOL_ParamType = 26,                 /* ParamType  */
   YYSYMBOL_ParamName = 27,                 /* ParamName  */
   YYSYMBOL_FunctionName = 28,              /* FunctionName  */
-  YYSYMBOL_Exp = 29,                       /* Exp  */
-  YYSYMBOL_Exp1 = 30,                      /* Exp1  */
-  YYSYMBOL_Exp2 = 31,                      /* Exp2  */
-  YYSYMBOL_ListExp = 32                    /* ListExp  */
+  YYSYMBOL_PackageName = 29,               /* PackageName  */
+  YYSYMBOL_Exp = 30,                       /* Exp  */
+  YYSYMBOL_Exp1 = 31,                      /* Exp1  */
+  YYSYMBOL_Exp2 = 32,                      /* Exp2  */
+  YYSYMBOL_ListExp = 33                    /* ListExp  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -999,18 +574,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  6
+#define YYFINAL  7
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   33
+#define YYLAST   36
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  18
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  15
+#define YYNNTS  16
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  28
+#define YYNRULES  29
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  46
+#define YYNSTATES  47
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   272
@@ -1059,11 +634,11 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_int16 yyrline[] =
+static const yytype_uint8 yyrline[] =
 {
-       0,   547,   547,   549,   551,   552,   554,   556,   557,   559,
-     561,   562,   563,   565,   567,   569,   571,   572,   573,   575,
-     576,   577,   579,   580,   581,   582,   584,   585,   586
+       0,   122,   122,   124,   126,   127,   129,   131,   132,   134,
+     136,   137,   138,   140,   142,   144,   146,   148,   149,   150,
+     152,   153,   154,   156,   157,   158,   159,   161,   162,   163
 };
 #endif
 
@@ -1084,8 +659,8 @@ static const char *const yytname[] =
   "_SYMB_7", "_SYMB_8", "_SYMB_9", "_SYMB_10", "_INTEGER_", "_DOUBLE_",
   "_IDENT_", "$accept", "Fifth", "ModuleImport", "ListModuleImport",
   "FunctionDeclaration", "ListFunctionDeclaration", "FormalParameter",
-  "ListFormalParameter", "ParamType", "ParamName", "FunctionName", "Exp",
-  "Exp1", "Exp2", "ListExp", YY_NULLPTR
+  "ListFormalParameter", "ParamType", "ParamName", "FunctionName",
+  "PackageName", "Exp", "Exp1", "Exp2", "ListExp", YY_NULLPTR
 };
 
 static const char *
@@ -1105,7 +680,7 @@ static const yytype_int16 yytoknum[] =
 };
 #endif
 
-#define YYPACT_NINF (-33)
+#define YYPACT_NINF (-34)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -1119,11 +694,11 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -8,     0,    18,    15,     4,   -33,   -33,    -8,   -33,    12,
-     -33,    17,   -33,     4,     6,   -33,   -33,    16,    20,     7,
-       6,    21,   -33,   -33,   -33,    -5,    -5,   -33,   -33,   -33,
-      -3,   -10,   -33,   -33,     3,    -5,    -5,    -5,    -5,    -5,
-     -33,   -33,   -10,   -10,   -33,   -33
+      -8,     0,    18,    15,     4,   -34,   -34,   -34,    -8,   -34,
+      12,   -34,    17,   -34,     4,     6,   -34,   -34,    16,    20,
+       7,     6,    21,   -34,   -34,   -34,    -5,    -5,   -34,   -34,
+     -34,    -3,   -10,   -34,   -34,     3,    -5,    -5,    -5,    -5,
+      -5,   -34,   -34,   -10,   -10,   -34,   -34
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -1131,25 +706,25 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,     0,     3,     1,     4,    15,     0,
-       2,     0,     5,     7,    10,     8,    13,    11,     0,     0,
-      10,     0,    14,     9,    12,    26,     0,    22,    23,    24,
-      27,    18,    21,     6,     0,    26,     0,     0,     0,     0,
-      25,    28,    16,    17,    19,    20
+       0,     0,     0,     0,     0,    16,     3,     1,     4,    15,
+       0,     2,     0,     5,     7,    10,     8,    13,    11,     0,
+       0,    10,     0,    14,     9,    12,    27,     0,    23,    24,
+      25,    28,    19,    22,     6,     0,    27,     0,     0,     0,
+       0,    26,    29,    17,    18,    20,    21
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -33,   -33,   -33,    22,   -33,    14,   -33,    10,   -33,   -33,
-     -33,     5,   -32,   -23,    -2
+     -34,   -34,   -34,    19,   -34,    22,   -34,     8,   -34,   -34,
+     -34,   -34,     5,   -33,   -24,    -6
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     3,     4,     9,    10,    17,    18,    19,    23,
-      11,    30,    31,    32,    33
+      -1,     2,     3,     4,    10,    11,    18,    19,    20,    24,
+      12,     6,    31,    32,    33,    34
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -1157,45 +732,45 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      26,    35,    38,    39,    42,    43,     1,    36,    37,    40,
-      27,    28,    29,    36,    37,    44,    45,     5,     6,     7,
-      13,     8,    14,    16,    22,    20,    21,    15,    25,    12,
-      24,    34,     0,    41
+      27,    36,    39,    40,    43,    44,     1,    37,    38,    41,
+      28,    29,    30,    37,    38,    45,    46,     5,     7,     8,
+      14,     9,    15,    17,    23,    21,    22,    13,    26,    25,
+      42,     0,    35,     0,     0,     0,    16
 };
 
 static const yytype_int8 yycheck[] =
 {
-       5,     4,    12,    13,    36,    37,    14,    10,    11,     6,
-      15,    16,    17,    10,    11,    38,    39,    17,     0,     4,
-       8,    17,     5,    17,    17,     9,     6,    13,     7,     7,
-      20,    26,    -1,    35
+       5,     4,    12,    13,    37,    38,    14,    10,    11,     6,
+      15,    16,    17,    10,    11,    39,    40,    17,     0,     4,
+       8,    17,     5,    17,    17,     9,     6,     8,     7,    21,
+      36,    -1,    27,    -1,    -1,    -1,    14
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    14,    19,    20,    21,    17,     0,     4,    17,    22,
-      23,    28,    21,     8,     5,    23,    17,    24,    25,    26,
-       9,     6,    17,    27,    25,     7,     5,    15,    16,    17,
-      29,    30,    31,    32,    29,     4,    10,    11,    12,    13,
-       6,    32,    30,    30,    31,    31
+       0,    14,    19,    20,    21,    17,    29,     0,     4,    17,
+      22,    23,    28,    21,     8,     5,    23,    17,    24,    25,
+      26,     9,     6,    17,    27,    25,     7,     5,    15,    16,
+      17,    30,    31,    32,    33,    30,     4,    10,    11,    12,
+      13,     6,    33,    31,    31,    32,    32
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
        0,    18,    19,    20,    21,    21,    22,    23,    23,    24,
-      25,    25,    25,    26,    27,    28,    29,    29,    29,    30,
-      30,    30,    31,    31,    31,    31,    32,    32,    32
+      25,    25,    25,    26,    27,    28,    29,    30,    30,    30,
+      31,    31,    31,    32,    32,    32,    32,    33,    33,    33
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     2,     2,     2,     3,     6,     2,     3,     2,
-       0,     1,     3,     1,     1,     1,     3,     3,     1,     3,
-       3,     1,     1,     1,     1,     3,     0,     1,     3
+       0,     1,     3,     1,     1,     1,     1,     3,     3,     1,
+       3,     3,     1,     1,     1,     1,     3,     0,     1,     3
 };
 
 
@@ -1663,169 +1238,175 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* Fifth: ListModuleImport ListFunctionDeclaration  */
-#line 547 "fifth.y"
+#line 122 "fifth.y"
                                                  {  std::reverse((yyvsp[-1].listmoduleimport_)->begin(),(yyvsp[-1].listmoduleimport_)->end()) ; std::reverse((yyvsp[0].listfunctiondeclaration_)->begin(),(yyvsp[0].listfunctiondeclaration_)->end()) ;(yyval.fifth_) = new FifthProgram((yyvsp[-1].listmoduleimport_), (yyvsp[0].listfunctiondeclaration_)); (yyval.fifth_)->line_number = yy_mylinenumber; YY_RESULT_Fifth_= (yyval.fifth_); }
-#line 1669 "Parser.C"
+#line 1244 "Parser.C"
     break;
 
-  case 3: /* ModuleImport: _SYMB_10 _IDENT_  */
-#line 549 "fifth.y"
-                                {  (yyval.moduleimport_) = new ModImp((yyvsp[0].string_)); (yyval.moduleimport_)->line_number = yy_mylinenumber; YY_RESULT_ModuleImport_= (yyval.moduleimport_); }
-#line 1675 "Parser.C"
+  case 3: /* ModuleImport: _SYMB_10 PackageName  */
+#line 124 "fifth.y"
+                                    {  (yyval.moduleimport_) = new ModImp((yyvsp[0].packagename_)); (yyval.moduleimport_)->line_number = yy_mylinenumber;  }
+#line 1250 "Parser.C"
     break;
 
   case 4: /* ListModuleImport: ModuleImport _SYMB_0  */
-#line 551 "fifth.y"
-                                        {  (yyval.listmoduleimport_) = new ListModuleImport() ; (yyval.listmoduleimport_)->push_back((yyvsp[-1].moduleimport_)); YY_RESULT_ListModuleImport_= (yyval.listmoduleimport_); }
-#line 1681 "Parser.C"
+#line 126 "fifth.y"
+                                        {  (yyval.listmoduleimport_) = new ListModuleImport() ; (yyval.listmoduleimport_)->push_back((yyvsp[-1].moduleimport_));  }
+#line 1256 "Parser.C"
     break;
 
   case 5: /* ListModuleImport: ModuleImport _SYMB_0 ListModuleImport  */
-#line 552 "fifth.y"
-                                          {  (yyvsp[0].listmoduleimport_)->push_back((yyvsp[-2].moduleimport_)) ; (yyval.listmoduleimport_) = (yyvsp[0].listmoduleimport_) ; YY_RESULT_ListModuleImport_= (yyval.listmoduleimport_); }
-#line 1687 "Parser.C"
+#line 127 "fifth.y"
+                                          {  (yyvsp[0].listmoduleimport_)->push_back((yyvsp[-2].moduleimport_)) ; (yyval.listmoduleimport_) = (yyvsp[0].listmoduleimport_) ;  }
+#line 1262 "Parser.C"
     break;
 
   case 6: /* FunctionDeclaration: FunctionName _SYMB_1 ListFormalParameter _SYMB_2 _SYMB_3 ListExp  */
-#line 554 "fifth.y"
-                                                                                       {  std::reverse((yyvsp[-3].listformalparameter_)->begin(),(yyvsp[-3].listformalparameter_)->end()) ; std::reverse((yyvsp[0].listexp_)->begin(),(yyvsp[0].listexp_)->end()) ;(yyval.functiondeclaration_) = new FuncDecl((yyvsp[-5].functionname_), (yyvsp[-3].listformalparameter_), (yyvsp[0].listexp_)); (yyval.functiondeclaration_)->line_number = yy_mylinenumber; YY_RESULT_FunctionDeclaration_= (yyval.functiondeclaration_); }
-#line 1693 "Parser.C"
+#line 129 "fifth.y"
+                                                                                       {  std::reverse((yyvsp[-3].listformalparameter_)->begin(),(yyvsp[-3].listformalparameter_)->end()) ; std::reverse((yyvsp[0].listexp_)->begin(),(yyvsp[0].listexp_)->end()) ;(yyval.functiondeclaration_) = new FuncDecl((yyvsp[-5].functionname_), (yyvsp[-3].listformalparameter_), (yyvsp[0].listexp_)); (yyval.functiondeclaration_)->line_number = yy_mylinenumber;  }
+#line 1268 "Parser.C"
     break;
 
   case 7: /* ListFunctionDeclaration: FunctionDeclaration _SYMB_4  */
-#line 556 "fifth.y"
-                                                      {  (yyval.listfunctiondeclaration_) = new ListFunctionDeclaration() ; (yyval.listfunctiondeclaration_)->push_back((yyvsp[-1].functiondeclaration_)); YY_RESULT_ListFunctionDeclaration_= (yyval.listfunctiondeclaration_); }
-#line 1699 "Parser.C"
+#line 131 "fifth.y"
+                                                      {  (yyval.listfunctiondeclaration_) = new ListFunctionDeclaration() ; (yyval.listfunctiondeclaration_)->push_back((yyvsp[-1].functiondeclaration_));  }
+#line 1274 "Parser.C"
     break;
 
   case 8: /* ListFunctionDeclaration: FunctionDeclaration _SYMB_4 ListFunctionDeclaration  */
-#line 557 "fifth.y"
-                                                        {  (yyvsp[0].listfunctiondeclaration_)->push_back((yyvsp[-2].functiondeclaration_)) ; (yyval.listfunctiondeclaration_) = (yyvsp[0].listfunctiondeclaration_) ; YY_RESULT_ListFunctionDeclaration_= (yyval.listfunctiondeclaration_); }
-#line 1705 "Parser.C"
+#line 132 "fifth.y"
+                                                        {  (yyvsp[0].listfunctiondeclaration_)->push_back((yyvsp[-2].functiondeclaration_)) ; (yyval.listfunctiondeclaration_) = (yyvsp[0].listfunctiondeclaration_) ;  }
+#line 1280 "Parser.C"
     break;
 
   case 9: /* FormalParameter: ParamType ParamName  */
-#line 559 "fifth.y"
-                                      {  (yyval.formalparameter_) = new FParam((yyvsp[-1].paramtype_), (yyvsp[0].paramname_)); (yyval.formalparameter_)->line_number = yy_mylinenumber; YY_RESULT_FormalParameter_= (yyval.formalparameter_); }
-#line 1711 "Parser.C"
+#line 134 "fifth.y"
+                                      {  (yyval.formalparameter_) = new FParam((yyvsp[-1].paramtype_), (yyvsp[0].paramname_)); (yyval.formalparameter_)->line_number = yy_mylinenumber;  }
+#line 1286 "Parser.C"
     break;
 
   case 10: /* ListFormalParameter: %empty  */
-#line 561 "fifth.y"
-                                  {  (yyval.listformalparameter_) = new ListFormalParameter(); YY_RESULT_ListFormalParameter_= (yyval.listformalparameter_); }
-#line 1717 "Parser.C"
+#line 136 "fifth.y"
+                                  {  (yyval.listformalparameter_) = new ListFormalParameter();  }
+#line 1292 "Parser.C"
     break;
 
   case 11: /* ListFormalParameter: FormalParameter  */
-#line 562 "fifth.y"
-                    {  (yyval.listformalparameter_) = new ListFormalParameter() ; (yyval.listformalparameter_)->push_back((yyvsp[0].formalparameter_)); YY_RESULT_ListFormalParameter_= (yyval.listformalparameter_); }
-#line 1723 "Parser.C"
+#line 137 "fifth.y"
+                    {  (yyval.listformalparameter_) = new ListFormalParameter() ; (yyval.listformalparameter_)->push_back((yyvsp[0].formalparameter_));  }
+#line 1298 "Parser.C"
     break;
 
   case 12: /* ListFormalParameter: FormalParameter _SYMB_5 ListFormalParameter  */
-#line 563 "fifth.y"
-                                                {  (yyvsp[0].listformalparameter_)->push_back((yyvsp[-2].formalparameter_)) ; (yyval.listformalparameter_) = (yyvsp[0].listformalparameter_) ; YY_RESULT_ListFormalParameter_= (yyval.listformalparameter_); }
-#line 1729 "Parser.C"
+#line 138 "fifth.y"
+                                                {  (yyvsp[0].listformalparameter_)->push_back((yyvsp[-2].formalparameter_)) ; (yyval.listformalparameter_) = (yyvsp[0].listformalparameter_) ;  }
+#line 1304 "Parser.C"
     break;
 
   case 13: /* ParamType: _IDENT_  */
-#line 565 "fifth.y"
-                    {  (yyval.paramtype_) = new TParam((yyvsp[0].string_)); (yyval.paramtype_)->line_number = yy_mylinenumber; YY_RESULT_ParamType_= (yyval.paramtype_); }
-#line 1735 "Parser.C"
+#line 140 "fifth.y"
+                    {  (yyval.paramtype_) = new TParam((yyvsp[0].string_)); (yyval.paramtype_)->line_number = yy_mylinenumber;  }
+#line 1310 "Parser.C"
     break;
 
   case 14: /* ParamName: _IDENT_  */
-#line 567 "fifth.y"
-                    {  (yyval.paramname_) = new NParam((yyvsp[0].string_)); (yyval.paramname_)->line_number = yy_mylinenumber; YY_RESULT_ParamName_= (yyval.paramname_); }
-#line 1741 "Parser.C"
+#line 142 "fifth.y"
+                    {  (yyval.paramname_) = new NParam((yyvsp[0].string_)); (yyval.paramname_)->line_number = yy_mylinenumber;  }
+#line 1316 "Parser.C"
     break;
 
   case 15: /* FunctionName: _IDENT_  */
-#line 569 "fifth.y"
-                       {  (yyval.functionname_) = new NFunc((yyvsp[0].string_)); (yyval.functionname_)->line_number = yy_mylinenumber; YY_RESULT_FunctionName_= (yyval.functionname_); }
-#line 1747 "Parser.C"
+#line 144 "fifth.y"
+                       {  (yyval.functionname_) = new NFunc((yyvsp[0].string_)); (yyval.functionname_)->line_number = yy_mylinenumber;  }
+#line 1322 "Parser.C"
     break;
 
-  case 16: /* Exp: Exp _SYMB_6 Exp1  */
-#line 571 "fifth.y"
-                       {  (yyval.exp_) = new EAdd((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber; YY_RESULT_Exp_= (yyval.exp_); }
-#line 1753 "Parser.C"
+  case 16: /* PackageName: _IDENT_  */
+#line 146 "fifth.y"
+                      {  (yyval.packagename_) = new NPkg((yyvsp[0].string_)); (yyval.packagename_)->line_number = yy_mylinenumber;  }
+#line 1328 "Parser.C"
     break;
 
-  case 17: /* Exp: Exp _SYMB_7 Exp1  */
-#line 572 "fifth.y"
-                     {  (yyval.exp_) = new ESub((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber; YY_RESULT_Exp_= (yyval.exp_); }
-#line 1759 "Parser.C"
+  case 17: /* Exp: Exp _SYMB_6 Exp1  */
+#line 148 "fifth.y"
+                       {  (yyval.exp_) = new EAdd((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1334 "Parser.C"
     break;
 
-  case 18: /* Exp: Exp1  */
-#line 573 "fifth.y"
-         {  (yyval.exp_) = (yyvsp[0].exp_); YY_RESULT_Exp_= (yyval.exp_); }
-#line 1765 "Parser.C"
+  case 18: /* Exp: Exp _SYMB_7 Exp1  */
+#line 149 "fifth.y"
+                     {  (yyval.exp_) = new ESub((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1340 "Parser.C"
     break;
 
-  case 19: /* Exp1: Exp1 _SYMB_8 Exp2  */
-#line 575 "fifth.y"
-                         {  (yyval.exp_) = new EMul((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber; YY_RESULT_Exp_= (yyval.exp_); }
-#line 1771 "Parser.C"
+  case 19: /* Exp: Exp1  */
+#line 150 "fifth.y"
+         {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1346 "Parser.C"
     break;
 
-  case 20: /* Exp1: Exp1 _SYMB_9 Exp2  */
-#line 576 "fifth.y"
-                      {  (yyval.exp_) = new EDiv((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber; YY_RESULT_Exp_= (yyval.exp_); }
-#line 1777 "Parser.C"
+  case 20: /* Exp1: Exp1 _SYMB_8 Exp2  */
+#line 152 "fifth.y"
+                         {  (yyval.exp_) = new EMul((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1352 "Parser.C"
     break;
 
-  case 21: /* Exp1: Exp2  */
-#line 577 "fifth.y"
-         {  (yyval.exp_) = (yyvsp[0].exp_); YY_RESULT_Exp_= (yyval.exp_); }
-#line 1783 "Parser.C"
+  case 21: /* Exp1: Exp1 _SYMB_9 Exp2  */
+#line 153 "fifth.y"
+                      {  (yyval.exp_) = new EDiv((yyvsp[-2].exp_), (yyvsp[0].exp_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1358 "Parser.C"
     break;
 
-  case 22: /* Exp2: _INTEGER_  */
-#line 579 "fifth.y"
-                 {  (yyval.exp_) = new EInt((yyvsp[0].int_)); (yyval.exp_)->line_number = yy_mylinenumber; YY_RESULT_Exp_= (yyval.exp_); }
-#line 1789 "Parser.C"
+  case 22: /* Exp1: Exp2  */
+#line 154 "fifth.y"
+         {  (yyval.exp_) = (yyvsp[0].exp_);  }
+#line 1364 "Parser.C"
     break;
 
-  case 23: /* Exp2: _DOUBLE_  */
-#line 580 "fifth.y"
-             {  (yyval.exp_) = new EDouble((yyvsp[0].double_)); (yyval.exp_)->line_number = yy_mylinenumber; YY_RESULT_Exp_= (yyval.exp_); }
-#line 1795 "Parser.C"
+  case 23: /* Exp2: _INTEGER_  */
+#line 156 "fifth.y"
+                 {  (yyval.exp_) = new EInt((yyvsp[0].int_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1370 "Parser.C"
     break;
 
-  case 24: /* Exp2: _IDENT_  */
-#line 581 "fifth.y"
-            {  (yyval.exp_) = new EIdent((yyvsp[0].string_)); (yyval.exp_)->line_number = yy_mylinenumber; YY_RESULT_Exp_= (yyval.exp_); }
-#line 1801 "Parser.C"
+  case 24: /* Exp2: _DOUBLE_  */
+#line 157 "fifth.y"
+             {  (yyval.exp_) = new EDouble((yyvsp[0].double_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1376 "Parser.C"
     break;
 
-  case 25: /* Exp2: _SYMB_1 Exp _SYMB_2  */
-#line 582 "fifth.y"
-                        {  (yyval.exp_) = (yyvsp[-1].exp_); YY_RESULT_Exp_= (yyval.exp_); }
-#line 1807 "Parser.C"
+  case 25: /* Exp2: _IDENT_  */
+#line 158 "fifth.y"
+            {  (yyval.exp_) = new EIdent((yyvsp[0].string_)); (yyval.exp_)->line_number = yy_mylinenumber;  }
+#line 1382 "Parser.C"
     break;
 
-  case 26: /* ListExp: %empty  */
-#line 584 "fifth.y"
-                      {  (yyval.listexp_) = new ListExp(); YY_RESULT_ListExp_= (yyval.listexp_); }
-#line 1813 "Parser.C"
+  case 26: /* Exp2: _SYMB_1 Exp _SYMB_2  */
+#line 159 "fifth.y"
+                        {  (yyval.exp_) = (yyvsp[-1].exp_);  }
+#line 1388 "Parser.C"
     break;
 
-  case 27: /* ListExp: Exp  */
-#line 585 "fifth.y"
-        {  (yyval.listexp_) = new ListExp() ; (yyval.listexp_)->push_back((yyvsp[0].exp_)); YY_RESULT_ListExp_= (yyval.listexp_); }
-#line 1819 "Parser.C"
+  case 27: /* ListExp: %empty  */
+#line 161 "fifth.y"
+                      {  (yyval.listexp_) = new ListExp();  }
+#line 1394 "Parser.C"
     break;
 
-  case 28: /* ListExp: Exp _SYMB_0 ListExp  */
-#line 586 "fifth.y"
-                        {  (yyvsp[0].listexp_)->push_back((yyvsp[-2].exp_)) ; (yyval.listexp_) = (yyvsp[0].listexp_) ; YY_RESULT_ListExp_= (yyval.listexp_); }
-#line 1825 "Parser.C"
+  case 28: /* ListExp: Exp  */
+#line 162 "fifth.y"
+        {  (yyval.listexp_) = new ListExp() ; (yyval.listexp_)->push_back((yyvsp[0].exp_));  }
+#line 1400 "Parser.C"
+    break;
+
+  case 29: /* ListExp: Exp _SYMB_0 ListExp  */
+#line 163 "fifth.y"
+                        {  (yyvsp[0].listexp_)->push_back((yyvsp[-2].exp_)) ; (yyval.listexp_) = (yyvsp[0].listexp_) ;  }
+#line 1406 "Parser.C"
     break;
 
 
-#line 1829 "Parser.C"
+#line 1410 "Parser.C"
 
       default: break;
     }

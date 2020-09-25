@@ -26,17 +26,6 @@ void yyerror(const char *str)
 
 
 static Fifth* YY_RESULT_Fifth_ = 0;
-static ModuleImport* YY_RESULT_ModuleImport_ = 0;
-static ListModuleImport* YY_RESULT_ListModuleImport_ = 0;
-static FunctionDeclaration* YY_RESULT_FunctionDeclaration_ = 0;
-static ListFunctionDeclaration* YY_RESULT_ListFunctionDeclaration_ = 0;
-static FormalParameter* YY_RESULT_FormalParameter_ = 0;
-static ListFormalParameter* YY_RESULT_ListFormalParameter_ = 0;
-static ParamType* YY_RESULT_ParamType_ = 0;
-static ParamName* YY_RESULT_ParamName_ = 0;
-static FunctionName* YY_RESULT_FunctionName_ = 0;
-static Exp* YY_RESULT_Exp_ = 0;
-static ListExp* YY_RESULT_ListExp_ = 0;
 
 Fifth* pFifth(FILE *inp)
 {
@@ -70,422 +59,6 @@ Fifth* pFifth(const char *str)
   }
 }
 
-ModuleImport* pModuleImport(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ModuleImport_;
-  }
-}
-ModuleImport* pModuleImport(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ModuleImport_;
-  }
-}
-
-ListModuleImport* pListModuleImport(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListModuleImport_;
-  }
-}
-ListModuleImport* pListModuleImport(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListModuleImport_;
-  }
-}
-
-FunctionDeclaration* pFunctionDeclaration(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FunctionDeclaration_;
-  }
-}
-FunctionDeclaration* pFunctionDeclaration(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FunctionDeclaration_;
-  }
-}
-
-ListFunctionDeclaration* pListFunctionDeclaration(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListFunctionDeclaration_;
-  }
-}
-ListFunctionDeclaration* pListFunctionDeclaration(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListFunctionDeclaration_;
-  }
-}
-
-FormalParameter* pFormalParameter(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FormalParameter_;
-  }
-}
-FormalParameter* pFormalParameter(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FormalParameter_;
-  }
-}
-
-ListFormalParameter* pListFormalParameter(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListFormalParameter_;
-  }
-}
-ListFormalParameter* pListFormalParameter(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListFormalParameter_;
-  }
-}
-
-ParamType* pParamType(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ParamType_;
-  }
-}
-ParamType* pParamType(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ParamType_;
-  }
-}
-
-ParamName* pParamName(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ParamName_;
-  }
-}
-ParamName* pParamName(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ParamName_;
-  }
-}
-
-FunctionName* pFunctionName(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FunctionName_;
-  }
-}
-FunctionName* pFunctionName(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_FunctionName_;
-  }
-}
-
-Exp* pExp(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-Exp* pExp(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-
-Exp* pExp1(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-Exp* pExp1(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-
-Exp* pExp2(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-Exp* pExp2(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
-
-ListExp* pListExp(FILE *inp)
-{
-  yy_mylinenumber = 1;
-  initialize_lexer(inp);
-  if (yyparse())
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListExp_;
-  }
-}
-ListExp* pListExp(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListExp_;
-  }
-}
-
 
 
 %}
@@ -506,6 +79,7 @@ ListExp* pListExp(const char *str)
   ParamType* paramtype_;
   ParamName* paramname_;
   FunctionName* functionname_;
+  PackageName* packagename_;
   Exp* exp_;
   ListExp* listexp_;
 }
@@ -533,6 +107,7 @@ ListExp* pListExp(const char *str)
 %type <paramtype_> ParamType
 %type <paramname_> ParamName
 %type <functionname_> FunctionName
+%type <packagename_> PackageName
 %type <exp_> Exp
 %type <exp_> Exp1
 %type <exp_> Exp2
@@ -546,43 +121,45 @@ ListExp* pListExp(const char *str)
 %%
 Fifth : ListModuleImport ListFunctionDeclaration {  std::reverse($1->begin(),$1->end()) ; std::reverse($2->begin(),$2->end()) ;$$ = new FifthProgram($1, $2); $$->line_number = yy_mylinenumber; YY_RESULT_Fifth_= $$; }
 ;
-ModuleImport : _SYMB_10 _IDENT_ {  $$ = new ModImp($2); $$->line_number = yy_mylinenumber; YY_RESULT_ModuleImport_= $$; }
+ModuleImport : _SYMB_10 PackageName {  $$ = new ModImp($2); $$->line_number = yy_mylinenumber;  }
 ;
-ListModuleImport : ModuleImport _SYMB_0 {  $$ = new ListModuleImport() ; $$->push_back($1); YY_RESULT_ListModuleImport_= $$; }
-  | ModuleImport _SYMB_0 ListModuleImport {  $3->push_back($1) ; $$ = $3 ; YY_RESULT_ListModuleImport_= $$; }
+ListModuleImport : ModuleImport _SYMB_0 {  $$ = new ListModuleImport() ; $$->push_back($1);  }
+  | ModuleImport _SYMB_0 ListModuleImport {  $3->push_back($1) ; $$ = $3 ;  }
 ;
-FunctionDeclaration : FunctionName _SYMB_1 ListFormalParameter _SYMB_2 _SYMB_3 ListExp {  std::reverse($3->begin(),$3->end()) ; std::reverse($6->begin(),$6->end()) ;$$ = new FuncDecl($1, $3, $6); $$->line_number = yy_mylinenumber; YY_RESULT_FunctionDeclaration_= $$; }
+FunctionDeclaration : FunctionName _SYMB_1 ListFormalParameter _SYMB_2 _SYMB_3 ListExp {  std::reverse($3->begin(),$3->end()) ; std::reverse($6->begin(),$6->end()) ;$$ = new FuncDecl($1, $3, $6); $$->line_number = yy_mylinenumber;  }
 ;
-ListFunctionDeclaration : FunctionDeclaration _SYMB_4 {  $$ = new ListFunctionDeclaration() ; $$->push_back($1); YY_RESULT_ListFunctionDeclaration_= $$; }
-  | FunctionDeclaration _SYMB_4 ListFunctionDeclaration {  $3->push_back($1) ; $$ = $3 ; YY_RESULT_ListFunctionDeclaration_= $$; }
+ListFunctionDeclaration : FunctionDeclaration _SYMB_4 {  $$ = new ListFunctionDeclaration() ; $$->push_back($1);  }
+  | FunctionDeclaration _SYMB_4 ListFunctionDeclaration {  $3->push_back($1) ; $$ = $3 ;  }
 ;
-FormalParameter : ParamType ParamName {  $$ = new FParam($1, $2); $$->line_number = yy_mylinenumber; YY_RESULT_FormalParameter_= $$; }
+FormalParameter : ParamType ParamName {  $$ = new FParam($1, $2); $$->line_number = yy_mylinenumber;  }
 ;
-ListFormalParameter : /* empty */ {  $$ = new ListFormalParameter(); YY_RESULT_ListFormalParameter_= $$; }
-  | FormalParameter {  $$ = new ListFormalParameter() ; $$->push_back($1); YY_RESULT_ListFormalParameter_= $$; }
-  | FormalParameter _SYMB_5 ListFormalParameter {  $3->push_back($1) ; $$ = $3 ; YY_RESULT_ListFormalParameter_= $$; }
+ListFormalParameter : /* empty */ {  $$ = new ListFormalParameter();  }
+  | FormalParameter {  $$ = new ListFormalParameter() ; $$->push_back($1);  }
+  | FormalParameter _SYMB_5 ListFormalParameter {  $3->push_back($1) ; $$ = $3 ;  }
 ;
-ParamType : _IDENT_ {  $$ = new TParam($1); $$->line_number = yy_mylinenumber; YY_RESULT_ParamType_= $$; }
+ParamType : _IDENT_ {  $$ = new TParam($1); $$->line_number = yy_mylinenumber;  }
 ;
-ParamName : _IDENT_ {  $$ = new NParam($1); $$->line_number = yy_mylinenumber; YY_RESULT_ParamName_= $$; }
+ParamName : _IDENT_ {  $$ = new NParam($1); $$->line_number = yy_mylinenumber;  }
 ;
-FunctionName : _IDENT_ {  $$ = new NFunc($1); $$->line_number = yy_mylinenumber; YY_RESULT_FunctionName_= $$; }
+FunctionName : _IDENT_ {  $$ = new NFunc($1); $$->line_number = yy_mylinenumber;  }
 ;
-Exp : Exp _SYMB_6 Exp1 {  $$ = new EAdd($1, $3); $$->line_number = yy_mylinenumber; YY_RESULT_Exp_= $$; }
-  | Exp _SYMB_7 Exp1 {  $$ = new ESub($1, $3); $$->line_number = yy_mylinenumber; YY_RESULT_Exp_= $$; }
-  | Exp1 {  $$ = $1; YY_RESULT_Exp_= $$; }
+PackageName : _IDENT_ {  $$ = new NPkg($1); $$->line_number = yy_mylinenumber;  }
 ;
-Exp1 : Exp1 _SYMB_8 Exp2 {  $$ = new EMul($1, $3); $$->line_number = yy_mylinenumber; YY_RESULT_Exp_= $$; }
-  | Exp1 _SYMB_9 Exp2 {  $$ = new EDiv($1, $3); $$->line_number = yy_mylinenumber; YY_RESULT_Exp_= $$; }
-  | Exp2 {  $$ = $1; YY_RESULT_Exp_= $$; }
+Exp : Exp _SYMB_6 Exp1 {  $$ = new EAdd($1, $3); $$->line_number = yy_mylinenumber;  }
+  | Exp _SYMB_7 Exp1 {  $$ = new ESub($1, $3); $$->line_number = yy_mylinenumber;  }
+  | Exp1 {  $$ = $1;  }
 ;
-Exp2 : _INTEGER_ {  $$ = new EInt($1); $$->line_number = yy_mylinenumber; YY_RESULT_Exp_= $$; }
-  | _DOUBLE_ {  $$ = new EDouble($1); $$->line_number = yy_mylinenumber; YY_RESULT_Exp_= $$; }
-  | _IDENT_ {  $$ = new EIdent($1); $$->line_number = yy_mylinenumber; YY_RESULT_Exp_= $$; }
-  | _SYMB_1 Exp _SYMB_2 {  $$ = $2; YY_RESULT_Exp_= $$; }
+Exp1 : Exp1 _SYMB_8 Exp2 {  $$ = new EMul($1, $3); $$->line_number = yy_mylinenumber;  }
+  | Exp1 _SYMB_9 Exp2 {  $$ = new EDiv($1, $3); $$->line_number = yy_mylinenumber;  }
+  | Exp2 {  $$ = $1;  }
 ;
-ListExp : /* empty */ {  $$ = new ListExp(); YY_RESULT_ListExp_= $$; }
-  | Exp {  $$ = new ListExp() ; $$->push_back($1); YY_RESULT_ListExp_= $$; }
-  | Exp _SYMB_0 ListExp {  $3->push_back($1) ; $$ = $3 ; YY_RESULT_ListExp_= $$; }
+Exp2 : _INTEGER_ {  $$ = new EInt($1); $$->line_number = yy_mylinenumber;  }
+  | _DOUBLE_ {  $$ = new EDouble($1); $$->line_number = yy_mylinenumber;  }
+  | _IDENT_ {  $$ = new EIdent($1); $$->line_number = yy_mylinenumber;  }
+  | _SYMB_1 Exp _SYMB_2 {  $$ = $2;  }
+;
+ListExp : /* empty */ {  $$ = new ListExp();  }
+  | Exp {  $$ = new ListExp() ; $$->push_back($1);  }
+  | Exp _SYMB_0 ListExp {  $3->push_back($1) ; $$ = $3 ;  }
 ;
 

@@ -46,6 +46,8 @@ class PrintAbsyn : public Visitor
   void visitNParam(NParam *p);
   void visitFunctionName(FunctionName *p); /* abstract class */
   void visitNFunc(NFunc *p);
+  void visitPackageName(PackageName *p); /* abstract class */
+  void visitNPkg(NPkg *p);
   void visitExp(Exp *p); /* abstract class */
   void visitEAdd(EAdd *p);
   void visitESub(ESub *p);
@@ -154,6 +156,8 @@ class ShowAbsyn : public Visitor
   void visitNParam(NParam *p);
   void visitFunctionName(FunctionName *p); /* abstract class */
   void visitNFunc(NFunc *p);
+  void visitPackageName(PackageName *p); /* abstract class */
+  void visitNPkg(NPkg *p);
   void visitExp(Exp *p); /* abstract class */
   void visitEAdd(EAdd *p);
   void visitESub(ESub *p);

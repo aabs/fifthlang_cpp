@@ -26,9 +26,13 @@ BISON=/opt/local/bin/bison
 BISONARGS=--language=c++ -d
 PARSER_FILE=$(DIRSRC)/fifth.y
 
-.PHONY: all
+.PHONY: all test
 
 all: $(DIROUT)/$(OUT)
+test: $(DIRBNFC)/Test$(OUT)
+	$(DIRBNFC)/Test$(OUT) test/examples/test1.5th
+
+$(DIRBNFC)/Test$(OUT): $(DIRBNFC)/fifth.y
 
 $(DIROUT):
 	-mkdir -p $@

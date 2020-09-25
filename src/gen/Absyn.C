@@ -53,15 +53,15 @@ FifthProgram *FifthProgram::clone() const
 
 
 /********************   ModImp    ********************/
-ModImp::ModImp(Ident p1)
+ModImp::ModImp(PackageName *p1)
 {
-  ident_ = p1;
+  packagename_ = p1;
 
 }
 
 ModImp::ModImp(const ModImp & other)
 {
-  ident_ = other.ident_;
+  packagename_ = other.packagename_->clone();
 
 }
 
@@ -74,12 +74,13 @@ ModImp &ModImp::operator=(const ModImp & other)
 
 void ModImp::swap(ModImp & other)
 {
-  std::swap(ident_, other.ident_);
+  std::swap(packagename_, other.packagename_);
 
 }
 
 ModImp::~ModImp()
 {
+  delete(packagename_);
 
 }
 
@@ -320,6 +321,49 @@ void NFunc::accept(Visitor *v)
 NFunc *NFunc::clone() const
 {
   return new NFunc(*this);
+}
+
+
+
+/********************   NPkg    ********************/
+NPkg::NPkg(Ident p1)
+{
+  ident_ = p1;
+
+}
+
+NPkg::NPkg(const NPkg & other)
+{
+  ident_ = other.ident_;
+
+}
+
+NPkg &NPkg::operator=(const NPkg & other)
+{
+  NPkg tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NPkg::swap(NPkg & other)
+{
+  std::swap(ident_, other.ident_);
+
+}
+
+NPkg::~NPkg()
+{
+
+}
+
+void NPkg::accept(Visitor *v)
+{
+  v->visitNPkg(this);
+}
+
+NPkg *NPkg::clone() const
+{
+  return new NPkg(*this);
 }
 
 

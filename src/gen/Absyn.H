@@ -26,6 +26,7 @@ class FormalParameter;
 class ParamType;
 class ParamName;
 class FunctionName;
+class PackageName;
 class Exp;
 class FifthProgram;
 class ModImp;
@@ -34,6 +35,7 @@ class FParam;
 class TParam;
 class NParam;
 class NFunc;
+class NPkg;
 class EAdd;
 class ESub;
 class EMul;
@@ -59,6 +61,7 @@ public:
   virtual void visitParamType(ParamType *p) = 0;
   virtual void visitParamName(ParamName *p) = 0;
   virtual void visitFunctionName(FunctionName *p) = 0;
+  virtual void visitPackageName(PackageName *p) = 0;
   virtual void visitExp(Exp *p) = 0;
   virtual void visitFifthProgram(FifthProgram *p) = 0;
   virtual void visitModImp(ModImp *p) = 0;
@@ -67,6 +70,7 @@ public:
   virtual void visitTParam(TParam *p) = 0;
   virtual void visitNParam(NParam *p) = 0;
   virtual void visitNFunc(NFunc *p) = 0;
+  virtual void visitNPkg(NPkg *p) = 0;
   virtual void visitEAdd(EAdd *p) = 0;
   virtual void visitESub(ESub *p) = 0;
   virtual void visitEMul(EMul *p) = 0;
@@ -148,6 +152,13 @@ public:
   int line_number;
 };
 
+class PackageName : public Visitable
+{
+public:
+  virtual PackageName *clone() const = 0;
+  int line_number;
+};
+
 class Exp : public Visitable
 {
 public:
@@ -175,11 +186,11 @@ public:
 class ModImp : public ModuleImport
 {
 public:
-  Ident ident_;
+  PackageName *packagename_;
 
   ModImp(const ModImp &);
   ModImp &operator=(const ModImp &);
-  ModImp(Ident p1);
+  ModImp(PackageName *p1);
   ~ModImp();
   virtual void accept(Visitor *v);
   virtual ModImp *clone() const;
@@ -257,6 +268,20 @@ public:
   virtual void accept(Visitor *v);
   virtual NFunc *clone() const;
   void swap(NFunc &);
+};
+
+class NPkg : public PackageName
+{
+public:
+  Ident ident_;
+
+  NPkg(const NPkg &);
+  NPkg &operator=(const NPkg &);
+  NPkg(Ident p1);
+  ~NPkg();
+  virtual void accept(Visitor *v);
+  virtual NPkg *clone() const;
+  void swap(NPkg &);
 };
 
 class EAdd : public Exp
