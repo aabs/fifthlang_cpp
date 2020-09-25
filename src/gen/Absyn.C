@@ -282,6 +282,54 @@ NParam *NParam::clone() const
 
 
 
+/********************   NQFunc    ********************/
+NQFunc::NQFunc(PackageName *p1, FunctionName *p2)
+{
+  packagename_ = p1;
+  functionname_ = p2;
+
+}
+
+NQFunc::NQFunc(const NQFunc & other)
+{
+  packagename_ = other.packagename_->clone();
+  functionname_ = other.functionname_->clone();
+
+}
+
+NQFunc &NQFunc::operator=(const NQFunc & other)
+{
+  NQFunc tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void NQFunc::swap(NQFunc & other)
+{
+  std::swap(packagename_, other.packagename_);
+  std::swap(functionname_, other.functionname_);
+
+}
+
+NQFunc::~NQFunc()
+{
+  delete(packagename_);
+  delete(functionname_);
+
+}
+
+void NQFunc::accept(Visitor *v)
+{
+  v->visitNQFunc(this);
+}
+
+NQFunc *NQFunc::clone() const
+{
+  return new NQFunc(*this);
+}
+
+
+
 /********************   NFunc    ********************/
 NFunc::NFunc(Ident p1)
 {
@@ -685,6 +733,189 @@ void EIdent::accept(Visitor *v)
 EIdent *EIdent::clone() const
 {
   return new EIdent(*this);
+}
+
+
+
+/********************   EString    ********************/
+EString::EString(String p1)
+{
+  string_ = p1;
+
+}
+
+EString::EString(const EString & other)
+{
+  string_ = other.string_;
+
+}
+
+EString &EString::operator=(const EString & other)
+{
+  EString tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void EString::swap(EString & other)
+{
+  std::swap(string_, other.string_);
+
+}
+
+EString::~EString()
+{
+
+}
+
+void EString::accept(Visitor *v)
+{
+  v->visitEString(this);
+}
+
+EString *EString::clone() const
+{
+  return new EString(*this);
+}
+
+
+
+/********************   EFuncCall    ********************/
+EFuncCall::EFuncCall(FunctionName *p1, ListExp *p2)
+{
+  functionname_ = p1;
+  listexp_ = p2;
+
+}
+
+EFuncCall::EFuncCall(const EFuncCall & other)
+{
+  functionname_ = other.functionname_->clone();
+  listexp_ = other.listexp_->clone();
+
+}
+
+EFuncCall &EFuncCall::operator=(const EFuncCall & other)
+{
+  EFuncCall tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void EFuncCall::swap(EFuncCall & other)
+{
+  std::swap(functionname_, other.functionname_);
+  std::swap(listexp_, other.listexp_);
+
+}
+
+EFuncCall::~EFuncCall()
+{
+  delete(functionname_);
+  delete(listexp_);
+
+}
+
+void EFuncCall::accept(Visitor *v)
+{
+  v->visitEFuncCall(this);
+}
+
+EFuncCall *EFuncCall::clone() const
+{
+  return new EFuncCall(*this);
+}
+
+
+
+/********************   EQFuncCall    ********************/
+EQFuncCall::EQFuncCall(QFunctionName *p1, ListExp *p2)
+{
+  qfunctionname_ = p1;
+  listexp_ = p2;
+
+}
+
+EQFuncCall::EQFuncCall(const EQFuncCall & other)
+{
+  qfunctionname_ = other.qfunctionname_->clone();
+  listexp_ = other.listexp_->clone();
+
+}
+
+EQFuncCall &EQFuncCall::operator=(const EQFuncCall & other)
+{
+  EQFuncCall tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void EQFuncCall::swap(EQFuncCall & other)
+{
+  std::swap(qfunctionname_, other.qfunctionname_);
+  std::swap(listexp_, other.listexp_);
+
+}
+
+EQFuncCall::~EQFuncCall()
+{
+  delete(qfunctionname_);
+  delete(listexp_);
+
+}
+
+void EQFuncCall::accept(Visitor *v)
+{
+  v->visitEQFuncCall(this);
+}
+
+EQFuncCall *EQFuncCall::clone() const
+{
+  return new EQFuncCall(*this);
+}
+
+
+
+/********************   EFuncParen    ********************/
+EFuncParen::EFuncParen(ListExp *p1)
+{
+  listexp_ = p1;
+
+}
+
+EFuncParen::EFuncParen(const EFuncParen & other)
+{
+  listexp_ = other.listexp_->clone();
+
+}
+
+EFuncParen &EFuncParen::operator=(const EFuncParen & other)
+{
+  EFuncParen tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void EFuncParen::swap(EFuncParen & other)
+{
+  std::swap(listexp_, other.listexp_);
+
+}
+
+EFuncParen::~EFuncParen()
+{
+  delete(listexp_);
+
+}
+
+void EFuncParen::accept(Visitor *v)
+{
+  v->visitEFuncParen(this);
+}
+
+EFuncParen *EFuncParen::clone() const
+{
+  return new EFuncParen(*this);
 }
 
 

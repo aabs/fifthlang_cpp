@@ -25,6 +25,7 @@ class FunctionDeclaration;
 class FormalParameter;
 class ParamType;
 class ParamName;
+class QFunctionName;
 class FunctionName;
 class PackageName;
 class Exp;
@@ -34,6 +35,7 @@ class FuncDecl;
 class FParam;
 class TParam;
 class NParam;
+class NQFunc;
 class NFunc;
 class NPkg;
 class EAdd;
@@ -43,6 +45,10 @@ class EDiv;
 class EInt;
 class EDouble;
 class EIdent;
+class EString;
+class EFuncCall;
+class EQFuncCall;
+class EFuncParen;
 class ListModuleImport;
 class ListFunctionDeclaration;
 class ListFormalParameter;
@@ -60,6 +66,7 @@ public:
   virtual void visitFormalParameter(FormalParameter *p) = 0;
   virtual void visitParamType(ParamType *p) = 0;
   virtual void visitParamName(ParamName *p) = 0;
+  virtual void visitQFunctionName(QFunctionName *p) = 0;
   virtual void visitFunctionName(FunctionName *p) = 0;
   virtual void visitPackageName(PackageName *p) = 0;
   virtual void visitExp(Exp *p) = 0;
@@ -69,6 +76,7 @@ public:
   virtual void visitFParam(FParam *p) = 0;
   virtual void visitTParam(TParam *p) = 0;
   virtual void visitNParam(NParam *p) = 0;
+  virtual void visitNQFunc(NQFunc *p) = 0;
   virtual void visitNFunc(NFunc *p) = 0;
   virtual void visitNPkg(NPkg *p) = 0;
   virtual void visitEAdd(EAdd *p) = 0;
@@ -78,6 +86,10 @@ public:
   virtual void visitEInt(EInt *p) = 0;
   virtual void visitEDouble(EDouble *p) = 0;
   virtual void visitEIdent(EIdent *p) = 0;
+  virtual void visitEString(EString *p) = 0;
+  virtual void visitEFuncCall(EFuncCall *p) = 0;
+  virtual void visitEQFuncCall(EQFuncCall *p) = 0;
+  virtual void visitEFuncParen(EFuncParen *p) = 0;
   virtual void visitListModuleImport(ListModuleImport *p) = 0;
   virtual void visitListFunctionDeclaration(ListFunctionDeclaration *p) = 0;
   virtual void visitListFormalParameter(ListFormalParameter *p) = 0;
@@ -142,6 +154,13 @@ class ParamName : public Visitable
 {
 public:
   virtual ParamName *clone() const = 0;
+  int line_number;
+};
+
+class QFunctionName : public Visitable
+{
+public:
+  virtual QFunctionName *clone() const = 0;
   int line_number;
 };
 
@@ -254,6 +273,21 @@ public:
   virtual void accept(Visitor *v);
   virtual NParam *clone() const;
   void swap(NParam &);
+};
+
+class NQFunc : public QFunctionName
+{
+public:
+  PackageName *packagename_;
+  FunctionName *functionname_;
+
+  NQFunc(const NQFunc &);
+  NQFunc &operator=(const NQFunc &);
+  NQFunc(PackageName *p1, FunctionName *p2);
+  ~NQFunc();
+  virtual void accept(Visitor *v);
+  virtual NQFunc *clone() const;
+  void swap(NQFunc &);
 };
 
 class NFunc : public FunctionName
@@ -384,6 +418,64 @@ public:
   virtual void accept(Visitor *v);
   virtual EIdent *clone() const;
   void swap(EIdent &);
+};
+
+class EString : public Exp
+{
+public:
+  String string_;
+
+  EString(const EString &);
+  EString &operator=(const EString &);
+  EString(String p1);
+  ~EString();
+  virtual void accept(Visitor *v);
+  virtual EString *clone() const;
+  void swap(EString &);
+};
+
+class EFuncCall : public Exp
+{
+public:
+  FunctionName *functionname_;
+  ListExp *listexp_;
+
+  EFuncCall(const EFuncCall &);
+  EFuncCall &operator=(const EFuncCall &);
+  EFuncCall(FunctionName *p1, ListExp *p2);
+  ~EFuncCall();
+  virtual void accept(Visitor *v);
+  virtual EFuncCall *clone() const;
+  void swap(EFuncCall &);
+};
+
+class EQFuncCall : public Exp
+{
+public:
+  QFunctionName *qfunctionname_;
+  ListExp *listexp_;
+
+  EQFuncCall(const EQFuncCall &);
+  EQFuncCall &operator=(const EQFuncCall &);
+  EQFuncCall(QFunctionName *p1, ListExp *p2);
+  ~EQFuncCall();
+  virtual void accept(Visitor *v);
+  virtual EQFuncCall *clone() const;
+  void swap(EQFuncCall &);
+};
+
+class EFuncParen : public Exp
+{
+public:
+  ListExp *listexp_;
+
+  EFuncParen(const EFuncParen &);
+  EFuncParen &operator=(const EFuncParen &);
+  EFuncParen(ListExp *p1);
+  ~EFuncParen();
+  virtual void accept(Visitor *v);
+  virtual EFuncParen *clone() const;
+  void swap(EFuncParen &);
 };
 
 

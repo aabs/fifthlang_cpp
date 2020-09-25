@@ -6,14 +6,16 @@ ModImp.     ModuleImport ::= "use" PackageName ;
 terminator nonempty ModuleImport ";" ;
 
 FuncDecl.   FunctionDeclaration ::= FunctionName "(" [FormalParameter] ")" "=>" [Exp] ;
-terminator nonempty FunctionDeclaration "." ;
+terminator nonempty FunctionDeclaration ";" ;
 
 FParam.     FormalParameter ::= ParamType ParamName ;
 separator   FormalParameter "," ;
 
 TParam.     ParamType ::= Ident ;
 NParam.     ParamName ::= Ident ;
+NQFunc.     QFunctionName ::= PackageName "." FunctionName ;
 NFunc.      FunctionName ::= Ident ;
+
 NPkg.       PackageName ::= Ident ;
 
 EAdd.       Exp  ::= Exp  "+" Exp1 ;
@@ -23,9 +25,13 @@ EDiv.       Exp1 ::= Exp1 "/" Exp2 ;
 EInt.       Exp2 ::= Integer ;
 EDouble.    Exp2 ::= Double ;
 EIdent.     Exp2 ::= Ident ;
+EString.     Exp2 ::= String ;
+EFuncCall.  Exp3 ::= FunctionName "(" [Exp] ")" ;
+EQFuncCall.  Exp3 ::= QFunctionName "(" [Exp] ")" ;
+EFuncParen. Exp4 ::= "(" [Exp] ")" ;
 
-separator   Exp ";" ;
-coercions Exp 2;
+separator   Exp "," ;
+coercions Exp 4;
 
 comment "/*" "*/" ;
 comment "//";

@@ -30,8 +30,8 @@ IDENT [a-zA-Z0-9'_]
 <YYINITIAL>"("      	 return _SYMB_1;
 <YYINITIAL>")"      	 return _SYMB_2;
 <YYINITIAL>"=>"      	 return _SYMB_3;
-<YYINITIAL>"."      	 return _SYMB_4;
-<YYINITIAL>","      	 return _SYMB_5;
+<YYINITIAL>","      	 return _SYMB_4;
+<YYINITIAL>"."      	 return _SYMB_5;
 <YYINITIAL>"+"      	 return _SYMB_6;
 <YYINITIAL>"-"      	 return _SYMB_7;
 <YYINITIAL>"*"      	 return _SYMB_8;
@@ -45,6 +45,15 @@ IDENT [a-zA-Z0-9'_]
 <COMMENT>. /* skip */;
 <COMMENT>[\n] ++yy_mylinenumber;
 
+<YYINITIAL>"\""      	 BEGIN STRING;
+<STRING>\\      	 BEGIN ESCAPED;
+<STRING>\"      	 yylval.string_ = strdup(YY_PARSED_STRING); YY_BUFFER_RESET(); BEGIN YYINITIAL; return _STRING_;
+<STRING>.      	 YY_BUFFER_APPEND(yytext);
+<ESCAPED>n      	 YY_BUFFER_APPEND("\n"); BEGIN STRING;
+<ESCAPED>\"      	 YY_BUFFER_APPEND("\""); BEGIN STRING ;
+<ESCAPED>\\      	 YY_BUFFER_APPEND("\\"); BEGIN STRING;
+<ESCAPED>t       	 YY_BUFFER_APPEND("\t"); BEGIN STRING;
+<ESCAPED>.       	 YY_BUFFER_APPEND(yytext); BEGIN STRING;
 <YYINITIAL>{DIGIT}+"."{DIGIT}+("e"(\-)?{DIGIT}+)?      	 yylval.double_ = atof(yytext); return _DOUBLE_;
 <YYINITIAL>{DIGIT}+      	 yylval.int_ = atoi(yytext); return _INTEGER_;
 <YYINITIAL>{LETTER}{IDENT}*      	 yylval.string_ = strdup(yytext); return _IDENT_;

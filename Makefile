@@ -16,21 +16,16 @@ BNFC_GEN_OBJS = $(DIRBNFC)/Absyn.o $(DIRBNFC)/Lexer.o $(DIRBNFC)/Parser.o $(DIRB
 BNFC_GEN_CPP = $(DIRBNFC)/Absyn.C $(DIRBNFC)/Lexer.C $(DIRBNFC)/Parser.C $(DIRBNFC)/Printer.C $(DIRBNFC)/Skeleton.C $(DIRBNFC)/Test.C
 BNFC_GEN_INCLUDE = $(DIRBNFC)/Absyn.H $(DIRBNFC)/Parser.H $(DIRBNFC)/Printer.H $(DIRBNFC)/Skeleton.H
 
-# FLEX STUFF
-FLEX=/opt/local/bin/flex
-FLEXARGS=--c++
-LEXER_FILE=$(DIRSRC)/fifth.l
-
-# BISON STUFF
-BISON=/opt/local/bin/bison
-BISONARGS=--language=c++ -d
-PARSER_FILE=$(DIRSRC)/fifth.y
-
-.PHONY: all test
+.PHONY: all test clean
 
 all: $(DIROUT)/$(OUT)
-test: $(DIRBNFC)/Test$(OUT)
+test: $(DIRBNFC)/Test$(OUT) test/examples/test1.5th
+	@echo 
+	@echo "------------------------"
 	$(DIRBNFC)/Test$(OUT) test/examples/test1.5th
+	@echo 
+	@echo "------------------------"
+	$(DIRBNFC)/Test$(OUT) test/examples/test2.5th
 
 $(DIRBNFC)/Test$(OUT): $(DIRBNFC)/fifth.y
 
@@ -39,7 +34,7 @@ $(DIROUT):
 $(DIRBNFC):
 	-mkdir -p $@
 
-$(DIROUT)/$(OUT): $(DIROUT) $(DIRBNFC)/fifth.y
+$(DIROUT)/$(OUT): $(DIROUT) $(DIRBNFC)/Test$(OUT)
 	$(CC) $(CCARGS) -o $(@) $(DIRSRC)/fifth.cpp
 
 clean:

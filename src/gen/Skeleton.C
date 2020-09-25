@@ -14,6 +14,7 @@ void Skeleton::visitFunctionDeclaration(FunctionDeclaration *t) {} //abstract cl
 void Skeleton::visitFormalParameter(FormalParameter *t) {} //abstract class
 void Skeleton::visitParamType(ParamType *t) {} //abstract class
 void Skeleton::visitParamName(ParamName *t) {} //abstract class
+void Skeleton::visitQFunctionName(QFunctionName *t) {} //abstract class
 void Skeleton::visitFunctionName(FunctionName *t) {} //abstract class
 void Skeleton::visitPackageName(PackageName *t) {} //abstract class
 void Skeleton::visitExp(Exp *t) {} //abstract class
@@ -67,6 +68,15 @@ void Skeleton::visitNParam(NParam *n_param)
   /* Code For NParam Goes Here */
 
   visitIdent(n_param->ident_);
+
+}
+
+void Skeleton::visitNQFunc(NQFunc *nq_func)
+{
+  /* Code For NQFunc Goes Here */
+
+  nq_func->packagename_->accept(this);
+  nq_func->functionname_->accept(this);
 
 }
 
@@ -143,6 +153,40 @@ void Skeleton::visitEIdent(EIdent *e_ident)
   /* Code For EIdent Goes Here */
 
   visitIdent(e_ident->ident_);
+
+}
+
+void Skeleton::visitEString(EString *e_string)
+{
+  /* Code For EString Goes Here */
+
+  visitString(e_string->string_);
+
+}
+
+void Skeleton::visitEFuncCall(EFuncCall *e_func_call)
+{
+  /* Code For EFuncCall Goes Here */
+
+  e_func_call->functionname_->accept(this);
+  e_func_call->listexp_->accept(this);
+
+}
+
+void Skeleton::visitEQFuncCall(EQFuncCall *eq_func_call)
+{
+  /* Code For EQFuncCall Goes Here */
+
+  eq_func_call->qfunctionname_->accept(this);
+  eq_func_call->listexp_->accept(this);
+
+}
+
+void Skeleton::visitEFuncParen(EFuncParen *e_func_paren)
+{
+  /* Code For EFuncParen Goes Here */
+
+  e_func_paren->listexp_->accept(this);
 
 }
 

@@ -14,6 +14,7 @@ class FormalParameter;
 class ListFormalParameter;
 class ParamType;
 class ParamName;
+class QFunctionName;
 class FunctionName;
 class PackageName;
 class Exp;
@@ -34,6 +35,7 @@ typedef union
   ListFormalParameter* listformalparameter_;
   ParamType* paramtype_;
   ParamName* paramname_;
+  QFunctionName* qfunctionname_;
   FunctionName* functionname_;
   PackageName* packagename_;
   Exp* exp_;
@@ -57,9 +59,10 @@ Fifth* pFifth(const char *str);
 #define _SYMB_8 267
 #define _SYMB_9 268
 #define _SYMB_10 269
-#define _INTEGER_ 270
-#define _DOUBLE_ 271
-#define _IDENT_ 272
+#define _STRING_ 270
+#define _INTEGER_ 271
+#define _DOUBLE_ 272
+#define _IDENT_ 273
 
 extern YYSTYPE yylval;
 

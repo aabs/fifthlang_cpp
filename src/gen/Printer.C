@@ -174,7 +174,7 @@ void PrintAbsyn::visitListFunctionDeclaration(ListFunctionDeclaration *listfunct
   for (ListFunctionDeclaration::const_iterator i = listfunctiondeclaration->begin() ; i != listfunctiondeclaration->end() ; ++i)
   {
     (*i)->accept(this);
-    if (i != listfunctiondeclaration->end() - 1) render('.');
+    if (i != listfunctiondeclaration->end() - 1) render(';');
   }
 }void PrintAbsyn::visitFormalParameter(FormalParameter *p) {} //abstract class
 
@@ -220,6 +220,22 @@ void PrintAbsyn::visitNParam(NParam *p)
   if (oldi > 0) render(_L_PAREN);
 
   visitIdent(p->ident_);
+
+  if (oldi > 0) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitQFunctionName(QFunctionName *p) {} //abstract class
+
+void PrintAbsyn::visitNQFunc(NQFunc *p)
+{
+  int oldi = _i_;
+  if (oldi > 0) render(_L_PAREN);
+
+  _i_ = 0; p->packagename_->accept(this);
+  render('.');
+  _i_ = 0; p->functionname_->accept(this);
 
   if (oldi > 0) render(_R_PAREN);
 
@@ -348,12 +364,68 @@ void PrintAbsyn::visitEIdent(EIdent *p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitEString(EString *p)
+{
+  int oldi = _i_;
+  if (oldi > 2) render(_L_PAREN);
+
+  visitString(p->string_);
+
+  if (oldi > 2) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEFuncCall(EFuncCall *p)
+{
+  int oldi = _i_;
+  if (oldi > 3) render(_L_PAREN);
+
+  _i_ = 0; p->functionname_->accept(this);
+  render('(');
+  if(p->listexp_) {_i_ = 0; p->listexp_->accept(this);}
+  render(')');
+
+  if (oldi > 3) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEQFuncCall(EQFuncCall *p)
+{
+  int oldi = _i_;
+  if (oldi > 3) render(_L_PAREN);
+
+  _i_ = 0; p->qfunctionname_->accept(this);
+  render('(');
+  if(p->listexp_) {_i_ = 0; p->listexp_->accept(this);}
+  render(')');
+
+  if (oldi > 3) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEFuncParen(EFuncParen *p)
+{
+  int oldi = _i_;
+  if (oldi > 4) render(_L_PAREN);
+
+  render('(');
+  if(p->listexp_) {_i_ = 0; p->listexp_->accept(this);}
+  render(')');
+
+  if (oldi > 4) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitListExp(ListExp *listexp)
 {
   for (ListExp::const_iterator i = listexp->begin() ; i != listexp->end() ; ++i)
   {
     (*i)->accept(this);
-    if (i != listexp->end() - 1) render(';');
+    if (i != listexp->end() - 1) render(',');
   }
 }void PrintAbsyn::visitInteger(Integer i)
 {
@@ -516,6 +588,22 @@ void ShowAbsyn::visitNParam(NParam *p)
   visitIdent(p->ident_);
   bufAppend(')');
 }
+void ShowAbsyn::visitQFunctionName(QFunctionName *p) {} //abstract class
+
+void ShowAbsyn::visitNQFunc(NQFunc *p)
+{
+  bufAppend('(');
+  bufAppend("NQFunc");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->packagename_)  p->packagename_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->functionname_)  p->functionname_->accept(this);
+  bufAppend(']');
+  bufAppend(')');
+}
 void ShowAbsyn::visitFunctionName(FunctionName *p) {} //abstract class
 
 void ShowAbsyn::visitNFunc(NFunc *p)
@@ -600,6 +688,55 @@ void ShowAbsyn::visitEIdent(EIdent *p)
   bufAppend("EIdent");
   bufAppend(' ');
   visitIdent(p->ident_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitEString(EString *p)
+{
+  bufAppend('(');
+  bufAppend("EString");
+  bufAppend(' ');
+  visitString(p->string_);
+  bufAppend(')');
+}
+void ShowAbsyn::visitEFuncCall(EFuncCall *p)
+{
+  bufAppend('(');
+  bufAppend("EFuncCall");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->functionname_)  p->functionname_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexp_)  p->listexp_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEQFuncCall(EQFuncCall *p)
+{
+  bufAppend('(');
+  bufAppend("EQFuncCall");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->qfunctionname_)  p->qfunctionname_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexp_)  p->listexp_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
+  bufAppend(')');
+}
+void ShowAbsyn::visitEFuncParen(EFuncParen *p)
+{
+  bufAppend('(');
+  bufAppend("EFuncParen");
+  bufAppend(' ');
+  bufAppend('[');
+  if (p->listexp_)  p->listexp_->accept(this);
+  bufAppend(']');
+  bufAppend(' ');
   bufAppend(')');
 }
 void ShowAbsyn::visitListExp(ListExp *listexp)

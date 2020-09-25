@@ -44,6 +44,8 @@ class PrintAbsyn : public Visitor
   void visitTParam(TParam *p);
   void visitParamName(ParamName *p); /* abstract class */
   void visitNParam(NParam *p);
+  void visitQFunctionName(QFunctionName *p); /* abstract class */
+  void visitNQFunc(NQFunc *p);
   void visitFunctionName(FunctionName *p); /* abstract class */
   void visitNFunc(NFunc *p);
   void visitPackageName(PackageName *p); /* abstract class */
@@ -56,6 +58,10 @@ class PrintAbsyn : public Visitor
   void visitEInt(EInt *p);
   void visitEDouble(EDouble *p);
   void visitEIdent(EIdent *p);
+  void visitEString(EString *p);
+  void visitEFuncCall(EFuncCall *p);
+  void visitEQFuncCall(EQFuncCall *p);
+  void visitEFuncParen(EFuncParen *p);
   void visitListExp(ListExp *p);
 
   void visitInteger(Integer i);
@@ -154,6 +160,8 @@ class ShowAbsyn : public Visitor
   void visitTParam(TParam *p);
   void visitParamName(ParamName *p); /* abstract class */
   void visitNParam(NParam *p);
+  void visitQFunctionName(QFunctionName *p); /* abstract class */
+  void visitNQFunc(NQFunc *p);
   void visitFunctionName(FunctionName *p); /* abstract class */
   void visitNFunc(NFunc *p);
   void visitPackageName(PackageName *p); /* abstract class */
@@ -166,6 +174,10 @@ class ShowAbsyn : public Visitor
   void visitEInt(EInt *p);
   void visitEDouble(EDouble *p);
   void visitEIdent(EIdent *p);
+  void visitEString(EString *p);
+  void visitEFuncCall(EFuncCall *p);
+  void visitEQFuncCall(EQFuncCall *p);
+  void visitEFuncParen(EFuncParen *p);
   void visitListExp(ListExp *p);
 
   void visitInteger(Integer i);

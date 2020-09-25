@@ -78,6 +78,7 @@ Fifth* pFifth(const char *str)
   ListFormalParameter* listformalparameter_;
   ParamType* paramtype_;
   ParamName* paramname_;
+  QFunctionName* qfunctionname_;
   FunctionName* functionname_;
   PackageName* packagename_;
   Exp* exp_;
@@ -89,8 +90,8 @@ Fifth* pFifth(const char *str)
 %token _SYMB_1    //   (
 %token _SYMB_2    //   )
 %token _SYMB_3    //   =>
-%token _SYMB_4    //   .
-%token _SYMB_5    //   ,
+%token _SYMB_4    //   ,
+%token _SYMB_5    //   .
 %token _SYMB_6    //   +
 %token _SYMB_7    //   -
 %token _SYMB_8    //   *
@@ -106,14 +107,18 @@ Fifth* pFifth(const char *str)
 %type <listformalparameter_> ListFormalParameter
 %type <paramtype_> ParamType
 %type <paramname_> ParamName
+%type <qfunctionname_> QFunctionName
 %type <functionname_> FunctionName
 %type <packagename_> PackageName
 %type <exp_> Exp
 %type <exp_> Exp1
 %type <exp_> Exp2
+%type <exp_> Exp3
+%type <exp_> Exp4
 %type <listexp_> ListExp
 
 %start Fifth
+%token<string_> _STRING_
 %token<int_> _INTEGER_
 %token<double_> _DOUBLE_
 %token<string_> _IDENT_
@@ -128,18 +133,20 @@ ListModuleImport : ModuleImport _SYMB_0 {  $$ = new ListModuleImport() ; $$->pus
 ;
 FunctionDeclaration : FunctionName _SYMB_1 ListFormalParameter _SYMB_2 _SYMB_3 ListExp {  std::reverse($3->begin(),$3->end()) ; std::reverse($6->begin(),$6->end()) ;$$ = new FuncDecl($1, $3, $6); $$->line_number = yy_mylinenumber;  }
 ;
-ListFunctionDeclaration : FunctionDeclaration _SYMB_4 {  $$ = new ListFunctionDeclaration() ; $$->push_back($1);  }
-  | FunctionDeclaration _SYMB_4 ListFunctionDeclaration {  $3->push_back($1) ; $$ = $3 ;  }
+ListFunctionDeclaration : FunctionDeclaration _SYMB_0 {  $$ = new ListFunctionDeclaration() ; $$->push_back($1);  }
+  | FunctionDeclaration _SYMB_0 ListFunctionDeclaration {  $3->push_back($1) ; $$ = $3 ;  }
 ;
 FormalParameter : ParamType ParamName {  $$ = new FParam($1, $2); $$->line_number = yy_mylinenumber;  }
 ;
 ListFormalParameter : /* empty */ {  $$ = new ListFormalParameter();  }
   | FormalParameter {  $$ = new ListFormalParameter() ; $$->push_back($1);  }
-  | FormalParameter _SYMB_5 ListFormalParameter {  $3->push_back($1) ; $$ = $3 ;  }
+  | FormalParameter _SYMB_4 ListFormalParameter {  $3->push_back($1) ; $$ = $3 ;  }
 ;
 ParamType : _IDENT_ {  $$ = new TParam($1); $$->line_number = yy_mylinenumber;  }
 ;
 ParamName : _IDENT_ {  $$ = new NParam($1); $$->line_number = yy_mylinenumber;  }
+;
+QFunctionName : PackageName _SYMB_5 FunctionName {  $$ = new NQFunc($1, $3); $$->line_number = yy_mylinenumber;  }
 ;
 FunctionName : _IDENT_ {  $$ = new NFunc($1); $$->line_number = yy_mylinenumber;  }
 ;
@@ -156,10 +163,18 @@ Exp1 : Exp1 _SYMB_8 Exp2 {  $$ = new EMul($1, $3); $$->line_number = yy_mylinenu
 Exp2 : _INTEGER_ {  $$ = new EInt($1); $$->line_number = yy_mylinenumber;  }
   | _DOUBLE_ {  $$ = new EDouble($1); $$->line_number = yy_mylinenumber;  }
   | _IDENT_ {  $$ = new EIdent($1); $$->line_number = yy_mylinenumber;  }
+  | _STRING_ {  $$ = new EString($1); $$->line_number = yy_mylinenumber;  }
+  | Exp3 {  $$ = $1;  }
+;
+Exp3 : FunctionName _SYMB_1 ListExp _SYMB_2 {  std::reverse($3->begin(),$3->end()) ;$$ = new EFuncCall($1, $3); $$->line_number = yy_mylinenumber;  }
+  | QFunctionName _SYMB_1 ListExp _SYMB_2 {  std::reverse($3->begin(),$3->end()) ;$$ = new EQFuncCall($1, $3); $$->line_number = yy_mylinenumber;  }
+  | Exp4 {  $$ = $1;  }
+;
+Exp4 : _SYMB_1 ListExp _SYMB_2 {  std::reverse($2->begin(),$2->end()) ;$$ = new EFuncParen($2); $$->line_number = yy_mylinenumber;  }
   | _SYMB_1 Exp _SYMB_2 {  $$ = $2;  }
 ;
 ListExp : /* empty */ {  $$ = new ListExp();  }
   | Exp {  $$ = new ListExp() ; $$->push_back($1);  }
-  | Exp _SYMB_0 ListExp {  $3->push_back($1) ; $$ = $3 ;  }
+  | Exp _SYMB_4 ListExp {  $3->push_back($1) ; $$ = $3 ;  }
 ;
 

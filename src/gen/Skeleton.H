@@ -14,6 +14,7 @@ public:
   void visitFormalParameter(FormalParameter *p);
   void visitParamType(ParamType *p);
   void visitParamName(ParamName *p);
+  void visitQFunctionName(QFunctionName *p);
   void visitFunctionName(FunctionName *p);
   void visitPackageName(PackageName *p);
   void visitExp(Exp *p);
@@ -23,6 +24,7 @@ public:
   void visitFParam(FParam *p);
   void visitTParam(TParam *p);
   void visitNParam(NParam *p);
+  void visitNQFunc(NQFunc *p);
   void visitNFunc(NFunc *p);
   void visitNPkg(NPkg *p);
   void visitEAdd(EAdd *p);
@@ -32,6 +34,10 @@ public:
   void visitEInt(EInt *p);
   void visitEDouble(EDouble *p);
   void visitEIdent(EIdent *p);
+  void visitEString(EString *p);
+  void visitEFuncCall(EFuncCall *p);
+  void visitEQFuncCall(EQFuncCall *p);
+  void visitEFuncParen(EFuncParen *p);
   void visitListModuleImport(ListModuleImport *p);
   void visitListFunctionDeclaration(ListFunctionDeclaration *p);
   void visitListFormalParameter(ListFormalParameter *p);
