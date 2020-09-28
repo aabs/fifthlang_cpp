@@ -4,8 +4,8 @@ DIRSRC=src
 DIRBNFC=$(DIRSRC)/gen
 
 # C++ STUFF
-CC=g++
-CCARGS = -std=c++14 -stdlib=libc++ -g
+CC=/opt/local/bin/g++-mp-10
+CCARGS = -std=c++20 -stdlib=libc++ -g
 OUT=fifth
 
 # BNFC STUFF
