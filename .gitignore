@@ -15,3 +15,6 @@ Printer.C.bak
 Printer.H.bak
 Skeleton.C.bak
 Skeleton.H.bak
+*.o
+build
+old.Makefile
