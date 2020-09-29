@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
+#include "nonstd/variant.hpp"
 
 using namespace std;
+using namespace nonstd;
 
 union Value
 {
@@ -17,12 +19,12 @@ union Value
     double   m_double;
 };
 
-
+typedef variant< char, int, long, std::string > primitive_type;
 class Env
 {
 private:
     /* data */
-    Value Lookup(string identifier);
+    primitive_type Lookup(string identifier);
 public:
     Env(/* args */);
     ~Env();
