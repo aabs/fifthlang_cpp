@@ -1,32 +1,22 @@
 #pragma once
 #include <string>
+#include <map>
 #include "nonstd/variant.hpp"
 
 using namespace std;
 using namespace nonstd;
 
-union Value
-{
-    bool     m_bool;
-    char     m_char8;
-    char16_t m_char16;
-    char32_t m_char32;
-    int16_t  m_int16;
-    int32_t  m_int32;
-    int64_t  m_int64;
-    string   m_string;
-    float    m_float;
-    double   m_double;
-};
+typedef variant< char, int, long, string > primitive_type;
 
-typedef variant< char, int, long, std::string > primitive_type;
 class Env
 {
 private:
-    /* data */
-    primitive_type Lookup(string identifier);
+    std::map<string, primitive_type> _env;
+
 public:
-    Env(/* args */);
+    Env();
     ~Env();
+    primitive_type Lookup(string identifier);
+    void Assign(string identifier, primitive_type value);
 };
 

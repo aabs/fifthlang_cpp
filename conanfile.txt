@@ -1,5 +1,6 @@
 [requires]
 variant-lite/1.2.2
+doctest/2.4.0 
 
 [generators]
 cmake
