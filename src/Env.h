@@ -6,17 +6,19 @@
 using namespace std;
 using namespace nonstd;
 
-typedef variant< char, int, long, string > primitive_type;
+typedef std::string t_identifier;
+typedef variant< char, int, long, string > t_primitive;
 
 class Env
 {
 private:
-    std::map<string, primitive_type> _env;
+    std::map<string, t_primitive> _env;
 
 public:
     Env();
     ~Env();
-    primitive_type Lookup(string identifier);
-    void Assign(string identifier, primitive_type value);
+    t_primitive Lookup(string identifier);
+    void Assign(string identifier, t_primitive value);
+    bool IsValidIdentifier(string id);
 };
 
