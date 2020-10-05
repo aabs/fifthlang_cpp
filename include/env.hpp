@@ -1,12 +1,10 @@
 #pragma once
 #include <string>
 #include <map>
-#include <variant>
-
+#include "common.hpp"
 using namespace std;
+using namespace fifth;
 
-typedef string t_identifier;
-typedef variant< char, int, long, string > t_primitive;
 
 class Env
 {

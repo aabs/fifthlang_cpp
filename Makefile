@@ -23,10 +23,10 @@ SRC_FILES = $(wildcard src/*.cpp)
 OBJ_FILES = $(SRC_FILES:$(DIRSRC)/%.cpp=$(DIROUT)/%.o)
 TEST_FILES = $(wildcard test/examples/*.5th)
 
-.PHONY: all test clean test retest
+.PHONY: all test clean testparser retest test
 
 all: $(DIROUT)/$(OUT)
-test: $(DIRBNFC)/Test$(OUT) $(TEST_FILES)
+testparser: $(DIRBNFC)/Test$(OUT) $(TEST_FILES)
 	@echo 
 	@echo "------------------------"
 	$(DIRBNFC)/Test$(OUT) test/examples/test1.5th
@@ -76,5 +76,7 @@ $(DIRBNFC)/fifth.y: $(BNFC_FILE)
 	cd $(DIRBNFC) && $(MAKE) -f Makefile all
 
 $(DIROUT)/unittest: $(OBJ_FILES)
-	$(CC) $(CCARGS) -o $(@) -I ${DIRINC} test/EnvTest.cpp $(OBJ_FILES)
-	$@
+	$(CC) $(CCARGS) -o $(@) -I ${DIRINC} test/EnvTest.cpp  test/function_wrapper_test.cpp $(OBJ_FILES)
+
+test: $(DIROUT)/unittest testparser
+	$<

@@ -1,5 +1,7 @@
+#include "common.hpp"
 #include "env.hpp"
 
+using namespace fifth;
 using namespace std;
 
 Env::Env(/* args */)
